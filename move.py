@@ -24,7 +24,7 @@ def on_press(key):
         ser.write("sd:0:10:10\n".encode())
     elif k == 'd':
         ser.write("d:1500\n".encode())
-        time.sleep(0.2)
+        time.sleep(0.5)
         ser.write("d:5000\n".encode())
 
 
