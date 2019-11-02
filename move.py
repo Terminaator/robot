@@ -1,3 +1,5 @@
+import time
+
 from pynput import keyboard
 import serial.tools.list_ports
 
@@ -5,29 +7,47 @@ import serial.tools.list_ports
 ports = serial.tools.list_ports.comports()
 device = list(map(lambda port: port.device, ports))[0]
 
-ser = serial.Serial(device, 115200, timeout=0.01)
-
+ser = serial.Serial(device, 115200)
+throw = False
 def on_press(key):
     try:
         k = key.char  # single-char keys
     except:
         k = key.name  # other keys
+    global throw
     if k == 'up':
+        if throw:
+            ser.write("sd:0:-10:10\nd:1500\n".encode())
         ser.write("sd:0:-10:10\n".encode())
     elif k == 'left':
-        ser.write("sd:0:-10:-10\n".encode())
+        if throw:
+            ser.write("sd:0:-5:-5\nd:1500\n".encode())
+        ser.write("sd:0:-5:-5\n".encode())
     elif k == 'down':
+        if throw:
+            ser.write("sd:0:10:-10\nd:1500\n".encode())
         ser.write("sd:0:10:-10\n".encode())
     elif k == 'right':
-        ser.write("sd:0:10:10\n".encode())
-    elif k == 'a':
-        ser.write("d:1000\n".encode())
-    elif k == 's':
-        ser.write("d:3000\n".encode())
+        if throw:
+            ser.write("sd:0:5:5\nd:1500\n".encode())
+        ser.write("sd:0:5:5\n".encode())
+    elif k == 'space':
+        if throw:
+            ser.write("sd:0:0:0\nd:1500\n".encode())
+        ser.write("sd:0:0:0\n".encode())
+    elif k == 'e':
+        if throw:
+            ser.write("sd:10:0:3\nd:1500\n".encode())
+        ser.write("sd:10:0:3\n".encode())
+    elif k == 'q':
+        if throw:
+            ser.write("sd:-10:3:0\nd:1500\n".encode())
+        ser.write("sd:-10:3:0\n".encode())
     elif k == 'd':
-        ser.write("d:1500\n".encode())
-        ser.write("d:3000\n".encode())
-
+        if throw:
+            throw = False
+        else:
+            throw = True
 
 
 
