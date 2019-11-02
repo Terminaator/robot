@@ -26,6 +26,9 @@ def on_press(key):
         ser.write("d:1500\n".encode())
         time.sleep(0.5)
         ser.write("d:5000\n".encode())
+        ser.write("d:5000\n".encode())
+        ser.write("d:5000\n".encode())
+
 
 
 lis = keyboard.Listener(on_press=on_press)
