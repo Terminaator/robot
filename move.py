@@ -20,6 +20,13 @@ def on_press(key):
         ser.write("sd:0:10:-10\n".encode())
     elif k == 'right':
         ser.write("sd:0:10:10\n".encode())
+    elif k == 'a':
+        ser.write("d:1000\n".encode())
+    elif k == 's':
+        ser.write("d:3000\n".encode())
+    elif k == 'd':
+        ser.write("d:3000\n".encode())
+
 
 
 
