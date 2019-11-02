@@ -22,6 +22,8 @@ def on_press(key):
         ser.write("sd:0:10:-10\n".encode())
     elif k == 'right':
         ser.write("sd:0:5:5\n".encode())
+    elif k == 'space':
+        ser.write("sd:0:0:0\n".encode())
     elif k == 'd':
         ser.write("d:1500\n".encode())
         time.sleep(0.5)
