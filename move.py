@@ -7,7 +7,7 @@ import serial.tools.list_ports
 ports = serial.tools.list_ports.comports()
 device = list(map(lambda port: port.device, ports))[0]
 
-ser = serial.Serial(device, 115200, timeout=0.01)
+ser = serial.Serial(device, 115200)
 
 def on_press(key):
     try:
@@ -25,8 +25,6 @@ def on_press(key):
     elif k == 'd':
         ser.write("d:1500\n".encode())
         time.sleep(0.5)
-        ser.write("d:5000\n".encode())
-        ser.write("d:5000\n".encode())
         ser.write("d:5000\n".encode())
 
 
