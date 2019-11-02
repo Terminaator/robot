@@ -10,11 +10,13 @@ device = list(map(lambda port: port.device, ports))[0]
 
 ser = serial.Serial(device, 115200, timeout=0.01)
 
+
 # open the camera
 # cap = cv2.VideoCapture(1)
 
 def nothing(x):
     pass
+
 
 cv2.namedWindow("Trackbars")
 cv2.createTrackbar("1", "Trackbars", 33, 255, nothing)
@@ -29,7 +31,6 @@ cv2.createTrackbar("9", "Trackbars", 255, 255, nothing)
 cv2.createTrackbar("10", "Trackbars", 255, 255, nothing)
 cv2.createTrackbar("11", "Trackbars", 255, 255, nothing)
 cv2.createTrackbar("12", "Trackbars", 255, 255, nothing)'''
-
 
 pipeline = rs.pipeline()
 config = rs.config()
@@ -47,16 +48,16 @@ profile = pipeline.start(config)
 def segment_colour(frame):  # returns only the red colors in the frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask_1 = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
-                                            cv2.getTrackbarPos("3", "Trackbars")]),
+                                        cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
     ycr_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2YCrCb)
-    #mask_2 = cv2.inRange(ycr_roi, np.array([cv2.getTrackbarPos("7", "Trackbars"), cv2.getTrackbarPos("8", "Trackbars"),
+    # mask_2 = cv2.inRange(ycr_roi, np.array([cv2.getTrackbarPos("7", "Trackbars"), cv2.getTrackbarPos("8", "Trackbars"),
     #                                        cv2.getTrackbarPos("9", "Trackbars")]),
     #                     np.array([cv2.getTrackbarPos("10", "Trackbars"), cv2.getTrackbarPos("11", "Trackbars"),
     #                               cv2.getTrackbarPos("12", "Trackbars")]))
 
-    mask = mask_1 #| mask_2
+    mask = mask_1  # | mask_2
     kern_dilate = np.ones((3, 3), np.uint8)
     kern_erode = np.ones((3, 3), np.uint8)
     mask = cv2.erode(mask, kern_erode)  # Eroding
@@ -67,7 +68,7 @@ def segment_colour(frame):  # returns only the red colors in the frame
 def find_blob(blob):  # returns the red colored circle
     largest_contour = 0
     cont_index = 0
-    _,contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
     for idx, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > largest_contour):
@@ -76,45 +77,47 @@ def find_blob(blob):  # returns the red colored circle
             cont_index = idx
             k = cv2.isContourConvex(contour)
             if k and 10 < len(contour) < 20:
-                cont_index=idx
+                cont_index = idx
     r = (0, 0, 2, 2)
     if len(contours) > 0:
         r = cv2.boundingRect(contours[cont_index])
 
     return r, largest_contour
 
+
 ports = serial.tools.list_ports.comports()
 device = list(map(lambda port: port.device, ports))[0]
 
 ser = serial.Serial(device, 115200, timeout=0.01)
-while True:
 
+frames = (None, None)
+while True:
     start = time.time()
     frame = pipeline.wait_for_frames()
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
-    cv2.getTrackbarPos("1", "Trackbars")
     ball = segment_colour(frame)
-    rec, area = find_blob(ball)
-    (x, y, w, h) = rec
-    if (w * h) < 10:
-        print(2)
-        #ser.write("sd:0:10:10\n".encode())
+    if frames[0] is not None and frames[1] is not None:
+        frame = np.concatenate((frames[0], frames[1]), axis=1)
+        frames = [None, None]
+        rec, area = find_blob(ball)
+        (x, y, w, h) = rec
+        if (w * h) < 10:
+            None
+        else:
+            simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
+            centre_x = x + ((w) / 2)
+            centre_y = y + ((h) / 2)
+            cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
+        cv2.imshow('Processed', frame)
+        cv2.imshow('treshold', ball)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
     else:
-        #ser.write("sd:0:0:0\n".encode())
-        found = 1
-        simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
-        centre_x = x + ((w) / 2)
-        centre_y = y + ((h) / 2)
-        #if 280 < centre_x < 360:
-        #    ser.write("sd:1:-1:0\n".encode())
-        cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-        centre_x -= 80
-        centre_y = 6 - -centre_y
-    cv2.imshow('Processed', frame)
-    cv2.imshow('treshold', ball)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        if frames[0] is None:
+            frames[0] = frame
+        else:
+            frames[1] = frame
 
 # When everything done, release the capture
 # cap.release()
