@@ -15,7 +15,7 @@ def on_press(key):
     if k == 'up':
         ser.write("sd:0:2:-2\n".encode())
     elif k == 'left':
-        print('Key pressed: ' + k)
+        ser.write("sd:0:0:-2\n".encode())
     elif k == 'down':
         print('Key pressed: ' + k)
     elif k == 'right':
