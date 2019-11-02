@@ -17,9 +17,9 @@ def on_press(key):
     elif k == 'left':
         ser.write("sd:0:0:-2\n".encode())
     elif k == 'down':
-        print('Key pressed: ' + k)
+        ser.write("sd:0:-2:2\n".encode())
     elif k == 'right':
-        print('Key pressed: ' + k)
+        ser.write("sd:0:-2:0\n".encode())
 
 
 lis = keyboard.Listener(on_press=on_press)
