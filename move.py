@@ -8,24 +8,38 @@ ports = serial.tools.list_ports.comports()
 device = list(map(lambda port: port.device, ports))[0]
 
 ser = serial.Serial(device, 115200)
-
+throw = False
 def on_press(key):
     try:
         k = key.char  # single-char keys
     except:
         k = key.name  # other keys
+    global throw
     if k == 'up':
-        ser.write("sd:0:-10:10\nd:1500\n".encode())
+        if throw:
+            ser.write("sd:0:-10:10\nd:1500\n".encode())
+        ser.write("sd:0:-10:10\n".encode())
     elif k == 'left':
-        ser.write("sd:0:-5:-5\nd:1500\n".encode())
+        if throw:
+            ser.write("sd:0:-5:-5\nd:1500\n".encode())
+        ser.write("sd:0:-5:-5\n".encode())
     elif k == 'down':
-        ser.write("sd:0:10:-10\nd:1500\n".encode())
+        if throw:
+            ser.write("sd:0:10:-10\nd:1500\n".encode())
+        ser.write("sd:0:10:-10\n".encode())
     elif k == 'right':
-        ser.write("sd:0:5:5\nd:1500\n".encode())
+        if throw:
+            ser.write("sd:0:5:5\nd:1500\n".encode())
+        ser.write("sd:0:5:5\n".encode())
     elif k == 'space':
-        ser.write("sd:0:0:0\nd:1500\n".encode())
+        if throw:
+            ser.write("sd:0:0:0\nd:1500\n".encode())
+        ser.write("sd:0:0:0\n".encode())
     elif k == 'd':
-        ser.write("d:5000\nd:5000\nd:5000\n".encode())
+        if throw:
+            throw = False
+        else:
+            throw = True
 
 
 
