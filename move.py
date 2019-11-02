@@ -25,6 +25,7 @@ def on_press(key):
     elif k == 's':
         ser.write("d:3000\n".encode())
     elif k == 'd':
+        ser.write("d:1500\n".encode())
         ser.write("d:3000\n".encode())
 
 
