@@ -13,11 +13,11 @@ def on_press(key):
     except:
         k = key.name  # other keys
     if k == 'up':
-        ser.write("sd:0:10:-10\n".encode())
+        ser.write("sd:0:-10:10\n".encode())
     elif k == 'left':
         ser.write("sd:0:-10:-10\n".encode())
     elif k == 'down':
-        ser.write("sd:0:-10:10\n".encode())
+        ser.write("sd:0:10:-10\n".encode())
     elif k == 'right':
         ser.write("sd:0:10:10\n".encode())
 
