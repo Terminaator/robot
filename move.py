@@ -38,7 +38,7 @@ def on_press(key):
     elif k == 'r':
         if throw:
             ser.write("sd:10:0:0\nd:1500\n".encode())
-        ser.write("sd:10:0:0\n".encode())
+        ser.write("sd:10:10:10\n".encode())
     elif k == 'd':
         if throw:
             throw = False
