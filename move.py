@@ -41,7 +41,7 @@ def on_press(key):
         ser.write("sd:5:0:0\n".encode())
     elif k == 'q':
         if throw:
-            ser.write("sd:-5:2:0\nd:1500\n".encode())
+            ser.write("sd:-10:3:0\nd:1500\n".encode())
         ser.write("sd:-5:2:0\n".encode())
     elif k == 'd':
         if throw:
