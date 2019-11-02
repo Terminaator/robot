@@ -115,9 +115,9 @@ while True:
             break
     else:
         if frames[0] is None:
-            frames[0] = frame
+            frames = (frame, None)
         else:
-            frames[1] = frame
+            frames = (frames[0], frame)
 
 # When everything done, release the capture
 # cap.release()
