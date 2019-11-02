@@ -22,6 +22,7 @@ def on_press(key):
         ser.write("sd:0:10:10\n".encode())
 
 
+
 lis = keyboard.Listener(on_press=on_press)
 lis.start()
 

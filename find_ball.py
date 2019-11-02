@@ -2,12 +2,6 @@ import numpy as np
 import cv2
 import time
 import pyrealsense2 as rs
-import serial.tools.list_ports
-
-ports = serial.tools.list_ports.comports()
-device = list(map(lambda port: port.device, ports))[0]
-
-ser = serial.Serial(device, 115200, timeout=0.01)
 
 
 def nothing(x):
@@ -72,10 +66,6 @@ def find_blob(blob):  # returns the red colored circle
     return r, largest_contour
 
 
-ports = serial.tools.list_ports.comports()
-device = list(map(lambda port: port.device, ports))[0]
-
-ser = serial.Serial(device, 115200, timeout=0.01)
 
 frames = (None, None)
 while True:
