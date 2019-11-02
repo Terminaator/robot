@@ -98,7 +98,7 @@ while True:
     frame = np.asanyarray(color_frame.get_data())
     ball = segment_colour(frame)
     if frames[0] is not None and frames[1] is not None:
-        frame = cv2.add(frames[0], 0.8, frames[1], 0.2, 0)
+        frame = cv2.addWeighted(frames[0], 0.2, frames[1], 0.8, 0)
         frames = [None, None]
         rec, area = find_blob(ball)
         (x, y, w, h) = rec
