@@ -1,6 +1,6 @@
 import time
 
-import serial
+import serial.tools.list_ports
 
 ports = serial.tools.list_ports.comports()
 device = list(map(lambda port: port.device, ports))[0]
