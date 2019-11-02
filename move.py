@@ -15,18 +15,16 @@ def on_press(key):
     except:
         k = key.name  # other keys
     if k == 'up':
-        ser.write("sd:0:-10:10\n".encode())
+        ser.write("sd:0:-10:10\nd:1500\n".encode())
     elif k == 'left':
-        ser.write("sd:0:-5:-5\n".encode())
+        ser.write("sd:0:-5:-5\nd:1500\n".encode())
     elif k == 'down':
-        ser.write("sd:0:10:-10\n".encode())
+        ser.write("sd:0:10:-10\nd:1500\n".encode())
     elif k == 'right':
-        ser.write("sd:0:5:5\n".encode())
+        ser.write("sd:0:5:5\nd:1500\n".encode())
     elif k == 'space':
-        ser.write("sd:0:0:0\n".encode())
+        ser.write("sd:0:0:0\nd:1500\n".encode())
     elif k == 'd':
-        ser.write("d:1500\n".encode())
-        time.sleep(0.5)
         ser.write("d:5000\n".encode())
 
 
