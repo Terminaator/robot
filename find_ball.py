@@ -2,7 +2,6 @@ import numpy as np
 import cv2
 import time
 import pyrealsense2 as rs
-import serial
 import serial.tools.list_ports
 
 ports = serial.tools.list_ports.comports()
@@ -10,9 +9,6 @@ device = list(map(lambda port: port.device, ports))[0]
 
 ser = serial.Serial(device, 115200, timeout=0.01)
 
-
-# open the camera
-# cap = cv2.VideoCapture(1)
 
 def nothing(x):
     pass
@@ -35,15 +31,10 @@ cv2.createTrackbar("12", "Trackbars", 255, 255, nothing)'''
 pipeline = rs.pipeline()
 config = rs.config()
 
-# config.enable_device('801212070130')
-
-# config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
 config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
 
-
-# profile = pipeline.start()
 
 def segment_colour(frame):  # returns only the red colors in the frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -52,10 +43,6 @@ def segment_colour(frame):  # returns only the red colors in the frame
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
     ycr_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2YCrCb)
-    # mask_2 = cv2.inRange(ycr_roi, np.array([cv2.getTrackbarPos("7", "Trackbars"), cv2.getTrackbarPos("8", "Trackbars"),
-    #                                        cv2.getTrackbarPos("9", "Trackbars")]),
-    #                     np.array([cv2.getTrackbarPos("10", "Trackbars"), cv2.getTrackbarPos("11", "Trackbars"),
-    #                               cv2.getTrackbarPos("12", "Trackbars")]))
 
     mask = mask_1  # | mask_2
     kern_dilate = np.ones((3, 3), np.uint8)
@@ -119,6 +106,4 @@ while True:
         else:
             frames = (frames[0], frame)
 
-# When everything done, release the capture
-# cap.release()
 cv2.destroyAllWindows()
