@@ -77,7 +77,6 @@ config = rs.config()
 config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
-keyboard = Controller()
 
 
 def segment_colour(frame):  # returns only the red colors in the frame
@@ -129,7 +128,7 @@ while True:
         rec, area = find_blob(ball)
         (x, y, w, h) = rec
         if (w * h) < 10:
-            keyboard.press('up')
+            on_press('up')
         else:
             simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
             centre_x = x + ((w) / 2)
