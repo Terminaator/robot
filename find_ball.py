@@ -83,7 +83,7 @@ while True:
             centre_x = x + ((w) / 2)
             centre_y = y + ((h) / 2)
             cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-        cv2.imshow('Processed', frame)
+        cv2.imshow('Processed', depth_frame)
         cv2.imshow('treshold', ball)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
