@@ -15,12 +15,6 @@ cv2.createTrackbar("3", "Trackbars", 104, 255, nothing)
 cv2.createTrackbar("4", "Trackbars", 91, 255, nothing)
 cv2.createTrackbar("5", "Trackbars", 255, 255, nothing)
 cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
-'''cv2.createTrackbar("7", "Trackbars", 169, 255, nothing)
-cv2.createTrackbar("8", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("9", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("10", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("11", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("12", "Trackbars", 255, 255, nothing)'''
 
 pipeline = rs.pipeline()
 config = rs.config()

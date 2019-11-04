@@ -23,8 +23,6 @@ if basket == 'b':
     hS = 255
     hV = 140
 
-    
-
 cv2.namedWindow("Trackbars")
 cv2.createTrackbar("1", "Trackbars", lH, 255, nothing)
 cv2.createTrackbar("2", "Trackbars", lS, 255, nothing)
@@ -32,12 +30,6 @@ cv2.createTrackbar("3", "Trackbars", lV, 255, nothing)
 cv2.createTrackbar("4", "Trackbars", hH, 255, nothing)
 cv2.createTrackbar("5", "Trackbars", hS, 255, nothing)
 cv2.createTrackbar("6", "Trackbars", hV, 255, nothing)
-'''cv2.createTrackbar("7", "Trackbars", 169, 255, nothing)
-cv2.createTrackbar("8", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("9", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("10", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("11", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("12", "Trackbars", 255, 255, nothing)'''
 
 pipeline = rs.pipeline()
 config = rs.config()
