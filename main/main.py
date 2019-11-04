@@ -27,3 +27,4 @@ if __name__ == "__main__":
     t1.start()
     while True:
         print(2)
+        print(frame)
