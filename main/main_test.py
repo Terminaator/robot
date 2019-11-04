@@ -124,16 +124,17 @@ while True:
         frames = [None, None]
         rec, area = find_blob(ball)
         (x, y, w, h) = rec
-        if (w * h) < 10:
-            on_press("e")
-        else:
-            simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
-            centre_x = x + ((w) / 2)
-            centre_y = y + ((h) / 2)
-            if 280 > centre_x < 320:
-                on_press("up")
+        simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
+        # centre point of the ball
+        centre_x = x + ((w) / 2)
+        centre_y = y + ((h) / 2)
+        if 280 > centre_x < 320:
+            if (w * h) > 20:
+                # stay still
             else:
-                on_press("e")
+                on_press("up")
+        else:
+            on_press("left")
             cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
         cv2.imshow('Processed', frame)
         cv2.imshow('treshold', ball)
