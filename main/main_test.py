@@ -118,11 +118,11 @@ while True:
     ball = segment_colour(frame)
     rec, area = find_blob(ball)
     (x, y, w, h) = rec
-    simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
     # centre point of the ball
     centre_x = x + ((w) / 2)
     centre_y = y + ((h) / 2)
     cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
+    print(centre_x)
     if 280 > centre_x < 320:
         if (w * h) > 20:
             # stay still
