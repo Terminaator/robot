@@ -21,10 +21,10 @@ def get_frame():
         color_frame = frames.get_color_frame()
         frame = np.asanyarray(color_frame.get_data())
 
-
-t1 = Thread(target=get_frame())
-t1.setDaemon(True)
-t1.start()
-while True:
-    print(frame)
-    cv2.imshow('Processed', frame)
+if __name__ == "__main__":
+    t1 = Thread(target=get_frame())
+    t1.setDaemon(True)
+    t1.start()
+    while True:
+        print(frame)
+        cv2.imshow('Processed', frame)
