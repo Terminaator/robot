@@ -13,6 +13,18 @@ profile = pipeline.start(config)
 
 frame = None
 
+def mask():
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    mask_1 = cv2.inRange(hsv, np.array([33,142,104]),
+                         np.array([91,255,255]))
+    ycr_roi = cv2.cvtColor(frame, cv2.COLOR_BGR2YCrCb)
+
+    mask = mask_1
+    kern_dilate = np.ones((3, 3), np.uint8)
+    kern_erode = np.ones((3, 3), np.uint8)
+    mask = cv2.erode(mask, kern_erode)
+    mask = cv2.dilate(mask, kern_dilate)
+    return mask
 
 def get_frame():
     while True:
