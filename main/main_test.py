@@ -115,7 +115,8 @@ while True:
     frame = pipeline.wait_for_frames()
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
-    frame = cv2.getRotationMatrix2D((320,240), 90, 1)
+    angle = cv2.getRotationMatrix2D((320,240), 90, 1)
+    frame = cv2.warpAffine(frame, angle, (640,480))
     ball = segment_colour(frame)
     rec, area = find_blob(ball)
     (x, y, w, h) = rec
