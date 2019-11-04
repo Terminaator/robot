@@ -12,11 +12,7 @@ device = list(map(lambda port: port.device, ports))[0]
 
 ser = serial.Serial(device, 115200)
 throw = False
-def on_press(key):
-    try:
-        k = key.char  # single-char keys
-    except:
-        k = key.name  # other keys
+def on_press(k):
     global throw
     if k == 'up':
         if throw:
@@ -54,10 +50,10 @@ def on_press(key):
 
 
 
-lis = keyboard.Listener(on_press=on_press)
-lis.start()
+#lis = keyboard.Listener(on_press=on_press)
+#lis.start()
 
-lis.join()
+#lis.join()
 
 def nothing(x):
     pass
