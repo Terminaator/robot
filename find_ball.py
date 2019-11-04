@@ -65,6 +65,7 @@ while True:
     start = time.time()
     frame = pipeline.wait_for_frames()
     color_frame = frame.get_color_frame()
+    depth_frame = frame.get_depth_frame()
     frame = np.asanyarray(color_frame.get_data())
     ball = segment_colour(frame)
     if frames[0] is not None and frames[1] is not None:
@@ -78,6 +79,8 @@ while True:
             simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
             centre_x = x + ((w) / 2)
             centre_y = y + ((h) / 2)
+            zDepth = depth_frame.get_distance(int(centre_x), int(centre_y))
+            print(zDepth)
             cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
         cv2.imshow('Processed', frame)
         cv2.imshow('treshold', ball)
