@@ -70,8 +70,7 @@ while True:
         continue
     frame = np.asanyarray(color_frame.get_data())
     ball = segment_colour(frame)
-    width = depth_frame.get_width()
-    height = depth_frame.get_height()
+    print(depth_frame)
     if frames[0] is not None and frames[1] is not None:
         frame = cv2.bitwise_and(frames[0], frames[1])
         frames = [None, None]
