@@ -22,9 +22,8 @@ def get_frame():
         frame = np.asanyarray(color_frame.get_data())
 
 if __name__ == "__main__":
-    t1 = Thread(target=get_frame())
+    t1 = Thread(target=get_frame)
     t1.setDaemon(True)
     t1.start()
     while True:
-        print(frame)
-        cv2.imshow('Processed', frame)
+        print(2)
