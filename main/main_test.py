@@ -126,7 +126,7 @@ while True:
     cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
     if 280 < centre_x < 320:
         on_press("space")
-        if (w * h) > 20:
+        if (w * h) < 10:
             # stay still
             on_press("space")
         else:
