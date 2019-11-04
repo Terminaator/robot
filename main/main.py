@@ -83,6 +83,7 @@ while True:
         frames[2] = frame
 
     if frames[0] is not None and frames[1] is not None and frames[2] is not None:
+        print(2)
         frame = cv2.bitwise_and(frames[0], frames[1])
         frame = cv2.bitwise_and(frame, frames[2])
         ball_treshold = segment_colour(frame)
