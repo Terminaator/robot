@@ -30,9 +30,8 @@ def segment_colour(frame):  # returns only the red colors in the frame
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
-    ycr_roi = cv2.cvtColor(mask_1, cv2.COLOR_BGR2YCrCb)
 
-    mask = ycr_roi  # | mask_2
+    mask = mask_1  # | mask_2
     kern_dilate = np.ones((3, 3), np.uint8)
     kern_erode = np.ones((3, 3), np.uint8)
     mask = cv2.erode(mask, kern_erode)  # Eroding
