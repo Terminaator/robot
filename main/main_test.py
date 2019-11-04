@@ -112,28 +112,25 @@ def find_blob(blob):  # returns the red colored circle
 
 
 while True:
-    start = time.time()
     frame = pipeline.wait_for_frames()
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
     ball = segment_colour(frame)
-    on_press("space")
-    frames = [None, None]
     rec, area = find_blob(ball)
     (x, y, w, h) = rec
     simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
     # centre point of the ball
     centre_x = x + ((w) / 2)
     centre_y = y + ((h) / 2)
+    cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
     if 280 > centre_x < 320:
         if (w * h) > 20:
             # stay still
-            nothing(1)
+            on_press("space")
         else:
             on_press("up")
     else:
         on_press("left")
-        cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', ball)
     if cv2.waitKey(1) & 0xFF == ord('q'):
