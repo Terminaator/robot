@@ -124,7 +124,7 @@ while True:
         rec, area = find_blob(ball)
         (x, y, w, h) = rec
         if (w * h) < 10:
-            ser.write("sd:0:-10:10\n".encode())
+            None
         else:
             simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
             centre_x = x + ((w) / 2)
