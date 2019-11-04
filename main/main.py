@@ -27,7 +27,8 @@ if __name__ == "__main__":
     t1.start()
     while True:
         print(2)
-        cv2.imshow('Processed', frame)
+        if frame is not None:
+            cv2.imshow('Processed', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
