@@ -128,6 +128,7 @@ while True:
             # stay still
             on_press("space")
         else:
+            print("up")
             on_press("up")
     else:
         on_press("left")
