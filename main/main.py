@@ -1,4 +1,6 @@
 from threading import Thread
+
+import cv2
 import numpy as np
 import pyrealsense2 as rs
 
@@ -25,3 +27,4 @@ t1.setDaemon(True)
 t1.start()
 while True:
     print(frame)
+    cv2.imshow('Processed', frame)
