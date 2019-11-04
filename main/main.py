@@ -89,7 +89,7 @@ while True:
         (x, y, w, h), area = find_blob(ball_treshold)
         if (w * h) < 10:
             on_press("up")
-        cv2.imshow('Processed', frame)
+    cv2.imshow('Processed', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
