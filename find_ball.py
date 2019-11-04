@@ -66,6 +66,8 @@ while True:
     frame = pipeline.wait_for_frames()
     color_frame = frame.get_color_frame()
     depth_frame = frame.get_depth_frame()
+    if not depth_frame:
+        continue
     frame = np.asanyarray(color_frame.get_data())
     ball = segment_colour(frame)
     if frames[0] is not None and frames[1] is not None:
