@@ -131,6 +131,7 @@ while True:
         if 280 > centre_x < 320:
             if (w * h) > 20:
                 # stay still
+                nothing(1)
             else:
                 on_press("up")
         else:
