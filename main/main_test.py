@@ -70,6 +70,7 @@ cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
 pipeline = rs.pipeline()
 config = rs.config()
 
+config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
 config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
@@ -113,6 +114,7 @@ def find_blob(blob):  # returns the red colored circle
 
 while True:
     frame = pipeline.wait_for_frames()
+    depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
     angle = cv2.getRotationMatrix2D((320,240), 90, 1)
@@ -126,6 +128,7 @@ while True:
     cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
     if 280 < centre_x < 320:
         on_press("space")
+        depth = depth_frame.get_distance(int(centre_x), int(centre_y))
         if depth < 0.29:
             # stay still
             on_press("space")
