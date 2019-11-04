@@ -111,40 +111,32 @@ def find_blob(blob):  # returns the red colored circle
 
 
 
-frames = (None, None)
 while True:
     start = time.time()
     frame = pipeline.wait_for_frames()
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
     ball = segment_colour(frame)
-    if frames[0] is not None and frames[1] is not None:
-        on_press("space")
-        frame = cv2.bitwise_and(frames[0], frames[1])
-        frames = [None, None]
-        rec, area = find_blob(ball)
-        (x, y, w, h) = rec
-        simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
-        # centre point of the ball
-        centre_x = x + ((w) / 2)
-        centre_y = y + ((h) / 2)
-        if 280 > centre_x < 320:
-            if (w * h) > 20:
-                # stay still
-                nothing(1)
-            else:
-                on_press("up")
+    on_press("space")
+    frames = [None, None]
+    rec, area = find_blob(ball)
+    (x, y, w, h) = rec
+    simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
+    # centre point of the ball
+    centre_x = x + ((w) / 2)
+    centre_y = y + ((h) / 2)
+    if 280 > centre_x < 320:
+        if (w * h) > 20:
+            # stay still
+            nothing(1)
         else:
-            on_press("left")
-            cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-        cv2.imshow('Processed', frame)
-        cv2.imshow('treshold', ball)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+            on_press("up")
     else:
-        if frames[0] is None:
-            frames = (frame, None)
-        else:
-            frames = (frames[0], frame)
+        on_press("left")
+        cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
+    cv2.imshow('Processed', frame)
+    cv2.imshow('treshold', ball)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
 cv2.destroyAllWindows()
