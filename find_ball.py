@@ -79,7 +79,7 @@ while True:
             simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
             centre_x = x + ((w) / 2)
             centre_y = y + ((h) / 2)
-            zDepth = depth_frame.get_distance(int(2), int(3))
+            zDepth = depth_frame.get_distance(3,2)
             print(zDepth)
             cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
         cv2.imshow('Processed', frame)
