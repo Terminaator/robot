@@ -122,8 +122,8 @@ while True:
     centre_x = x + ((w) / 2)
     centre_y = y + ((h) / 2)
     cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-    print(centre_x)
-    if 280 > centre_x < 320:
+    if 280 < centre_x < 320:
+        print(centre_x)
         if (w * h) > 20:
             # stay still
             on_press("space")
