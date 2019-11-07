@@ -17,11 +17,11 @@ def on_press(k):
     if k == 'up':
         if throw:
             ser.write("sd:0:-10:10\nd:1500\n".encode())
-        ser.write("sd:0:-10:10\n".encode())
+        ser.write("sd:0:-20:10\n".encode())
     elif k == 'left':
         if throw:
             ser.write("sd:0:-5:-5\nd:1500\n".encode())
-        ser.write("sd:0:-5:-5\n".encode())
+        ser.write("sd:0:-15:-5\n".encode())
     elif k == 'down':
         if throw:
             ser.write("sd:0:10:-10\nd:1500\n".encode())
@@ -110,9 +110,11 @@ def find_blob(blob):  # returns the red colored circle
 
     return r, largest_contour
 
-
+fps = 0
+seconds = 0
 
 while True:
+##    start = time.time()
     frame = pipeline.wait_for_frames()
     depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
@@ -125,15 +127,16 @@ while True:
     # centre point of the ball
     centre_x = x + ((w) / 2)
     centre_y = y + ((h) / 2)
+    u = 2*(w+h)
     cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-    if 280 < centre_x < 320:
+    if 240 < centre_x < 360:
         on_press("space")
         depth = depth_frame.get_distance(int(centre_x), int(centre_y))
-        if depth < 0.29:
+        print(u)
+        if u > 240:
             # stay still
             on_press("space")
         else:
-            print("up")
             on_press("up")
     else:
         on_press("left")
@@ -141,5 +144,14 @@ while True:
     cv2.imshow('treshold', ball)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    
+##    end = time.time()
+##    seconds += end - start
+##    if seconds < 1:
+##        fps += 1
+##    elif seconds >= 1:
+##        print(int(round(fps)))
+##        seconds = 0
+##        fps = 0
 
 cv2.destroyAllWindows()
