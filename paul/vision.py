@@ -14,7 +14,8 @@ class Vision(Thread):
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 15)
 
         self.profile = self.pipeline.start(self.config)
-        self.profile.set_option(rs.option.enable_auto_exposure, False)
+        color = self.profile.get_device().query_sensors()[1]
+        color.set_option(rs.option.enable_auto_exposure, False)
 
     def on_message(self, msg):
         print("vision received:", msg)
