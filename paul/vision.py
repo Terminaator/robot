@@ -56,4 +56,5 @@ class Vision(Thread):
         frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
+        cv2.imshow('Processed', ball_mask)
         print(ball_x, ball_y)
