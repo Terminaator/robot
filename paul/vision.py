@@ -14,7 +14,7 @@ class Vision(Thread):
         self.config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
-        self.profile = pipeline.start(config)
+        self.profile = self.pipeline.start(self.config)
 
     def on_message(self, msg):
         print("vision received:", msg)
@@ -26,6 +26,14 @@ class Vision(Thread):
         opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
         return opening
 
-    def on_tick(self):
-        print(2)
+    def read_frame(self):
+        frames = self.pipeline.wait_for_frames()
+        depth_frame = frames.get_depth_frame()
+        color_frame = frames.get_color_frame()
+        return depth_frame, color_frame
 
+    def on_tick(self):
+        depth_frame, color_frame = self.read_frame()
+        if not depth_frame or not color_frame:
+            return
+        frame = np.asanyarray(color_frame.get_data())

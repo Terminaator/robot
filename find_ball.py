@@ -27,17 +27,12 @@ profile = pipeline.start(config)
 
 def segment_colour(frame):  # returns only the red colors in the frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask_1 = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
+    mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
-
-    mask = mask_1  # | mask_2
-    kern_dilate = np.ones((3, 3), np.uint8)
-    kern_erode = np.ones((3, 3), np.uint8)
-    mask = cv2.erode(mask, kern_erode)  # Eroding
-    mask = cv2.dilate(mask, kern_dilate)  # Dilating
-    return mask
+    opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    return opening
 
 
 def find_blob(blob):  # returns the red colored circle
