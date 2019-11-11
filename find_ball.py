@@ -19,8 +19,8 @@ cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
 pipeline = rs.pipeline()
 config = rs.config()
 
-config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
-config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
+config.enable_stream(rs.stream.depth, 720, 480, rs.format.z16, 60)
+config.enable_stream(rs.stream.color, 720, 480, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
 
@@ -31,7 +31,7 @@ def segment_colour(frame):  # returns only the red colors in the frame
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
-    kernel = np.ones((3, 3), np.uint8)
+    kernel = np.ones((5, 5), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     return opening
 
@@ -65,7 +65,7 @@ while True:
     if not depth_frame:
         continue
     frame = np.asanyarray(color_frame.get_data())
-    frame = cv2.warpAffine(frame, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
+    frame = cv2.warpAffine(frame, cv2.getRotationMatrix2D((360, 240), 90, 1), (720, 480))
     ball = segment_colour(frame)
 
     rec, area = find_blob(ball)
