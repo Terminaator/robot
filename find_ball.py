@@ -65,7 +65,7 @@ while True:
     if not depth_frame:
         continue
     frame = np.asanyarray(color_frame.get_data())
-    frame = cv2.warpAffine(frame, cv2.getRotationMatrix2D((360, 240), 90, 1), (720, 480))
+    #frame = cv2.warpAffine(frame, cv2.getRotationMatrix2D((360, 240), 90, 1), (720, 480))
     ball = segment_colour(frame)
 
     rec, area = find_blob(ball)
