@@ -66,7 +66,7 @@ while True:
         continue
     frame = np.asanyarray(color_frame.get_data())
 
-    cv2.imshow('Processed', frame)
+    cv2.imshow('Processed', segment_colour(frame))
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
