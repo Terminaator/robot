@@ -44,7 +44,8 @@ class Vision(Thread):
                 cont_index = idx
         if len(contours) > 0:
             r = cv2.boundingRect(contours[cont_index])
-            return ((r[0] + ((r[2]) / 2)), ([1] + (([3]) / 2)))
+
+            return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
 
         return 0,0
 
@@ -54,5 +55,5 @@ class Vision(Thread):
             return
         frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
-        x,y = self.find_ball(ball_mask)
-        print(x,y)
+        ball_x,ball_y = self.find_ball(ball_mask)
+        print(ball_x)

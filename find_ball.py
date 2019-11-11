@@ -75,8 +75,8 @@ while True:
             None
         else:
             simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
-            centre_x = x + ((w) / 2)
-            centre_y = y + ((h) / 2)
+            centre_x = x + (w / 2)
+            centre_y = y + (h / 2)
             zDepth = depth_frame.get_distance(int(centre_x), int(centre_y))
             print(zDepth)
             cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
