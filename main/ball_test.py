@@ -2,7 +2,51 @@ import numpy as np
 import cv2
 import time
 import pyrealsense2 as rs
+from pynput import keyboard
 
+import serial.tools.list_ports
+from pynput.keyboard import Controller
+
+ports = serial.tools.list_ports.comports()
+device = list(map(lambda port: port.device, ports))[0]
+
+ser = serial.Serial(device, 115200)
+throw = False
+def on_press(k):
+    global throw
+    if k == 'up':
+        if throw:
+            ser.write("sd:0:-10:10\nd:1500\n".encode())
+        ser.write("sd:0:-20:10\n".encode())
+    elif k == 'left':
+        if throw:
+            ser.write("sd:0:-5:-5\nd:1500\n".encode())
+        ser.write("sd:0:-15:-5\n".encode())
+    elif k == 'down':
+        if throw:
+            ser.write("sd:0:10:-10\nd:1500\n".encode())
+        ser.write("sd:0:10:-10\n".encode())
+    elif k == 'right':
+        if throw:
+            ser.write("sd:0:5:5\nd:1500\n".encode())
+        ser.write("sd:0:5:5\n".encode())
+    elif k == 'space':
+        if throw:
+            ser.write("sd:0:0:0\nd:1500\n".encode())
+        ser.write("sd:0:0:0\n".encode())
+    elif k == 'e':
+        if throw:
+            ser.write("sd:10:0:0\nd:1500\n".encode())
+        ser.write("sd:10:0:0\n".encode())
+    elif k == 'q':
+        if throw:
+            ser.write("sd:-10:0:0\nd:1500\n".encode())
+        ser.write("sd:-10:0:0\n".encode())
+    elif k == 'd':
+        if throw:
+            throw = False
+        else:
+            throw = True
 
 def nothing(x):
     pass
@@ -83,7 +127,7 @@ while True:
             if 240 < centre_x < 360:
                 on_press("space")
                 depth = depth_frame.get_distance(int(centre_x), int(centre_y))
-                if depth == 0.0:
+                if depth <= 1.5:
                     # stay still
                     on_press("space")
                 else:
