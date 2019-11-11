@@ -53,7 +53,8 @@ class Vision(Thread):
         depth_frame, color_frame = self.read_frame()
         if not depth_frame or not color_frame:
             return
-        frame = np.asanyarray(color_frame.get_data())
+        frame_wrong_way = np.asanyarray(color_frame.get_data())
+        frame = cv2.warpAffine(frame_wrong_way, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
         cv2.imshow('Processed', ball_mask)
