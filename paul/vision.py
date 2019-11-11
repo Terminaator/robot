@@ -32,7 +32,7 @@ class Vision(Thread):
         color_frame = frames.get_color_frame()
         return depth_frame, color_frame
 
-    def find_blob(self, blob):  # returns the red colored circle
+    def find_ball(self, blob):  # returns the red colored circle
         largest_contour = 0
         cont_index = 0
         _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
@@ -42,11 +42,11 @@ class Vision(Thread):
                 largest_contour = area
 
                 cont_index = idx
-        r = (0, 0, 2, 2)
         if len(contours) > 0:
             r = cv2.boundingRect(contours[cont_index])
+            return ((r[0] + ((r[2]) / 2)), ([1] + (([3]) / 2)))
 
-        return r, largest_contour
+        return None
 
     def on_tick(self):
         depth_frame, color_frame = self.read_frame()
@@ -54,8 +54,5 @@ class Vision(Thread):
             return
         frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
-        (x, y, w, h), area = self.find_blob(ball_mask)
-        if (w * h) > 10:
-            centre_x = x + ((w) / 2)
-            centre_y = y + ((h) / 2)
-            print(centre_x,centre_y)
+        x,y = self.find_ball(ball_mask)
+        print(x,y)
