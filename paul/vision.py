@@ -10,7 +10,7 @@ class Vision(Thread):
         Thread.__init__(self)
         self.pipeline = rs.pipeline()
         self.config = rs.config()
-
+        self.config.set_option(rs.option.enable_auto_exposure, 0)
         self.config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 15)
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 15)
 
