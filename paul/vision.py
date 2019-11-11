@@ -42,7 +42,6 @@ class Vision(Thread):
                 largest_contour = area
 
                 cont_index = idx
-                k = cv2.isContourConvex(contour)
         r = (0, 0, 2, 2)
         if len(contours) > 0:
             r = cv2.boundingRect(contours[cont_index])
