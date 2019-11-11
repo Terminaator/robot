@@ -56,6 +56,4 @@ class Vision(Thread):
         frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
         rec, area = self.find_blob(ball_mask)
-        cv2.imshow('Processed', ball_mask)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            return
+        print(color_frame)
