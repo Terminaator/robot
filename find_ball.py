@@ -31,8 +31,10 @@ def segment_colour(frame):  # returns only the red colors in the frame
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
-    opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-    return opening
+    kernel = np.ones((8, 8), np.uint8)
+    opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    dilation = cv2.dilate(opening, kernel, iterations=2)
+    return dilation
 
 
 def find_blob(blob):  # returns the red colored circle
@@ -56,7 +58,6 @@ def find_blob(blob):  # returns the red colored circle
 
 
 
-frames = (None, None)
 while True:
     start = time.time()
     frame = pipeline.wait_for_frames()
@@ -66,28 +67,22 @@ while True:
         continue
     frame = np.asanyarray(color_frame.get_data())
     ball = segment_colour(frame)
-    if frames[0] is not None and frames[1] is not None:
-        frame = cv2.bitwise_and(frames[0], frames[1])
-        frames = [None, None]
-        rec, area = find_blob(ball)
-        (x, y, w, h) = rec
-        if (w * h) < 10:
-            None
-        else:
-            simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
-            centre_x = x + (w / 2)
-            centre_y = y + (h / 2)
-            zDepth = depth_frame.get_distance(int(centre_x), int(centre_y))
-            print(zDepth)
-            cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-        cv2.imshow('Processed', frame)
-        cv2.imshow('treshold', ball)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+
+    rec, area = find_blob(ball)
+    (x, y, w, h) = rec
+    if (w * h) < 10:
+        None
     else:
-        if frames[0] is None:
-            frames = (frame, None)
-        else:
-            frames = (frames[0], frame)
+        simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
+        centre_x = x + (w / 2)
+        centre_y = y + (h / 2)
+        zDepth = depth_frame.get_distance(int(centre_x), int(centre_y))
+        print(zDepth)
+        cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
+    cv2.imshow('Processed', frame)
+    cv2.imshow('treshold', ball)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
 
 cv2.destroyAllWindows()
