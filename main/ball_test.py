@@ -124,16 +124,6 @@ while True:
             zDepth = depth_frame.get_distance(int(centre_x), int(centre_y))
             print(zDepth)
             cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-            if 280 < centre_x < 320:
-                on_press("space")
-                #depth = depth_frame.get_distance(int(centre_x), int(centre_y))
-                if zDepth < 100:
-                    # stay still
-                    on_press("space")
-                else:
-                    on_press("up")
-            else:
-                on_press("left")
         cv2.imshow('Processed', frame)
         cv2.imshow('treshold', ball)
         if cv2.waitKey(1) & 0xFF == ord('q'):
