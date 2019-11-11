@@ -31,7 +31,7 @@ def segment_colour(frame):  # returns only the red colors in the frame
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
-    kernel = np.ones((8, 8), np.uint8)
+    kernel = np.ones((2, 2), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     dilation = cv2.dilate(opening, kernel, iterations=2)
     return dilation
