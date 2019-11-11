@@ -1,4 +1,4 @@
-from paul.vision import Vision
+from vision import Vision
 
 vision = Vision()
 

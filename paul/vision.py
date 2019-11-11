@@ -2,7 +2,7 @@ import pyrealsense2 as rs
 import cv2
 import numpy as np
 
-from paul.thread import Thread
+from thread import Thread
 
 
 class Vision(Thread):
