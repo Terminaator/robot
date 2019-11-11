@@ -127,7 +127,7 @@ while True:
             if 240 < centre_x < 360:
                 on_press("space")
                 depth = depth_frame.get_distance(int(centre_x), int(centre_y))
-                if depth < 0.1:
+                if depth < 0.1 and depth != 0.0:
                     # stay still
                     on_press("space")
                 else:
