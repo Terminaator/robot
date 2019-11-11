@@ -19,8 +19,8 @@ cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
 pipeline = rs.pipeline()
 config = rs.config()
 
-config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
-config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 15)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 15)
 
 profile = pipeline.start(config)
 
@@ -31,7 +31,7 @@ def segment_colour(frame):  # returns only the red colors in the frame
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
-    kernel = np.ones((3, 3), np.uint8)
+    kernel = np.ones((5, 5), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     return opening
 
@@ -62,24 +62,13 @@ while True:
     frame = pipeline.wait_for_frames()
     depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
-    if not depth_frame:
+    if not color_frame:
         continue
     frame = np.asanyarray(color_frame.get_data())
-    ball = segment_colour(frame)
 
-    rec, area = find_blob(ball)
-    (x, y, w, h) = rec
-    if (w * h) < 10:
-        None
-    else:
-        simg2 = cv2.rectangle(frame, (x, y), (x + w, y + h), 255, 2)
-        centre_x = x + (w / 2)
-        centre_y = y + (h / 2)
-        zDepth = depth_frame.get_distance(int(centre_x), int(centre_y))
-        print(zDepth)
-        cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-    cv2.imshow('Processed', frame)
-    cv2.imshow('treshold', ball)
+    cv2.imshow('Processed', segment_colour(frame))
+    cv2.imshow('Processed1', frame)
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
