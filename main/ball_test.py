@@ -126,8 +126,8 @@ while True:
             cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
             if 280 < centre_x < 320:
                 on_press("space")
-                depth = depth_frame.get_distance(int(centre_x), int(centre_y))
-                if depth < 0.1 and depth > 0.0:
+                #depth = depth_frame.get_distance(int(centre_x), int(centre_y))
+                if zDepth < 100:
                     # stay still
                     on_press("space")
                 else:
