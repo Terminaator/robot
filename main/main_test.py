@@ -112,7 +112,7 @@ fps = 0
 seconds = 0
 
 while True:
-##    start = time.time()
+    start = time.time()
     frame = pipeline.wait_for_frames()
     depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
@@ -135,6 +135,7 @@ while True:
         if u > 240:
             # stay still
             on_press("space")
+            time.sleep(1)
         else:
             on_press("up")
     else:
