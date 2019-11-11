@@ -11,8 +11,8 @@ class Vision(Thread):
         self.pipeline = rs.pipeline()
         self.config = rs.config()
 
-        self.config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
-        self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
+        self.config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
         self.profile = self.pipeline.start(self.config)
 
@@ -23,8 +23,11 @@ class Vision(Thread):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, np.array([33, 142, 104]),
                            np.array([91, 255, 255]))
-        opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-        return opening
+        kernel = np.ones((8, 8), np.uint8)
+        opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+        dilation = cv2.dilate(opening, kernel, iterations=2)
+
+        return dilation
 
     def read_frame(self):
         frames = self.pipeline.wait_for_frames()
@@ -32,7 +35,7 @@ class Vision(Thread):
         color_frame = frames.get_color_frame()
         return depth_frame, color_frame
 
-    def find_blob(self, blob):  # returns the red colored circle
+    def find_ball(self, blob):  # returns the red colored circle
         largest_contour = 0
         cont_index = 0
         _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
@@ -42,20 +45,19 @@ class Vision(Thread):
                 largest_contour = area
 
                 cont_index = idx
-        r = (0, 0, 2, 2)
         if len(contours) > 0:
             r = cv2.boundingRect(contours[cont_index])
 
-        return r, largest_contour
+            return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
+
+        return 0,0
 
     def on_tick(self):
         depth_frame, color_frame = self.read_frame()
         if not depth_frame or not color_frame:
             return
-        frame = np.asanyarray(color_frame.get_data())
+        frame_wrong_way = np.asanyarray(color_frame.get_data())
+        frame = cv2.warpAffine(frame_wrong_way, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
         ball_mask = self.ball_mask(frame)
-        (x, y, w, h), area = self.find_blob(ball_mask)
-        if (w * h) > 10:
-            centre_x = x + ((w) / 2)
-            centre_y = y + ((h) / 2)
-            print(centre_x,centre_y)
+        ball_x,ball_y = self.find_ball(ball_mask)
+        print(ball_x, ball_y)
