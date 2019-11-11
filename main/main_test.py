@@ -128,6 +128,7 @@ while True:
     if 240 < centre_x < 360:
         on_press("space")
         depth = depth_frame.get_distance(int(centre_x), int(centre_y))
+        # u - tuvastatud palli ümber oleva nelinurga ümbermõõt
         print(u)
         if u > 240:
             # stay still
