@@ -55,5 +55,8 @@ class Vision(Thread):
             return
         frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
-        rec, area = self.find_blob(ball_mask)
-        print(color_frame)
+        (x, y, w, h), area = self.find_blob(ball_mask)
+        if (w * h) > 10:
+            centre_x = x + ((w) / 2)
+            centre_y = y + ((h) / 2)
+            print(centre_x,centre_y)
