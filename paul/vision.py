@@ -23,7 +23,7 @@ class Vision(Thread):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, np.array([33, 142, 104]),
                            np.array([91, 255, 255]))
-        kernel = np.ones((3, 3), np.uint8)
+        kernel = np.ones((8, 8), np.uint8)
         opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
         dilation = cv2.dilate(opening, kernel, iterations=2)
 
