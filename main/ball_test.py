@@ -98,7 +98,14 @@ def find_blob(blob):  # returns the red colored circle
 
     return r, largest_contour
 
-
+def move(depth):
+    if depth is not None:
+        if depth < 0.3:
+            on_press("space")
+        else:
+            on_press("up")
+    else:
+        on_press("left")
 
 frames = (None, None)
 while True:
