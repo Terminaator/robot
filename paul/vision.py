@@ -46,7 +46,7 @@ class Vision(Thread):
             r = cv2.boundingRect(contours[cont_index])
             return ((r[0] + ((r[2]) / 2)), ([1] + (([3]) / 2)))
 
-        return None
+        return 0,0
 
     def on_tick(self):
         depth_frame, color_frame = self.read_frame()
