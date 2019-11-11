@@ -56,4 +56,4 @@ class Vision(Thread):
         frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
-        print(ball_x)
+        print(ball_x, ball_y)
