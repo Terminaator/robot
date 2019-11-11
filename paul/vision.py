@@ -32,8 +32,28 @@ class Vision(Thread):
         color_frame = frames.get_color_frame()
         return depth_frame, color_frame
 
+    def find_blob(self, blob):  # returns the red colored circle
+        largest_contour = 0
+        cont_index = 0
+        _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+        for idx, contour in enumerate(contours):
+            area = cv2.contourArea(contour)
+            if (area > largest_contour):
+                largest_contour = area
+
+                cont_index = idx
+                k = cv2.isContourConvex(contour)
+        r = (0, 0, 2, 2)
+        if len(contours) > 0:
+            r = cv2.boundingRect(contours[cont_index])
+
+        return r, largest_contour
+
     def on_tick(self):
         depth_frame, color_frame = self.read_frame()
         if not depth_frame or not color_frame:
             return
         frame = np.asanyarray(color_frame.get_data())
+        ball_mask = self.ball_mask(frame)
+        rec, area = self.find_blob(ball_mask)
+        cv2.imshow('Processed', ball_mask)
