@@ -62,8 +62,8 @@ def nothing(x):
 
 cv2.namedWindow("Trackbars")
 cv2.createTrackbar("1", "Trackbars", 40, 255, nothing)
-cv2.createTrackbar("2", "Trackbars", 0, 255, nothing)
-cv2.createTrackbar("3", "Trackbars", 0, 255, nothing)
+cv2.createTrackbar("2", "Trackbars", 73, 255, nothing)
+cv2.createTrackbar("3", "Trackbars", 66, 255, nothing)
 cv2.createTrackbar("4", "Trackbars", 80, 255, nothing)
 cv2.createTrackbar("5", "Trackbars", 255, 255, nothing)
 cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
