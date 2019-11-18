@@ -29,7 +29,6 @@ class AI(Thread):
             mainboard.send_message("left")
             self.last = "left"
         else:
-<<<<<<< HEAD
             mainboard.send_message("stop")
         
         
@@ -48,7 +47,5 @@ class AI(Thread):
                     self.last = "up"
                     mainboard.send_message("up")
         print(self.last)
-
->>>>>>> c770d59f23b91011be19c425d49ff019e735c907
 
 ai = AI()
