@@ -61,12 +61,12 @@ def nothing(x):
 
 
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("1", "Trackbars", 33, 255, nothing)
-cv2.createTrackbar("2", "Trackbars", 142, 255, nothing)
-cv2.createTrackbar("3", "Trackbars", 104, 255, nothing)
-cv2.createTrackbar("4", "Trackbars", 91, 255, nothing)
-cv2.createTrackbar("5", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
+cv2.createTrackbar("1", "Trackbars", 75, 255, nothing)
+cv2.createTrackbar("2", "Trackbars", 57, 255, nothing)
+cv2.createTrackbar("3", "Trackbars", 27, 255, nothing)
+cv2.createTrackbar("4", "Trackbars", 75, 255, nothing)
+cv2.createTrackbar("5", "Trackbars", 57, 255, nothing)
+cv2.createTrackbar("6", "Trackbars", 27, 255, nothing)
 
 pipeline = rs.pipeline()
 config = rs.config()
@@ -87,8 +87,8 @@ def segment_colour(frame):  # returns only the red colors in the frame
 
     kernel = np.ones((3, 3), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    dilation = cv2.dilate(opening, kernel, iterations=2)
-    return dilation
+    #dilation = cv2.dilate(opening, kernel, iterations=2)
+    return opening
 
 
 def find_blob(blob):  # returns the red colored circle
