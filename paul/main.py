@@ -5,8 +5,8 @@ from ai import AI
 vision = Vision()
 ai = AI()
 
-vision.start()
 ai.start()
-vision.join()
+vision.start()
 ai.join()
+vision.join()
 
