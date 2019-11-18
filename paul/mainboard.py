@@ -21,6 +21,8 @@ class Mainboard(Thread):
 
     def on_message(self, msg):
         print("mainboard received:", msg)
+        if self.done:
+            return
         if msg == 'up' and self.last_command != "up":
             self.ser.write("sd:0:0:0\n".encode())
         self.last_command = msg
