@@ -11,7 +11,6 @@ class Thread(threading.Thread):
         self.tick_speed = tick_speed
 
     def send_message(self, msg):
-        print(2)
         self.message_queue.put_nowait(msg)
 
     def run(self):
