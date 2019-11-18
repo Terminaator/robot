@@ -62,6 +62,8 @@ class Vision(Thread):
         frame = cv2.warpAffine(frame_wrong_way, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
-        ai.send_message("")
+        ai.send_message({
+            "closest_ball_coordinates": (ball_x, ball_y)
+        })
 
 vision = Vision()
