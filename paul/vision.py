@@ -1,3 +1,5 @@
+import time
+
 import pyrealsense2 as rs
 import cv2
 import numpy as np
@@ -62,10 +64,9 @@ class Vision(Thread):
         frame = cv2.warpAffine(frame_wrong_way, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
-        if ball_y != 0 and ball_y !=  0:
-            print(ball_y,ball_x)
-            ai.send_message({
-                "closest_ball_coordinates": (ball_x, ball_y)
-            })
+        ai.send_message({
+            "closest_ball_coordinates": (ball_x, ball_y)
+        })
+        time.sleep(1. / 30)
 
 vision = Vision()

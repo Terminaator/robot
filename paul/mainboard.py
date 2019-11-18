@@ -23,9 +23,10 @@ class Mainboard(Thread):
     def on_tick(self):
         # Do nothing when no command has been received
         if self.last_command == None:
-            self.last_command = None
             return
 
+        if self.last_command == 'up':
+            self.ser.write("sd:0:-10:10\n".encode())
         if self.last_command == 'left':
             self.ser.write("sd:0:-5:-5\n".encode())
         elif self.last_command == 'right':

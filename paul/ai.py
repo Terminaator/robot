@@ -19,8 +19,12 @@ class AI(Thread):
 
         # Process vision state and decide action
         # then send motor speeds command to mainboard
-        if self.vision_state["closest_ball_coordinates"][0] < 0:
+        x = self.vision_state["closest_ball_coordinates"][0]
+        y = self.vision_state["closest_ball_coordinates"][1]
+        if x == 0 and y == 0:
             mainboard.send_message("left")
+        elif 240 < x < 360:
+            mainboard.send_message("up")
         else:
             mainboard.send_message("right")
 
