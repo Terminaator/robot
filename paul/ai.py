@@ -1,4 +1,5 @@
 from thread import Thread
+from mainboard import mainboard
 
 class AI(Thread):
     def __init__(self):
@@ -19,9 +20,9 @@ class AI(Thread):
         # Process vision state and decide action
         # then send motor speeds command to mainboard
         if self.vision_state["closest_ball_coordinates"][0] < 0:
-            print(self.vision_state)
+            mainboard.send_message("left")
         else:
-            print(self.vision_state)
+            mainboard.send_message("right")
 
 
 ai = AI()
