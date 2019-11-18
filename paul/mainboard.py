@@ -29,7 +29,7 @@ class Mainboard(Thread):
 
     def on_tick(self):
         # Do nothing when no command has been received
-        if self.last_command == None and not self.done:
+        if self.last_command == None and self.done:
             return
         self.done = True
         if self.last_command == 'up':
