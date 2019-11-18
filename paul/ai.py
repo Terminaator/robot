@@ -24,6 +24,8 @@ class AI(Thread):
         if x == 0 and y == 0:
             mainboard.send_message("left")
         elif 240 < x < 360:
+            if self.vision_state["distance"] < 0.8:
+                mainboard.send_message("stop")
             print(self.vision_state["distance"])
             mainboard.send_message("up")
         else:
