@@ -9,6 +9,7 @@ class AI(Thread):
 
     def on_message(self, msg):
         # Received message, overwrite vision state
+        print(2)
         self.vision_state = msg
 
     def on_tick(self):
