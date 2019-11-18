@@ -67,6 +67,5 @@ class Vision(Thread):
         ai.send_message({
             "closest_ball_coordinates": (ball_x, ball_y)
         })
-        time.sleep(1. / 30)
 
 vision = Vision()

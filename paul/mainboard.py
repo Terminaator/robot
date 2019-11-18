@@ -27,7 +27,9 @@ class Mainboard(Thread):
 
         if self.last_command == 'up':
             self.ser.write("sd:0:-10:10\n".encode())
-        if self.last_command == 'left':
+        elif self.last_command == 'stop':
+            self.ser.write("sd:0:0:0\n".encode())
+        elif self.last_command == 'left':
             self.ser.write("sd:0:-5:-5\n".encode())
         elif self.last_command == 'right':
             self.ser.write("sd:0:5:5\n".encode())
