@@ -65,7 +65,7 @@ class Vision(Thread):
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
         ai.send_message({
-            "closest_ball_coordinates": (ball_x, ball_y)
+            "closest_ball_coordinates": (ball_x, ball_y), "distance": (depth_frame.get_distance(int(ball_x), int(ball_y)))
         })
 
 vision = Vision()
