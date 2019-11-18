@@ -25,9 +25,9 @@ class Mainboard(Thread):
         if self.last_command == None:
             return
 
-        if self.msg == 'left':
+        if self.last_command == 'left':
             self.ser.write("sd:0:-5:-5\n".encode())
-        elif self.msg == 'right':
+        elif self.last_command == 'right':
             self.ser.write("sd:0:5:5\n".encode())
 
 mainboard = Mainboard()
