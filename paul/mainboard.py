@@ -35,5 +35,6 @@ class Mainboard(Thread):
             self.ser.write("sd:0:-5:-5\n".encode())
         elif self.last_command == 'right':
             self.ser.write("sd:0:5:5\n".encode())
+            self.ser.write("sd:0:-10:10\n".encode())
 
 mainboard = Mainboard()
