@@ -15,7 +15,6 @@ def on_press(key):
     except:
         k = key.name  # other keys
     global throw
-    print(ser.read())
     if k == 'up':
         if throw:
             ser.write("sd:0:-10:10\nd:1500\n".encode())
