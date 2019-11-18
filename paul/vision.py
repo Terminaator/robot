@@ -2,7 +2,7 @@ import pyrealsense2 as rs
 import cv2
 import numpy as np
 
-import ai
+from ai import ai
 from thread import Thread
 
 
