@@ -27,6 +27,7 @@ class AI(Thread):
             print(self.vision_state["distance"])
             mainboard.send_message("up")
         else:
+            mainboard.send_message("up")
             mainboard.send_message("right")
 
 
