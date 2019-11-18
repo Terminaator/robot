@@ -78,16 +78,18 @@ profile = pipeline.start(config)
 color = profile.get_device().query_sensors()[1]
 color.set_option(rs.option.enable_auto_exposure, False)
 
+
 def segment_colour(frame):  # returns only the red colors in the frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
-                                      cv2.getTrackbarPos("3", "Trackbars")]),
-                       np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
-                                 cv2.getTrackbarPos("6", "Trackbars")]))
+    # mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
+    #                                  cv2.getTrackbarPos("3", "Trackbars")]),
+    #                   np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
+    #                             cv2.getTrackbarPos("6", "Trackbars")]))
 
+    mask = cv2.inRange(hsv, np.array([30, 0, 0]), np.array([90, 255, 255]))
     kernel = np.ones((3, 3), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    #dilation = cv2.dilate(opening, kernel, iterations=2)
+    # dilation = cv2.dilate(opening, kernel, iterations=2)
     return opening
 
 
