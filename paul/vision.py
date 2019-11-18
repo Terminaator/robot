@@ -64,4 +64,4 @@ class Vision(Thread):
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
         print(ball_y)
-        AI.send_message("")
+        self.send_message("")
