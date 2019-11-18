@@ -37,9 +37,8 @@ class Mainboard(Thread):
         elif self.last_command == 'left':
             self.ser.write("sd:-10:-10:-10\n".encode())
         elif self.last_command == 'right':
-            self.ser.write("sd:0:-10:10\n".encode())
-            time.sleep(1. / 60)
             self.ser.write("sd:10:10:10\n".encode())
+            self.ser.write("sd:0:-10:10\n".encode())
         time.sleep(1./60)
         self.done = False
 
