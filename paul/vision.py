@@ -2,9 +2,8 @@ import pyrealsense2 as rs
 import cv2
 import numpy as np
 
-from thread import Thread
-from ai import AI
-
+from paul import ai
+from paul.thread import Thread
 
 
 class Vision(Thread):
@@ -63,4 +62,4 @@ class Vision(Thread):
         frame = cv2.warpAffine(frame_wrong_way, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
-        AI.send_message("")
+        ai.send_message("")

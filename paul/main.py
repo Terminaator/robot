@@ -1,6 +1,5 @@
-from vision import Vision
-from ai import AI
-
+from paul.ai import AI
+from paul.vision import Vision
 
 vision = Vision()
 ai = AI()
