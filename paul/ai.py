@@ -1,3 +1,5 @@
+import time
+
 from thread import Thread
 from mainboard import mainboard
 
@@ -7,6 +9,7 @@ class AI(Thread):
 
         # Initially vision state is unknown
         self.vision_state = {}
+        self.last = None
 
     def on_message(self, msg):
         # Received message, overwrite vision state
@@ -22,9 +25,14 @@ class AI(Thread):
         x = self.vision_state["closest_ball_coordinates"][0]
         y = self.vision_state["closest_ball_coordinates"][1]
         if x == 0 and y == 0:
+            self.last = "left"
             mainboard.send_message("left")
         else:
-            mainboard.send_message("stop")
-
+            if self.last == "left":
+                self.last = "stop"
+                mainboard.send_message("stop")
+            elif self.last == "stop":
+                mainboard.send_message("up")
+        time.sleep(0.2)
 
 ai = AI()
