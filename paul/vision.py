@@ -63,6 +63,7 @@ class Vision(Thread):
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
         if ball_y != 0 and ball_y !=  0:
+            print(ball_y,ball_x)
             ai.send_message({
                 "closest_ball_coordinates": (ball_x, ball_y)
             })
