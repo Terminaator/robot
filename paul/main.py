@@ -1,8 +1,6 @@
-from ai import AI
-from vision import Vision
+from ai import ai
+from vision import vision
 
-vision = Vision()
-ai = AI()
 
 ai.start()
 vision.start()
