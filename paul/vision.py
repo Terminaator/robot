@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 from thread import Thread
-from ai import AI
+from ai import ai
 
 
 
@@ -64,6 +64,7 @@ class Vision(Thread):
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
         if ball_y != 0 and ball_x != 0:
-            AI.send_message({
+            print(2)
+            ai.send_message({
                 "closest_ball_coordinates": (ball_x, ball_y)
             })
