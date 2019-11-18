@@ -33,6 +33,8 @@ class AI(Thread):
                 mainboard.send_message("stop")
             elif self.last == "stop":
                 mainboard.send_message("up")
+        if self.last is None:
+            self.last = "stop"
         time.sleep(0.2)
 
 ai = AI()
