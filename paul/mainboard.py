@@ -1,3 +1,5 @@
+import time
+
 import serial.tools.list_ports
 from thread import Thread
 
@@ -35,6 +37,7 @@ class Mainboard(Thread):
             self.ser.write("sd:0:-5:-5\n".encode())
         elif self.last_command == 'right':
             self.ser.write("sd:0:5:5\n".encode())
+            time.sleep(0.6)
             self.ser.write("sd:0:-10:10\n".encode())
 
 mainboard = Mainboard()
