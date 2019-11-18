@@ -27,5 +27,15 @@ def get_mask(frame):
 index = 565
 image = cv2.imread("C:\\Users\\liibepau\\Desktop\\new\\" + str(index) + ".png")
 while True:
-    cv2.imshow("image", get_mask(image))
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    (t, binary) = cv2.threshold(blur, 100, 255, cv2.THRESH_BINARY)
+
+    # find contours
+    contours, _ = cv2.findContours(binary, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    # draw contours over original image
+    cv2.drawContours(image, contours, -1, (0, 0, 255), 5)
+    # Show blobs
+    cv2.imshow("Keypoints", image)
     cv2.waitKey(0)
