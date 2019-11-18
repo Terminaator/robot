@@ -23,6 +23,4 @@ class Thread(threading.Thread):
                 pass
 
             self.on_tick()
-
-            if self.tick_speed:
-                time.sleep(1. / 60)
+            time.sleep(1. / 30)

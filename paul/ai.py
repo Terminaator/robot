@@ -24,18 +24,25 @@ class AI(Thread):
         # then send motor speeds command to mainboard
         x = self.vision_state["closest_ball_coordinates"][0]
         y = self.vision_state["closest_ball_coordinates"][1]
-        print(x,y)
+        distance = self.vision_state["distance"]
         if x == 0 and y == 0:
             self.last = "left"
             mainboard.send_message("left")
         else:
             if self.last == "left":
-                self.last = "stop"
                 mainboard.send_message("stop")
-            elif self.last == "stop":
-                mainboard.send_message("up")
-        if self.last is None:
-            self.last = "stop"
-        time.sleep(0.2)
+                self.last = None
+            else:
+                if x < 240:
+                    self.last = "right"
+                    mainboard.send_message("right")
+                elif x > 360:
+                    self.last = "left"
+                    mainboard.send_message("left")
+                elif 240 < x < 360:
+                    self.last = "up"
+                    mainboard.send_message("up")
+        print(self.last)
+
 
 ai = AI()
