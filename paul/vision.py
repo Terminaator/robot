@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 
 from thread import Thread
+from ai import AI
+
 
 
 class Vision(Thread):
@@ -61,4 +63,7 @@ class Vision(Thread):
         frame = cv2.warpAffine(frame_wrong_way, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
-        print(ball_x, ball_y)
+        if ball_y != 0 and ball_x != 0:
+            AI.send_message({
+                "closest_ball_coordinates": (ball_x, ball_y)
+            })
