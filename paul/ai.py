@@ -23,6 +23,8 @@ class AI(Thread):
         y = self.vision_state["closest_ball_coordinates"][1]
         if x == 0 and y == 0:
             mainboard.send_message("left")
+        else
+            mainboard.send_message("stop")
 
 
 ai = AI()
