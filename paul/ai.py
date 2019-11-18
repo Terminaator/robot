@@ -24,6 +24,7 @@ class AI(Thread):
         # then send motor speeds command to mainboard
         x = self.vision_state["closest_ball_coordinates"][0]
         y = self.vision_state["closest_ball_coordinates"][1]
+        print(x,y)
         if x == 0 and y == 0:
             self.last = "left"
             mainboard.send_message("left")
