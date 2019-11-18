@@ -17,6 +17,7 @@ class Mainboard(Thread):
 
         self.ser = serial.Serial(device, 115200)
         self.last_command = None
+        self.done = False
 
     def on_message(self, msg):
         print("mainboard received:", msg)
@@ -26,9 +27,9 @@ class Mainboard(Thread):
 
     def on_tick(self):
         # Do nothing when no command has been received
-        if self.last_command == None:
+        if self.last_command == None and not self.done:
             return
-
+        self.done = True
         if self.last_command == 'up':
             self.ser.write("sd:0:-10:10\n".encode())
         elif self.last_command == 'stop':
@@ -40,5 +41,7 @@ class Mainboard(Thread):
             time.sleep(1. / 60)
             self.ser.write("sd:10:10:10\n".encode())
         time.sleep(1./60)
+        self.done = False
+
 
 mainboard = Mainboard()
