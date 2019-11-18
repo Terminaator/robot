@@ -61,12 +61,12 @@ def nothing(x):
 
 
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("1", "Trackbars", 75, 255, nothing)
-cv2.createTrackbar("2", "Trackbars", 57, 255, nothing)
-cv2.createTrackbar("3", "Trackbars", 27, 255, nothing)
-cv2.createTrackbar("4", "Trackbars", 75, 255, nothing)
-cv2.createTrackbar("5", "Trackbars", 57, 255, nothing)
-cv2.createTrackbar("6", "Trackbars", 27, 255, nothing)
+cv2.createTrackbar("1", "Trackbars", 40, 255, nothing)
+cv2.createTrackbar("2", "Trackbars", 0, 255, nothing)
+cv2.createTrackbar("3", "Trackbars", 0, 255, nothing)
+cv2.createTrackbar("4", "Trackbars", 80, 255, nothing)
+cv2.createTrackbar("5", "Trackbars", 255, 255, nothing)
+cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
 
 pipeline = rs.pipeline()
 config = rs.config()
@@ -81,12 +81,12 @@ color.set_option(rs.option.enable_auto_exposure, False)
 
 def segment_colour(frame):  # returns only the red colors in the frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    # mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
-    #                                  cv2.getTrackbarPos("3", "Trackbars")]),
-    #                   np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
-    #                             cv2.getTrackbarPos("6", "Trackbars")]))
+    mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
+                                      cv2.getTrackbarPos("3", "Trackbars")]),
+                       np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
+                                 cv2.getTrackbarPos("6", "Trackbars")]))
 
-    mask = cv2.inRange(hsv, np.array([40, 0, 0]), np.array([80, 255, 255]))
+    #mask = cv2.inRange(hsv, np.array([40, 0, 0]), np.array([80, 255, 255]))
     kernel = np.ones((3, 3), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     # dilation = cv2.dilate(opening, kernel, iterations=2)
