@@ -14,4 +14,4 @@ class AI(Thread):
 
     def on_tick(self):
         # Do nothing if vision state is not known
-        print(self.vision_state)
+        pass
