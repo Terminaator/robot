@@ -25,4 +25,4 @@ class Thread(threading.Thread):
             self.on_tick()
 
             if self.tick_speed:
-                time.sleep(1. / 30)
+                time.sleep(1. / 60)
