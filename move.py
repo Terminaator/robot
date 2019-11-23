@@ -19,7 +19,7 @@ def on_press(key):
     if k == 'up':
         if throw:
             ser.write("sd:0:-10:10\nd:1500\n".encode())
-        ser.write("sd:0:0:10\n".encode())
+        ser.write("sd:0:-10:10\n".encode())
     elif k == 'left':
         if throw:
             ser.write("sd:0:-5:-5\nd:1500\n".encode())
