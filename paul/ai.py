@@ -32,7 +32,7 @@ class AI(Thread):
             mainboard.send_message("stop")
         
         
-=======
+
             if self.last == "left":
                 mainboard.send_message("stop")
                 self.last = None
