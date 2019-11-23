@@ -2,10 +2,10 @@ import numpy as np
 import cv2
 import time
 import pyrealsense2 as rs
-from pynput import keyboard
+#from pynput import keyboard
 
 import serial.tools.list_ports
-from pynput.keyboard import Controller
+#from pynput.keyboard import Controller
 
 ports = serial.tools.list_ports.comports()
 device = list(map(lambda port: port.device, ports))[0]
@@ -50,12 +50,6 @@ def on_press(k):
         else:
             throw = True
 
-
-# lis = keyboard.Listener(on_press=on_press)
-# lis.start()
-
-# lis.join()
-
 def nothing(x):
     pass
 
@@ -71,8 +65,8 @@ cv2.createTrackbar("6", "Trackbars", 255, 255, nothing)
 pipeline = rs.pipeline()
 config = rs.config()
 
-config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
-config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
 color = profile.get_device().query_sensors()[1]
