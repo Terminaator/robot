@@ -72,6 +72,30 @@ def find_blob(blob):  # returns the red colored circle
     return r, largest_contour
 
 
+def find_basket(blob):  # returns the red colored circle
+    largest_contour = 0
+    cont_index = 0
+    _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for idx, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if area > largest_contour:
+            largest_contour = area
+
+            cont_index = idx
+    if len(contours) > 0:
+        r = cv2.boundingRect(contours[cont_index])
+
+        return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
+    return 0, 0
+
+
+def basket_mask(frame):
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    mask = cv2.inRange(hsv, np.array([187, 173, 207]),
+                       np.array([184, 223, 255]))
+    return mask
+
+
 fps = 0
 seconds = 0
 
@@ -81,14 +105,14 @@ while True:
     depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
-    ball = segment_colour(frame)
-    rec, area = find_blob(ball)
+    ball = basket_mask(frame)
+    rec, area = find_basket(ball)
     (x, y, w, h) = rec
     # centre point of the ball
     centre_x = x + ((w) / 2)
     centre_y = y + ((h) / 2)
     u = 2 * (w + h)
-    image = cv2.rectangle(frame, (5,5),(200,200),(255, 0, 0),2)
+    image = cv2.rectangle(frame, (5, 5), (200, 200), (255, 0, 0), 2)
 
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', ball)
