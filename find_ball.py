@@ -114,7 +114,6 @@ while True:
     frame = np.asanyarray(color_frame.get_data())
     mask = basket_mask(frame)
     x, y = find_blob(mask)
-    print(depth_frame.get_distance(int(x), int(y)))
     #print(x, y,depth_frame.get_distance(int(x), int(y)))
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', mask)
@@ -126,7 +125,6 @@ while True:
     if seconds < 1:
         fps += 1
     elif seconds >= 1:
-        print(int(round(fps)))
         seconds = 0
         fps = 0
 
