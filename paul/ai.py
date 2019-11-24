@@ -22,7 +22,7 @@ class AI(Thread):
             x = self.vision_state["closest_ball_coordinates"][0]
             y = self.vision_state["closest_ball_coordinates"][1]
             distance = self.vision_state["distance"]
-            print(x,y)
+            print(x,y, distance)
 
             if x == 0 and y == 0:
                 mainboard.first_wheel_speed(10)
