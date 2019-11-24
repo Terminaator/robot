@@ -20,12 +20,12 @@ def nothing(x):
 
 
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("1", "Trackbars", 8, 255, nothing)
-cv2.createTrackbar("2", "Trackbars", 85, 255, nothing)
-cv2.createTrackbar("3", "Trackbars", 76, 255, nothing)
-cv2.createTrackbar("4", "Trackbars", 28, 255, nothing)
-cv2.createTrackbar("5", "Trackbars", 252, 255, nothing)
-cv2.createTrackbar("6", "Trackbars", 189, 255, nothing)
+cv2.createTrackbar("1", "Trackbars", 60, 255, nothing)
+cv2.createTrackbar("2", "Trackbars", 100, 255, nothing)
+cv2.createTrackbar("3", "Trackbars", 100, 255, nothing)
+cv2.createTrackbar("4", "Trackbars", 99, 255, nothing)
+cv2.createTrackbar("5", "Trackbars", 250, 255, nothing)
+cv2.createTrackbar("6", "Trackbars", 160, 255, nothing)
 
 pipeline = rs.pipeline()
 config = rs.config()
