@@ -30,15 +30,15 @@ class Mainboard(Thread):
         if self.last_command == None:
             return
         if self.last_command == 'up': #korras
-            self.ser.write("sd:-10:0:10\n".encode())
+            self.ser.write("sd:-20:0:20\n".encode())
         elif self.last_command == 'back': #korras
-            self.ser.write("sd:10:0:-10\n".encode())
+            self.ser.write("sd:20:0:-20\n".encode())
         elif self.last_command == 'stop':
             self.ser.write("sd:0:0:0\n".encode())
         elif self.last_command == 'left':
-            self.ser.write("sd:-5:-5:-5\n".encode())
+            self.ser.write("sd:-10:-10:-10\n".encode())
         elif self.last_command == 'right':
-            self.ser.write("sd:5:5:5\n".encode())
+            self.ser.write("sd:10:10:10\n".encode())
 
 
 mainboard = Mainboard()
