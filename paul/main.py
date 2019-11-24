@@ -9,6 +9,3 @@ mainboard.start()
 ai.join()
 vision.join()
 mainboard.join()
-
-while True:
-    print(vision.frame)
