@@ -41,9 +41,8 @@ color.set_option(rs.option.enable_auto_white_balance, False)
 
 def basket_mask(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsv, np.array([167, 173, 207]),
+    return cv2.inRange(hsv, np.array([167, 173, 207]),
                        np.array([184, 223, 255]))
-    return mask
 
 
 def find_blob(blob):  # returns the red colored circle
@@ -54,11 +53,10 @@ def find_blob(blob):  # returns the red colored circle
         area = cv2.contourArea(contour)
         if area > largest_contour:
             largest_contour = area
-
             cont_index = idx
+
     if len(contours) > 0:
         r = cv2.boundingRect(contours[cont_index])
-
         return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
     return 0, 0
 
