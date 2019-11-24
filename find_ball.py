@@ -43,13 +43,13 @@ def segment_colour(frame):  # returns only the red colors in the frame
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
                                       cv2.getTrackbarPos("3", "Trackbars")]),
-                       np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
-                                 cv2.getTrackbarPos("6", "Trackbars")]))
+                       np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
+                                 cv2.getTrackbarPos("3", "Trackbars")]))
 
-    kernel = np.ones((3, 3), np.uint8)
-    opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    dilation = cv2.dilate(opening, kernel, iterations=2)
-    return dilation
+    #kernel = np.ones((3, 3), np.uint8)
+    #opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    #dilation = cv2.dilate(opening, kernel, iterations=2)
+    return mask
 
 
 def find_blob(blob):  # returns the red colored circle
