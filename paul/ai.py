@@ -3,9 +3,6 @@ import time
 from thread import Thread
 from mainboard import mainboard
 
-from vision import vision
-
-
 class AI(Thread):
     def __init__(self):
         Thread.__init__(self)
