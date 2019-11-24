@@ -96,12 +96,8 @@ while True:
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
     ball = basket_mask(frame)
-    rec, area = find_basket(ball)
-    (x, y, w, h) = rec
-    # centre point of the ball
-    centre_x = x + ((w) / 2)
-    centre_y = y + ((h) / 2)
-    u = 2 * (w + h)
+    rec = find_basket(ball)
+
     image = cv2.rectangle(frame, (5, 5), (200, 200), (255, 0, 0), 2)
 
     cv2.imshow('Processed', frame)
