@@ -51,11 +51,27 @@ def find_compatible_camera():
 
 
 profile = pipeline.start(config)
-#color = profile.get_device().query_sensors()[1]
-advnc_mode = rs.rs400_advanced_mode(find_compatible_camera())
-with open('test.json', 'r') as f:
-    distros_dict = json.load(f)
-print(distros_dict)
+
+try:
+    dev = find_compatible_camera()
+    advnc_mode = rs.rs400_advanced_mode(dev)
+    while not advnc_mode.is_enabled():
+        advnc_mode.toggle_advanced_mode(True)
+        time.sleep(2)
+        # The 'dev' object will become invalid and we need to initialize it again
+        dev = find_compatible_camera()
+        advnc_mode = rs.rs400_advanced_mode(dev)
+
+    with open('custompreset.json', 'r') as f:
+        distros_dict = json.load(f)
+
+    as_json_object = json.loads(str(distros_dict).replace("'", '\"'))
+    json_string = str(as_json_object).replace("'", '\"')
+    advnc_mode.load_json(json_string)
+
+except Exception as e:
+    print(e)
+pass
 
 
 def basket_mask(frame):
