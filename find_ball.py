@@ -56,6 +56,7 @@ def find_blob(blob):  # returns the red colored circle
             cont_index = idx
 
     if len(contours) > 0:
+
         r = cv2.boundingRect(contours[cont_index])
         return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
     return 0, 0
@@ -69,7 +70,7 @@ while True:
     frame = np.asanyarray(color_frame.get_data())
     mask = basket_mask(frame)
     x, y = find_blob(mask)
-    print(x, y)
+    print(x, y,depth_frame.get_distance(int(x), int(y)))
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', mask)
     if cv2.waitKey(1) & 0xFF == ord('q'):
