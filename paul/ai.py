@@ -40,7 +40,11 @@ class AI(Thread):
                 self.last = None
             elif 250 < x < 390 and distance < 0.3:
                 if self.last == "fwd stop":
-
+                    mainboard.first_wheel_speed(0)
+                    mainboard.second_wheel_speed(-20)
+                    mainboard.third_wheel_speed(0)
+                    if 300 < basket.x < 340:
+                        throw_ball(distance)
                 else:
                     mainboard.first_wheel_speed(0)
                     mainboard.second_wheel_speed(0)
