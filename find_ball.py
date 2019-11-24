@@ -69,6 +69,7 @@ while True:
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
     mask = basket_mask(frame)
+    basket = find_basket(mask)
     image = cv2.rectangle(frame, (5, 5), (200, 200), (255, 0, 0), 2)
 
     cv2.imshow('Processed', frame)
