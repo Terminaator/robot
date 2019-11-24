@@ -14,41 +14,6 @@ ser = serial.Serial(device, 115200)
 throw = False
 
 
-def on_press(k):
-    global throw
-    if k == 'up':
-        if throw:
-            ser.write("sd:0:-10:10\nd:1500\n".encode())
-        ser.write("sd:0:-20:10\n".encode())
-    elif k == 'left':
-        if throw:
-            ser.write("sd:0:-5:-5\nd:1500\n".encode())
-        ser.write("sd:0:-15:-5\n".encode())
-    elif k == 'down':
-        if throw:
-            ser.write("sd:0:10:-10\nd:1500\n".encode())
-        ser.write("sd:0:10:-10\n".encode())
-    elif k == 'right':
-        if throw:
-            ser.write("sd:0:5:5\nd:1500\n".encode())
-        ser.write("sd:0:5:5\n".encode())
-    elif k == 'space':
-        if throw:
-            ser.write("sd:0:0:0\nd:1500\n".encode())
-        ser.write("sd:0:0:0\n".encode())
-    elif k == 'e':
-        if throw:
-            ser.write("sd:10:0:0\nd:1500\n".encode())
-        ser.write("sd:10:0:0\n".encode())
-    elif k == 'q':
-        if throw:
-            ser.write("sd:-10:0:0\nd:1500\n".encode())
-        ser.write("sd:-10:0:0\n".encode())
-    elif k == 'd':
-        if throw:
-            throw = False
-        else:
-            throw = True
 
 def nothing(x):
     pass
@@ -80,11 +45,10 @@ def segment_colour(frame):  # returns only the red colors in the frame
                        np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                  cv2.getTrackbarPos("6", "Trackbars")]))
 
-    #mask = cv2.inRange(hsv, np.array([40, 0, 0]), np.array([80, 255, 255]))
     kernel = np.ones((3, 3), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    # dilation = cv2.dilate(opening, kernel, iterations=2)
-    return opening
+    dilation = cv2.dilate(opening, kernel, iterations=2)
+    return dilation
 
 
 def find_blob(blob):  # returns the red colored circle
@@ -135,14 +99,5 @@ while True:
     cv2.imshow('treshold', ball)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-
-##    end = time.time()
-##    seconds += end - start
-##    if seconds < 1:
-##        fps += 1
-##    elif seconds >= 1:
-##        print(int(round(fps)))
-##        seconds = 0
-##        fps = 0
 
 cv2.destroyAllWindows()
