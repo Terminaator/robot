@@ -62,9 +62,13 @@ def find_blob(blob):  # returns the red colored circle
         return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
     return 0, 0
 
+fps = 0
+str_fps = " "
+seconds = 0
 
 while True:
-    ##    start = time.time()
+    start = time.time()
+    print(count_fps)
     frame = pipeline.wait_for_frames()
     depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
@@ -76,5 +80,14 @@ while True:
     cv2.imshow('treshold', mask)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    
+    end = time.time()
+    seconds += end - start
+    if seconds < 1:
+        fps += 1
+    elif seconds >= 1:
+        count_fps = int(round(fps))
+        seconds = 0
+        fps = 0
 
 cv2.destroyAllWindows()
