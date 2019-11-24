@@ -50,7 +50,6 @@ def find_compatible_camera():
     raise Exception("No device that supports advanced mode was found")
 
 
-profile = pipeline.start(config)
 
 try:
     dev = find_compatible_camera()
@@ -73,6 +72,7 @@ except Exception as e:
     print(e)
 pass
 
+profile = pipeline.start(config)
 
 def basket_mask(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
