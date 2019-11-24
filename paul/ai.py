@@ -39,17 +39,17 @@ class AI(Thread):
                 mainboard.third_wheel_speed(0)
                 mainboard.send_message("stop")
                 self.last = None
-            elif x < 290:
+            elif x < 250:
                 mainboard.first_wheel_speed(-20)
                 mainboard.second_wheel_speed(-20)
                 mainboard.third_wheel_speed(-20)
                 mainboard.send_message("left")
-            elif x > 350:
+            elif x > 390:
                 mainboard.first_wheel_speed(20)
                 mainboard.second_wheel_speed(20)
                 mainboard.third_wheel_speed(20)
                 mainboard.send_message("right")
-            elif 290 < x < 350:
+            elif 250 < x < 390:
                 mainboard.first_wheel_speed(-40)
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(40)
