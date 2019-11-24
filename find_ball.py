@@ -53,6 +53,10 @@ def find_compatible_camera():
 profile = pipeline.start(config)
 #color = profile.get_device().query_sensors()[1]
 advnc_mode = rs.rs400_advanced_mode(find_compatible_camera())
+with open('test.json', 'r') as f:
+    distros_dict = json.load(f)
+print(distros_dict)
+
 
 def basket_mask(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
