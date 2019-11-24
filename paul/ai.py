@@ -26,9 +26,9 @@ class AI(Thread):
         print(x,y,distance, "cord")
 
         if x == 0 and y == 0:
-            mainboard.first_wheel_speed(5)
-            mainboard.second_wheel_speed(5)
-            mainboard.third_wheel_speed(5)
+            mainboard.first_wheel_speed(10)
+            mainboard.second_wheel_speed(10)
+            mainboard.third_wheel_speed(10)
             mainboard.send_message("turn")
             self.last = "NO_BALL"
         else:
