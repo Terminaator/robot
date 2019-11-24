@@ -68,7 +68,6 @@ seconds = 0
 
 while True:
     start = time.time()
-    print(count_fps)
     frame = pipeline.wait_for_frames()
     depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
@@ -86,7 +85,7 @@ while True:
     if seconds < 1:
         fps += 1
     elif seconds >= 1:
-        count_fps = int(round(fps))
+        print(int(round(fps)))
         seconds = 0
         fps = 0
 
