@@ -34,8 +34,8 @@ class Vision(Thread):
         else:
             mask = cv2.inRange(hsv, np.array([167, 173, 207]),
                                np.array([184, 223, 255]))
-        opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-        return opening
+        #opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+        return mask
 
     def read_frame(self):
         frames = self.pipeline.wait_for_frames()
