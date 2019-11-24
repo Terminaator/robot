@@ -28,9 +28,9 @@ class Vision(Thread):
     def mask(self, frame, ball):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         if ball:
-            mask = cv2.inRange(hsv, np.array([8, 85, 76]),
+            mask = cv2.inRange(hsv, np.array([10, 85, 76]),
                                np.array([28, 252, 189]))
-            mask = cv2.dilate(mask,  np.ones((3, 3), np.uint8), iterations=2)
+            #mask = cv2.dilate(mask,  np.ones((3, 3), np.uint8), iterations=2)
         else:
             mask = cv2.inRange(hsv, np.array([167, 173, 207]),
                                np.array([184, 223, 255]))
