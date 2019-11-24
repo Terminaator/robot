@@ -88,7 +88,7 @@ while True:
     centre_x = x + ((w) / 2)
     centre_y = y + ((h) / 2)
     u = 2 * (w + h)
-    image = cv2.rectangle(frame, 0, 100, 3, (0, 110, 255), -1)
+    image = cv2.rectangle(frame, (5,5),(200,200),(255, 0, 0),2)
 
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', ball)
