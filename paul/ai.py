@@ -33,7 +33,14 @@ class AI(Thread):
             if self.last == "NO_BALL":
                 mainboard.send_message("stop")
                 self.last = "YES_BALL"
+            elif x < 290:
+                mainboard.send_message("right")
+                self.last = "right"
+            elif x > 350:
+                mainboard.send_message("left")
+                self.last = "left"
             else:
+                self.last = "none"
         print(self.last)
 
 
