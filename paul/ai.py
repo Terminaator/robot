@@ -22,6 +22,9 @@ class AI(Thread):
 
     def on_tick(self):
         # Do nothing if vision state is not known
+        if self.vision_state is None:
+            return
+
         if "basket" in self.vision_state:
             x = self.vision_state["closest_ball_coordinates"][0]
             y = self.vision_state["closest_ball_coordinates"][1]
