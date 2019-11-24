@@ -40,6 +40,7 @@ class AI(Thread):
                 mainboard.send_message("left")
                 self.last = "left"
             else:
+                mainboard.send_message("stop")
                 self.last = "none"
         print(self.last)
 
