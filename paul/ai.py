@@ -33,7 +33,7 @@ class AI(Thread):
             if self.last == "NO_BALL":
                 mainboard.send_message("stop")
                 self.last = "YES_BALL"
-
+            else:
         print(self.last)
 
 

@@ -13,8 +13,8 @@ class Vision(Thread):
         Thread.__init__(self)
         self.pipeline = rs.pipeline()
         self.config = rs.config()
-        self.config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
-        self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
+        self.config.enable_stream(rs.stream.depth, 960, 540, rs.format.z16, 60)
+        self.config.enable_stream(rs.stream.color, 960, 540, rs.format.bgr8, 60)
 
         self.profile = self.pipeline.start(self.config)
         camera_one = self.profile.get_device().query_sensors()[1]
@@ -61,8 +61,7 @@ class Vision(Thread):
         depth_frame, color_frame = self.read_frame()
         if not depth_frame or not color_frame:
             return
-        frame_wrong_way = np.asanyarray(color_frame.get_data())
-        frame = cv2.warpAffine(frame_wrong_way, cv2.getRotationMatrix2D((320, 240), 90, 1), (640, 480))
+        frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
         ball_x,ball_y = self.find_ball(ball_mask)
         ai.send_message({

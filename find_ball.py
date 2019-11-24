@@ -30,8 +30,8 @@ cv2.createTrackbar("6", "Trackbars", 189, 255, nothing)
 pipeline = rs.pipeline()
 config = rs.config()
 
-config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
-config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
+config.enable_stream(rs.stream.depth, 960, 540, rs.format.z16, 60)
+config.enable_stream(rs.stream.color, 960, 540, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
 color = profile.get_device().query_sensors()[1]
@@ -81,8 +81,6 @@ while True:
     depth_frame = frame.get_depth_frame()
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
-    angle = cv2.getRotationMatrix2D((320, 240), 90, 1)
-    frame = cv2.warpAffine(frame, angle, (640, 480))
     ball = segment_colour(frame)
     rec, area = find_blob(ball)
     (x, y, w, h) = rec
