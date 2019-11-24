@@ -22,8 +22,11 @@ class AI(Thread):
 
     def on_tick(self):
         # Do nothing if vision state is not known
-
-        if "closest_ball_coordinates" in self.vision_state:
+        if "basket" in self.vision_state:
+            x = self.vision_state["closest_ball_coordinates"][0]
+            y = self.vision_state["closest_ball_coordinates"][1]
+            distance = self.vision_state["distance"]
+        elif "closest_ball_coordinates" in self.vision_state:
             x = self.vision_state["closest_ball_coordinates"][0]
             y = self.vision_state["closest_ball_coordinates"][1]
             distance = self.vision_state["distance"]
@@ -65,10 +68,6 @@ class AI(Thread):
                     mainboard.send_message("right")
                 else:
                     mainboard.send_message(None)
-        elif "basket" in self.vision_state:
-            x = self.vision_state["closest_ball_coordinates"][0]
-            y = self.vision_state["closest_ball_coordinates"][1]
-            distance = self.vision_state["distance"]
         else:
             return
 
