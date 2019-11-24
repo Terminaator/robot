@@ -28,10 +28,11 @@ class AI(Thread):
         distance = self.vision_state["distance"]
         if x == 0 and y == 0:
             mainboard.send_message("left")
-            self.last = "left"
+            self.last = "NO_BALL"
         else:
-            mainboard.send_message("up")
-            self.last = "up"
+            if self.last == "NO_BALL":
+                mainboard.send_message("stop")
+                self.last = "YES_BALL"
 
         print(self.last)
 
