@@ -46,9 +46,9 @@ def basket_mask(frame):
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
     #mask = cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=2)
-    closing = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+    #closing = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
 
-    return closing
+    return mask
 
 def find_blob(blob):  # returns the red colored circle
     largest_contour = 0
