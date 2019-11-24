@@ -44,8 +44,8 @@ class AI(Thread):
                 mainboard.third_wheel_speed(40)
                 mainboard.send_message("left")
             elif x > 340:
-                mainboard.first_wheel_speed(20)
-                mainboard.third_wheel_speed(40)
+                mainboard.first_wheel_speed(40)
+                mainboard.third_wheel_speed(20)
                 mainboard.send_message("right")
 
 ai = AI()
