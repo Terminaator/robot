@@ -23,4 +23,4 @@ class Thread(threading.Thread):
                 pass
 
             self.on_tick()
-            time.sleep(1. / 30)
+            time.sleep(1. / 60)
