@@ -32,16 +32,14 @@ class AI(Thread):
         else:
             if self.last == "NO_BALL":
                 mainboard.send_message("stop")
-                self.last = "YES_BALL"
-            elif x < 290:
+            elif x < 300:
                 mainboard.send_message("left")
-                self.last = "right"
-            elif x > 350:
+            elif x > 340:
                 mainboard.send_message("right")
-                self.last = "left"
-            elif 290 < x < 350:
+            elif 300 < x < 340 and distance < 0.8:
+                mainboard.send_message("stop")
+            elif 300 < x < 340:
                 mainboard.send_message("up")
-                self.last = "up"
         print(self.last, x, y, distance)
 
 
