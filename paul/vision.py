@@ -28,10 +28,12 @@ class Vision(Thread):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                            np.array([28, 252, 189]))
-        #kernel = np.ones((8, 8), np.uint8)
-        #opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-        #dilation = cv2.dilate(opening, kernel, iterations=2)
+        return mask
 
+    def basket_mask(self, frame):
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(hsv, np.array([14, 85, 76]),
+                           np.array([28, 252, 189]))
         return mask
 
     def read_frame(self):
@@ -46,7 +48,7 @@ class Vision(Thread):
         _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
         for idx, contour in enumerate(contours):
             area = cv2.contourArea(contour)
-            if (area > largest_contour):
+            if area > largest_contour:
                 largest_contour = area
 
                 cont_index = idx
@@ -54,8 +56,23 @@ class Vision(Thread):
             r = cv2.boundingRect(contours[cont_index])
 
             return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
+        return 0, 0
 
-        return 0,0
+    def find_basket(self, blob):  # returns the red colored circle
+        largest_contour = 0
+        cont_index = 0
+        _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        for idx, contour in enumerate(contours):
+            area = cv2.contourArea(contour)
+            if area > largest_contour:
+                largest_contour = area
+
+                cont_index = idx
+        if len(contours) > 0:
+            r = cv2.boundingRect(contours[cont_index])
+
+            return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
+        return 0, 0
 
     def on_tick(self):
         depth_frame, color_frame = self.read_frame()
@@ -63,9 +80,11 @@ class Vision(Thread):
             return
         frame = np.asanyarray(color_frame.get_data())
         ball_mask = self.ball_mask(frame)
-        ball_x,ball_y = self.find_ball(ball_mask)
+        ball_x, ball_y = self.find_ball(ball_mask)
         ai.send_message({
-            "closest_ball_coordinates": (ball_x, ball_y), "distance": (depth_frame.get_distance(int(ball_x), int(ball_y)))
+            "closest_ball_coordinates": (ball_x, ball_y),
+            "distance": (depth_frame.get_distance(int(ball_x), int(ball_y)))
         })
+
 
 vision = Vision()

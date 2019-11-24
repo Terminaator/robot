@@ -2,17 +2,17 @@ import numpy as np
 import cv2
 import time
 import pyrealsense2 as rs
-#from pynput import keyboard
+# from pynput import keyboard
 
 import serial.tools.list_ports
-#from pynput.keyboard import Controller
+
+# from pynput.keyboard import Controller
 
 ports = serial.tools.list_ports.comports()
 device = list(map(lambda port: port.device, ports))[0]
 
 ser = serial.Serial(device, 115200)
 throw = False
-
 
 
 def nothing(x):
@@ -47,8 +47,8 @@ def segment_colour(frame):  # returns only the red colors in the frame
                                  cv2.getTrackbarPos("6", "Trackbars")]))
 
     kernel = np.ones((3, 3), np.uint8)
-    #opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    #dilation = cv2.dilate(opening, kernel, iterations=2)
+    # opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    # dilation = cv2.dilate(opening, kernel, iterations=2)
     return mask
 
 
@@ -88,11 +88,7 @@ while True:
     centre_x = x + ((w) / 2)
     centre_y = y + ((h) / 2)
     u = 2 * (w + h)
-    cv2.circle(frame, (int(centre_x), int(centre_y)), 3, (0, 110, 255), -1)
-    if 240 < centre_x < 360:
-        depth = depth_frame.get_distance(int(centre_x), int(centre_y))
-        # u - tuvastatud palli ümber oleva nelinurga ümbermõõt
-        print(u)
+    image = cv2.rectangle(frame, 0, 100, 3, (0, 110, 255), -1)
 
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', ball)
