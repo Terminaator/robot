@@ -17,6 +17,7 @@ class Vision(Thread):
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
         self.profile = self.pipeline.start(self.config)
+        self.frame = None
         camera_one = self.profile.get_device().query_sensors()[1]
         camera_one.set_option(rs.option.enable_auto_exposure, False)
         camera_one.set_option(rs.option.enable_auto_white_balance, False)
@@ -66,9 +67,9 @@ class Vision(Thread):
         depth_frame, color_frame = self.read_frame()
         if not depth_frame or not color_frame:
             return
-        frame = np.asanyarray(color_frame.get_data())
-        ball_mask = self.mask(frame, True)
-        basket_mask = self.mask(frame, False)
+        self.frame = np.asanyarray(color_frame.get_data())
+        ball_mask = self.mask(self.frame, True)
+        basket_mask = self.mask(self.frame, False)
         x_ball, y_ball = self.find_blob(ball_mask, True)
         x_basket, y_basket = self.find_blob(basket_mask, False)
         ai.send_message({
