@@ -39,5 +39,9 @@ class AI(Thread):
                 mainboard.third_wheel_speed(0)
                 mainboard.send_message("stop")
                 self.last = None
+            elif x < 300:
+                mainboard.first_wheel_speed(50)
+                mainboard.third_wheel_speed(80)
+                mainboard.send_message("left")
 
 ai = AI()
