@@ -1,8 +1,8 @@
 import time
 
 from thread import Thread
-from mainboard import mainboard
 from vision import vision
+from mainboard import mainboard
 
 
 
