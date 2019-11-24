@@ -1,3 +1,5 @@
+import json
+
 import numpy as np
 import cv2
 import time
@@ -34,8 +36,12 @@ config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
 color = profile.get_device().query_sensors()[1]
-#color.set_option(rs.option.enable_auto_exposure, False)
-#color.set_option(rs.option.enable_auto_white_balance, False)
+advnc_mode = rs.rs400_advanced_mode(color)
+with open('test.json', 'r') as f:
+    distros_dict = json.load(f)
+as_json_object = json.loads(str(distros_dict).replace("'", '\"'))
+json_string = str(as_json_object).replace("'", '\"')
+advnc_mode.load_json(json_string)
 
 
 def basket_mask(frame):
