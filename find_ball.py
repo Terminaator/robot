@@ -58,8 +58,8 @@ def find_basket(blob):  # returns the red colored circle
             cont_index = idx
     if len(contours) > 0:
         r = cv2.boundingRect(contours[cont_index])
-        print(r)
-    return 0, 0
+        return r[0], r[2], r[3]
+    return 0, 0, 0
 
 
 while True:
@@ -69,7 +69,7 @@ while True:
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
     mask = basket_mask(frame)
-    basket = find_basket(mask)
+    x_start, x_end, y_point = find_basket(mask)
     image = cv2.rectangle(frame, (5, 5), (200, 200), (255, 0, 0), 2)
 
     cv2.imshow('Processed', frame)

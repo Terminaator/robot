@@ -20,9 +20,11 @@ class Vision(Thread):
         camera_one = self.profile.get_device().query_sensors()[1]
         camera_one.set_option(rs.option.enable_auto_exposure, False)
         camera_one.set_option(rs.option.enable_auto_white_balance, False)
+        self.look_ball = True
 
     def on_message(self, msg):
         print("vision received:", msg)
+        self.look_ball = msg
 
     def ball_mask(self, frame):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -32,8 +34,8 @@ class Vision(Thread):
 
     def basket_mask(self, frame):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv, np.array([14, 85, 76]),
-                           np.array([28, 252, 189]))
+        mask = cv2.inRange(hsv, np.array([167, 173, 207]),
+                           np.array([184, 223, 255]))
         return mask
 
     def read_frame(self):
@@ -75,16 +77,20 @@ class Vision(Thread):
         return 0, 0
 
     def on_tick(self):
+
         depth_frame, color_frame = self.read_frame()
         if not depth_frame or not color_frame:
             return
         frame = np.asanyarray(color_frame.get_data())
-        ball_mask = self.ball_mask(frame)
-        ball_x, ball_y = self.find_ball(ball_mask)
-        ai.send_message({
-            "closest_ball_coordinates": (ball_x, ball_y),
-            "distance": (depth_frame.get_distance(int(ball_x), int(ball_y)))
-        })
+        if self.look_ball:
+            ball_mask = self.ball_mask(frame)
+            ball_x, ball_y = self.find_ball(ball_mask)
+            ai.send_message({
+                "closest_ball_coordinates": (ball_x, ball_y),
+                "distance": (depth_frame.get_distance(int(ball_x), int(ball_y)))
+            })
+        else:
+            print(2)
 
 
 vision = Vision()
