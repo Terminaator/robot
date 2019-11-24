@@ -50,6 +50,10 @@ class AI(Thread):
                         mainboard.first_wheel_speed(0)
                         mainboard.second_wheel_speed(-20)
                         mainboard.third_wheel_speed(0)
+                    elif 300 < x < 340:
+                        mainboard.first_wheel_speed(0)
+                        mainboard.second_wheel_speed(0)
+                        mainboard.third_wheel_speed(0)
                 else:
                     mainboard.first_wheel_speed(0)
                     mainboard.second_wheel_speed(0)
