@@ -27,20 +27,29 @@ class AI(Thread):
         y = self.vision_state["closest_ball_coordinates"][1]
         distance = self.vision_state["distance"]
         if x == 0 and y == 0:
+            mainboard.first_wheel_speed(10)
+            mainboard.second_wheel_speed(10)
+            mainboard.third_wheel_speed(10)
             mainboard.send_message("left")
             self.last = "NO_BALL"
         else:
             if self.last == "NO_BALL":
-                mainboard.send_message("stop")
+                mainboard.first_wheel_speed(0)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(0)
+                mainboard.send_message("left")
                 self.last = None
             elif x < 300:
+                mainboard.first_wheel_speed(50)
+                mainboard.third_wheel_speed(80)
                 mainboard.send_message("left")
             elif x > 340:
-                mainboard.send_message("right")
-            elif 300 < x < 340 and distance < 0.8:
-                mainboard.send_message("stop")
-            elif 300 < x < 340:
-                mainboard.send_message("up")
+                mainboard.first_wheel_speed(80)
+                mainboard.third_wheel_speed(50)
+                mainboard.send_message("left")
+            else:
+                mainboard.first_wheel_speed(0)
+                mainboard.third_wheel_speed(0)
         print(self.last, x, y, distance)
 
 
