@@ -2,7 +2,6 @@ import time
 
 from thread import Thread
 from mainboard import mainboard
-from vision import vision
 
 
 
@@ -43,7 +42,6 @@ class AI(Thread):
                     mainboard.second_wheel_speed(0)
                     mainboard.third_wheel_speed(0)
                     mainboard.send_message("stop")
-                    vision.send_message(True)
                 elif 250 < x < 390:
                     mainboard.first_wheel_speed(-40)
                     mainboard.second_wheel_speed(0)
