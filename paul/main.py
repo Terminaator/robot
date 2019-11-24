@@ -3,11 +3,10 @@ from vision import vision
 
 from mainboard import mainboard
 
-mainboard.start()
-vision.start()
 ai.start()
-
+vision.start()
+mainboard.start()
+ai.join()
 vision.join()
 mainboard.join()
-ai.join()
 
