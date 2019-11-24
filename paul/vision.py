@@ -24,9 +24,9 @@ class Vision(Thread):
     def on_message(self, msg):
         print("vision received:", msg)
 
-    def mask(self, frame):
+    def mask(self, frame, ball):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        if ai.is_ball():
+        if ball:
             mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                                np.array([28, 252, 189]))
         else:
@@ -41,10 +41,14 @@ class Vision(Thread):
         color_frame = frames.get_color_frame()
         return depth_frame, color_frame
 
-    def find_blob(self, blob):  # returns the red colored circle
+    def find_blob(self, blob,ball):  # returns the red colored circle
         largest_contour = 0
         cont_index = 0
-        _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+        if ball:
+            _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+        else:
+            _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
         for idx, contour in enumerate(contours):
             area = cv2.contourArea(contour)
             if area > largest_contour:
@@ -62,18 +66,16 @@ class Vision(Thread):
         if not depth_frame or not color_frame:
             return
         frame = np.asanyarray(color_frame.get_data())
-        mask = self.mask(frame)
-        x, y = self.find_blob(mask)
-        if ai.is_ball():
-            ai.send_message({
-                "closest_ball_coordinates": (x, y),
-                "distance": (depth_frame.get_distance(int(x), int(y)))
-            })
-        else:
-            ai.send_message({
-                "basket": (x, y),
-                "distance": (depth_frame.get_distance(int(x), int(y)))
-            })
+        ball_mask = self.mask(frame, True)
+        basket_mask = self.mask(frame, False)
+        x_ball, y_ball = self.find_blob(ball_mask, True)
+        x_basket, y_basket = self.find_blob(basket_mask, False)
+        ai.send_message({
+            "ball_coordinates": (x_ball, y_ball),
+            "basket_coordinates": (x_basket, y_basket),
+            "ball_distance": (depth_frame.get_distance(int(x_ball), int(y_ball))),
+            "basket_distance": (depth_frame.get_distance(int(x_basket), int(y_basket)))
+        })
 
 
 vision = Vision()

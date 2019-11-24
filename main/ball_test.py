@@ -83,6 +83,8 @@ def find_blob(blob):  # returns the red colored circle
     largest_contour = 0
     cont_index = 0
     _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, hierarchy = cv2.findContours(blob, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
     for idx, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if (area > largest_contour):
