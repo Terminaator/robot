@@ -20,21 +20,19 @@ class Vision(Thread):
         camera_one = self.profile.get_device().query_sensors()[1]
         camera_one.set_option(rs.option.enable_auto_exposure, False)
         camera_one.set_option(rs.option.enable_auto_white_balance, False)
-        self.look_ball = True
 
     def on_message(self, msg):
         print("vision received:", msg)
-        self.look_ball = msg
 
     def mask(self, frame):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        if self.look_ball:
+        if self.ai.is_ball():
             mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                                np.array([28, 252, 189]))
         else:
             mask = cv2.inRange(hsv, np.array([167, 173, 207]),
                                np.array([184, 223, 255]))
-        #opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+            mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
         return mask
 
     def read_frame(self):
@@ -75,4 +73,6 @@ class Vision(Thread):
             ai.send_message({
                 "basket": (x, y)
             })
+
+
 vision = Vision()
