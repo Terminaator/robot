@@ -27,10 +27,10 @@ class AI(Thread):
             y = self.vision_state["closest_ball_coordinates"][1]
             distance = self.vision_state["distance"]
         elif "closest_ball_coordinates" in self.vision_state:
+            print(self.vision_state)
             x = self.vision_state["closest_ball_coordinates"][0]
             y = self.vision_state["closest_ball_coordinates"][1]
             distance = self.vision_state["distance"]
-            print(self.vision_state)
             if x == 0 and y == 0:
                 mainboard.first_wheel_speed(10)
                 mainboard.second_wheel_speed(10)
