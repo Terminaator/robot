@@ -34,9 +34,25 @@ config = rs.config()
 config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
 config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
+
+def find_compatible_camera():
+    ctx = rs.context()
+    ds5_dev = rs.device()
+    devices = ctx.query_devices()
+    DS5_product_ids = ["0AD1", "0AD2", "0AD3", "0AD4", "0AD5", "0AF6", "0AFE", "0AFF", "0B00", "0B01", "0B03",
+                       "0B07"]
+    for dev in devices:
+        if dev.supports(rs.camera_info.product_id) and str(
+                dev.get_info(rs.camera_info.product_id)) in DS5_product_ids:
+            if dev.supports(rs.camera_info.name):
+                print("Found device that supports advanced mode:", dev.get_info(rs.camera_info.name))
+            return dev
+    raise Exception("No device that supports advanced mode was found")
+
+
 profile = pipeline.start(config)
-color = profile.get_device().query_sensors()[1]
-advnc_mode = rs.rs400_advanced_mode(color)
+#color = profile.get_device().query_sensors()[1]
+advnc_mode = rs.rs400_advanced_mode(find_compatible_camera())
 with open('test.json', 'r') as f:
     distros_dict = json.load(f)
 as_json_object = json.loads(str(distros_dict).replace("'", '\"'))
@@ -54,6 +70,7 @@ def basket_mask(frame):
     #closing = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
 
     return mask
+
 
 def find_blob(blob):  # returns the red colored circle
     largest_contour = 0
