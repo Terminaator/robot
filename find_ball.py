@@ -80,6 +80,7 @@ def basket_mask(frame):
 
 
     closing = cv2.morphologyEx(hsv, cv2.MORPH_CLOSE, kernel)
+
     mask = cv2.inRange(closing,np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
