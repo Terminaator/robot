@@ -20,7 +20,7 @@ def nothing(x):
 
 
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("1", "Trackbars", 14, 255, nothing)
+cv2.createTrackbar("1", "Trackbars", 8, 255, nothing)
 cv2.createTrackbar("2", "Trackbars", 85, 255, nothing)
 cv2.createTrackbar("3", "Trackbars", 76, 255, nothing)
 cv2.createTrackbar("4", "Trackbars", 28, 255, nothing)
@@ -48,7 +48,7 @@ def basket_mask(frame):
     #mask = cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=2)
     closing = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
 
-    return mask
+    return closing
 
 def find_blob(blob):  # returns the red colored circle
     largest_contour = 0
