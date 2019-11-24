@@ -18,14 +18,13 @@ throw = False
 def nothing(x):
     pass
 
-
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("1", "Trackbars", 60, 255, nothing)
-cv2.createTrackbar("2", "Trackbars", 100, 255, nothing)
-cv2.createTrackbar("3", "Trackbars", 100, 255, nothing)
-cv2.createTrackbar("4", "Trackbars", 99, 255, nothing)
-cv2.createTrackbar("5", "Trackbars", 250, 255, nothing)
-cv2.createTrackbar("6", "Trackbars", 160, 255, nothing)
+cv2.createTrackbar("1", "Trackbars", 29, 255, nothing)
+cv2.createTrackbar("2", "Trackbars", 90, 255, nothing)
+cv2.createTrackbar("3", "Trackbars", 99, 255, nothing)
+cv2.createTrackbar("4", "Trackbars", 255, 255, nothing)
+cv2.createTrackbar("5", "Trackbars", 70, 255, nothing)
+cv2.createTrackbar("6", "Trackbars", 200, 255, nothing)
 
 pipeline = rs.pipeline()
 config = rs.config()
