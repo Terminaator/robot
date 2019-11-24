@@ -30,8 +30,13 @@ class AI(Thread):
             mainboard.first_wheel_speed(10)
             mainboard.second_wheel_speed(10)
             mainboard.third_wheel_speed(10)
-            mainboard.send_message("left")
+            mainboard.send_message("turn")
             self.last = "NO_BALL"
-
+        else:
+            if self.last == "NO_BALL":
+                mainboard.first_wheel_speed(0)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(0)
+                self.last = None
 
 ai = AI()
