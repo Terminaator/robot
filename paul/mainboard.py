@@ -36,7 +36,8 @@ class Mainboard(Thread):
         # Do nothing when no command has been received
         if self.last_command == None:
             return
-        self.ser.write("sd:" + str(self.first) + ":" + str(self.second) + ":" + str(self.third) + "\n".encode())
+        print("sd:" + str(self.first) + ":" + str(self.second) + ":" + str(self.third) + "\n")
+        #self.ser.write("sd:" + str(self.first) + ":" + str(self.second) + ":" + str(self.third) + "\n".encode())
 
 
 mainboard = Mainboard()
