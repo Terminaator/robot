@@ -20,10 +20,10 @@ class AI(Thread):
         # Do nothing if vision state is not known
         if "ball_coordinates" not in self.vision_state:
             return
-
         x = self.vision_state["ball_coordinates"][0]
         y = self.vision_state["ball_coordinates"][1]
         distance = self.vision_state["ball_distance"]
+        print(x,y,distance)
 
         if x == 0 and y == 0:
             mainboard.first_wheel_speed(10)
