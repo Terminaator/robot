@@ -39,7 +39,7 @@ class AI(Thread):
                 mainboard.third_wheel_speed(0)
                 mainboard.send_message("stop")
                 self.last = None
-            elif 250 < x < 390 and distance < 0.8:
+            elif 250 < x < 390 and distance < 0.5:
                 mainboard.first_wheel_speed(0)
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
