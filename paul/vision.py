@@ -29,11 +29,13 @@ class Vision(Thread):
     def mask(self, frame):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         if self.look_ball:
-            return cv2.inRange(hsv, np.array([14, 85, 76]),
+            mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                                np.array([28, 252, 189]))
         else:
-            cv2.inRange(hsv, np.array([167, 173, 207]),
-                        np.array([184, 223, 255]))
+            mask = cv2.inRange(hsv, np.array([167, 173, 207]),
+                               np.array([184, 223, 255]))
+        opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+        return opening
 
     def read_frame(self):
         frames = self.pipeline.wait_for_frames()
@@ -57,19 +59,22 @@ class Vision(Thread):
             return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
         return 0, 0
 
-
     def on_tick(self):
-
         depth_frame, color_frame = self.read_frame()
         if not depth_frame or not color_frame:
             return
         frame = np.asanyarray(color_frame.get_data())
-        ball_mask = self.mask(frame)
-        ball_x, ball_y = self.find_blob(ball_mask)
-        ai.send_message({
-            "closest_ball_coordinates": (ball_x, ball_y),
-            "distance": (depth_frame.get_distance(int(ball_x), int(ball_y)))
-        })
+        mask = self.mask(frame)
+        x, y = self.find_blob(mask)
+        if self.look_ball:
+            ai.send_message({
+                "closest_ball_coordinates": (x, y),
+                "distance": (depth_frame.get_distance(int(x), int(y)))
+            })
+        else:
+            ai.send_message({
+                "basket": (x, y),
+            })
 
 
 vision = Vision()
