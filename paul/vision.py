@@ -66,6 +66,7 @@ class Vision(Thread):
         frame = np.asanyarray(color_frame.get_data())
         mask = self.mask(frame)
         x, y = self.find_blob(mask)
+        print(depth_frame.get_distance(int(x), int(y)))
         ai.send_message({
             "closest_ball_coordinates": (x, y),
             "distance": (depth_frame.get_distance(int(x), int(y)))
