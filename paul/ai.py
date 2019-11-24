@@ -66,7 +66,9 @@ class AI(Thread):
                 else:
                     mainboard.send_message(None)
         elif "basket" in self.vision_state:
-            print(2)
+            x = self.vision_state["closest_ball_coordinates"][0]
+            y = self.vision_state["closest_ball_coordinates"][1]
+            distance = self.vision_state["distance"]
         else:
             return
 
