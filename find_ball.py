@@ -75,7 +75,7 @@ while True:
     color_frame = frame.get_color_frame()
     frame = np.asanyarray(color_frame.get_data())
     mask = basket_mask(frame)
-    x, y = find_blob(mask)
+    #x, y = find_blob(mask)
     #print(x, y,depth_frame.get_distance(int(x), int(y)))
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', mask)
