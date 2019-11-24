@@ -72,6 +72,7 @@ class Vision(Thread):
                 "distance": (depth_frame.get_distance(int(x), int(y)))
             })
         else:
-            print(2)
-
+            ai.send_message({
+                "basket": (x, y)
+            })
 vision = Vision()
