@@ -39,7 +39,7 @@ class AI(Thread):
                     mainboard.first_wheel_speed(0)
                     mainboard.second_wheel_speed(0)
                     mainboard.third_wheel_speed(0)
-                    mainboard.send_message("stop")
+                    mainboard.send_message("fwd stop")
                 elif 250 < x < 390:
                     mainboard.first_wheel_speed(-40)
                     mainboard.second_wheel_speed(0)
