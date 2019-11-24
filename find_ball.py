@@ -34,8 +34,8 @@ config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
 profile = pipeline.start(config)
 color = profile.get_device().query_sensors()[1]
-color.set_option(rs.option.enable_auto_exposure, False)
-color.set_option(rs.option.enable_auto_white_balance, False)
+#color.set_option(rs.option.enable_auto_exposure, False)
+#color.set_option(rs.option.enable_auto_white_balance, False)
 
 
 def basket_mask(frame):
