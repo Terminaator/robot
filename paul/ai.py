@@ -26,8 +26,12 @@ class AI(Thread):
         x = self.vision_state["closest_ball_coordinates"][0]
         y = self.vision_state["closest_ball_coordinates"][1]
         distance = self.vision_state["distance"]
-        mainboard.send_message("right")
-        self.last = "left"
+        if x == 0 and y == 0:
+            mainboard.send_message("left")
+            self.last = "left"
+        else:
+            mainboard.send_message("up")
+            self.last = "up"
 
         print(self.last)
 
