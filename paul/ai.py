@@ -39,6 +39,16 @@ class AI(Thread):
                 mainboard.third_wheel_speed(0)
                 mainboard.send_message("stop")
                 self.last = None
+            elif 250 < x < 390 and distance < 0.8:
+                mainboard.first_wheel_speed(0)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(0)
+                mainboard.send_message("stop")
+            elif 250 < x < 390:
+                mainboard.first_wheel_speed(-40)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(40)
+                mainboard.send_message("fwd")
             elif x < 250:
                 mainboard.first_wheel_speed(-20)
                 mainboard.second_wheel_speed(-20)
@@ -49,11 +59,6 @@ class AI(Thread):
                 mainboard.second_wheel_speed(20)
                 mainboard.third_wheel_speed(20)
                 mainboard.send_message("right")
-            elif 250 < x < 390:
-                mainboard.first_wheel_speed(-40)
-                mainboard.second_wheel_speed(0)
-                mainboard.third_wheel_speed(40)
-                mainboard.send_message("fwd")
             else:
                 mainboard.send_message(None)
                 
