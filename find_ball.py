@@ -61,7 +61,7 @@ try:
         dev = find_compatible_camera()
         advnc_mode = rs.rs400_advanced_mode(dev)
 
-    with open('custompreset.json', 'r') as f:
+    with open('test.json', 'r') as f:
         distros_dict = json.load(f)
 
     as_json_object = json.loads(str(distros_dict).replace("'", '\"'))
