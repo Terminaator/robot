@@ -43,6 +43,7 @@ def basket_mask(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                        np.array([28, 252, 189]))
+    mask = cv2.dilate(mask, np.ones((3, 3), np.uint8), iterations=2)
     return mask
 
 def find_blob(blob):  # returns the red colored circle
