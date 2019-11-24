@@ -32,7 +32,7 @@ class Vision(Thread):
         #opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
         #dilation = cv2.dilate(opening, kernel, iterations=2)
 
-        return dilation
+        return mask
 
     def read_frame(self):
         frames = self.pipeline.wait_for_frames()
