@@ -29,7 +29,7 @@ class Vision(Thread):
         if ball:
             mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                                np.array([28, 252, 189]))
-            mask = cv2.dilate(hsv, np.ones((3, 3)), iterations=2)
+            mask = cv2.dilate(mask,  np.ones((3, 3), np.uint8), iterations=2)
         else:
             mask = cv2.inRange(hsv, np.array([167, 173, 207]),
                                np.array([184, 223, 255]))
