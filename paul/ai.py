@@ -50,6 +50,7 @@ class AI(Thread):
             else:
                 mainboard.first_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
+                mainboard.send_message("left")
         print(self.last, x, y, distance)
 
 
