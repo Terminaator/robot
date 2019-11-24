@@ -42,7 +42,7 @@ class AI(Thread):
             else:
                 mainboard.send_message("stop")
                 self.last = "none"
-        print(self.last)
+        print(self.last, x, y)
 
 
 ai = AI()
