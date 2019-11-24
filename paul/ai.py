@@ -3,6 +3,7 @@ import time
 from thread import Thread
 from mainboard import mainboard
 
+
 class AI(Thread):
     def __init__(self):
         Thread.__init__(self)
@@ -30,8 +31,6 @@ class AI(Thread):
             self.last = "left"
         else:
             mainboard.send_message("stop")
-        
-        
 
             if self.last == "left":
                 mainboard.send_message("stop")
@@ -47,5 +46,6 @@ class AI(Thread):
                     self.last = "up"
                     mainboard.send_message("up")
         print(self.last)
+
 
 ai = AI()
