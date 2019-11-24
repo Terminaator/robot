@@ -42,17 +42,17 @@ class AI(Thread):
                 if self.last == "fwd stop":
                     x = self.vision_state["basket_coordinates"][0]
                     y = self.vision_state["basket_coordinates"][1]
-                    if x < 300:
-                        mainboard.first_wheel_speed(0)
-                        mainboard.second_wheel_speed(-20)
-                        mainboard.third_wheel_speed(0)
-                    elif x > 340:
-                        mainboard.first_wheel_speed(0)
-                        mainboard.second_wheel_speed(-20)
-                        mainboard.third_wheel_speed(0)
-                    elif 300 < x < 340:
+                    if 250 < x < 390:
                         mainboard.first_wheel_speed(0)
                         mainboard.second_wheel_speed(0)
+                        mainboard.third_wheel_speed(0)
+                    elif x < 250:
+                        mainboard.first_wheel_speed(0)
+                        mainboard.second_wheel_speed(-20)
+                        mainboard.third_wheel_speed(0)
+                    elif x > 390:
+                        mainboard.first_wheel_speed(0)
+                        mainboard.second_wheel_speed(-20)
                         mainboard.third_wheel_speed(0)
                 else:
                     mainboard.first_wheel_speed(0)
