@@ -29,6 +29,7 @@ class Vision(Thread):
         if ball:
             mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                                np.array([28, 252, 189]))
+            mask = cv2.dilate(hsv, np.ones((3, 3), iterations=2))
         else:
             mask = cv2.inRange(hsv, np.array([167, 173, 207]),
                                np.array([184, 223, 255]))
@@ -41,7 +42,7 @@ class Vision(Thread):
         color_frame = frames.get_color_frame()
         return depth_frame, color_frame
 
-    def find_blob(self, blob,ball):  # returns the red colored circle
+    def find_blob(self, blob, ball):  # returns the red colored circle
         largest_contour = 0
         cont_index = 0
         if ball:
