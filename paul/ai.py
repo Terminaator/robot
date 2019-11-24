@@ -39,9 +39,9 @@ class AI(Thread):
             elif x > 350:
                 mainboard.send_message("right")
                 self.last = "left"
-            else:
-                mainboard.send_message("stop")
-                self.last = "none"
+            elif 290 < x < 350 :
+                mainboard.send_message("up")
+                self.last = "up"
         print(self.last, x, y)
 
 
