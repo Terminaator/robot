@@ -26,7 +26,7 @@ class Vision(Thread):
 
     def mask(self, frame):
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        if self.ai.is_ball():
+        if ai.is_ball():
             mask = cv2.inRange(hsv, np.array([14, 85, 76]),
                                np.array([28, 252, 189]))
         else:
