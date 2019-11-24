@@ -4,10 +4,10 @@ from vision import vision
 from mainboard import mainboard
 
 mainboard.start()
-ai.start()
 vision.start()
+ai.start()
 
+vision.join()
 mainboard.join()
 ai.join()
-vision.join()
 
