@@ -1,7 +1,6 @@
 import time
 
 from thread import Thread
-from vision import vision
 from mainboard import mainboard
 
 
