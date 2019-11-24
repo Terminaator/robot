@@ -67,12 +67,12 @@ class AI(Thread):
                 mainboard.third_wheel_speed(40)
                 mainboard.send_message("fwd")
             elif x < 250:
-                mainboard.first_wheel_speed(-20)
+                mainboard.first_wheel_speed(-30)
                 mainboard.second_wheel_speed(-20)
                 mainboard.third_wheel_speed(-20)
                 mainboard.send_message("left")
             elif x > 390:
-                mainboard.first_wheel_speed(20)
+                mainboard.first_wheel_speed(30)
                 mainboard.second_wheel_speed(20)
                 mainboard.third_wheel_speed(20)
                 mainboard.send_message("right")
