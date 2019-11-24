@@ -30,9 +30,9 @@ class Mainboard(Thread):
         if self.last_command == None and self.done:
             return
         self.done = True
-        if self.last_command == 'up':
+        if self.last_command == 'up': #korras
             self.ser.write("sd:-10:0:10\n".encode())
-        elif self.last_command == 'back':
+        elif self.last_command == 'back': #korras
             self.ser.write("sd:10:0:-10\n".encode())
         elif self.last_command == 'stop':
             self.ser.write("sd:0:0:0\n".encode())
