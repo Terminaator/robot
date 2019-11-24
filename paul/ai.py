@@ -47,6 +47,7 @@ class AI(Thread):
                     mainboard.second_wheel_speed(0)
                     mainboard.third_wheel_speed(0)
                     mainboard.send_message("fwd stop")
+                    self.isball = False
                 elif 250 < x < 390:
                     mainboard.first_wheel_speed(-40)
                     mainboard.second_wheel_speed(0)
