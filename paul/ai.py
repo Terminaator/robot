@@ -37,6 +37,7 @@ class AI(Thread):
                 mainboard.first_wheel_speed(0)
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
+                mainboard.send_message("stop")
                 self.last = None
 
 ai = AI()
