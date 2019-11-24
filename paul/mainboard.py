@@ -29,6 +29,7 @@ class Mainboard(Thread):
         # Do nothing when no command has been received
         if self.last_command == None:
             return
+
         if self.last_command == 'up': #korras
             self.ser.write("sd:-20:0:20\n".encode())
         elif self.last_command == 'back': #korras

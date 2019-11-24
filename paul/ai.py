@@ -32,6 +32,7 @@ class AI(Thread):
         else:
             if self.last == "NO_BALL":
                 mainboard.send_message("stop")
+                self.last = None
             elif x < 300:
                 mainboard.send_message("left")
             elif x > 340:
