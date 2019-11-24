@@ -3,6 +3,7 @@ import time
 from thread import Thread
 from mainboard import mainboard
 
+
 class AI(Thread):
     def __init__(self):
         Thread.__init__(self)
@@ -38,10 +39,15 @@ class AI(Thread):
                 mainboard.send_message("stop")
                 self.last = None
             elif 250 < x < 390 and distance < 0.3:
-                mainboard.first_wheel_speed(0)
-                mainboard.second_wheel_speed(0)
-                mainboard.third_wheel_speed(0)
-                mainboard.send_message("fwd stop")
+                if self.last == "fwd stop":
+
+                else:
+                    mainboard.first_wheel_speed(0)
+                    mainboard.second_wheel_speed(0)
+                    mainboard.third_wheel_speed(0)
+                    mainboard.send_message("fwd stop")
+                    self.last = "fwd stop"
+
             elif 250 < x < 390:
                 mainboard.first_wheel_speed(-40)
                 mainboard.second_wheel_speed(0)
@@ -59,5 +65,6 @@ class AI(Thread):
                 mainboard.send_message("right")
             else:
                 mainboard.send_message(None)
+
 
 ai = AI()
