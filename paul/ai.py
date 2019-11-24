@@ -2,6 +2,7 @@ import time
 
 from thread import Thread
 from mainboard import mainboard
+from vision import vision
 
 
 class AI(Thread):
