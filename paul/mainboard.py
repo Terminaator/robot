@@ -19,6 +19,9 @@ class Mainboard(Thread):
     def first_wheel_speed(self, first):
         self.first = first
 
+    def second_wheel_speed(self, second):
+        self.second = second
+
     def third_wheel_speed(self, third):
         self.third = third
 
