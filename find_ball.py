@@ -41,8 +41,10 @@ color.set_option(rs.option.enable_auto_white_balance, False)
 
 def basket_mask(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    return cv2.inRange(hsv, np.array([167, 173, 207]),
+    mask = cv2.inRange(hsv, np.array([167, 173, 207]),
                        np.array([184, 223, 255]))
+    opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    return  opening
 
 
 def find_blob(blob):  # returns the red colored circle
