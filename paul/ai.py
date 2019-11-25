@@ -39,7 +39,7 @@ class AI(Thread):
         wheelLinearVelocity2 = 30 * cos(math.radians(robotDirectionAngle - 120))
         wheelLinearVelocity3 = 30 * cos(math.radians(robotDirectionAngle - 240))
 
-        print(robotDirectionAngle, wheelLinearVelocity1,wheelLinearVelocity2,wheelLinearVelocity3)
+        print(x_ball,y_ball,robotDirectionAngle, wheelLinearVelocity1,wheelLinearVelocity2,wheelLinearVelocity3)
 
         mainboard.first_wheel_speed(int(wheelLinearVelocity2))
         mainboard.second_wheel_speed(int(wheelLinearVelocity1))
