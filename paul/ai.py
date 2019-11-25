@@ -51,7 +51,7 @@ class AI(Thread):
                             mainboard.first_wheel_speed(0)
                             mainboard.second_wheel_speed(0)
                             mainboard.third_wheel_speed(0)
-                            mainboard.thrower(1500)
+                            mainboard.throw(1500)
                         else:
                             mainboard.first_wheel_speed(-40)
                             mainboard.second_wheel_speed(0)
