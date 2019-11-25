@@ -40,10 +40,11 @@ class AI(Thread):
                 mainboard.third_wheel_speed(10)
                 self.last = "NO_BALL"
         else:
-            mainboard.first_wheel_speed(0)
-            mainboard.second_wheel_speed(0)
-            mainboard.third_wheel_speed(0)
-            self.last = "STOP"
+            if self.last in ["NO_BALL_BASKET_GO","NO_BALL"]:
+                mainboard.first_wheel_speed(0)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(0)
+                self.last = "BALL_FOUND"
         mainboard.send_message(self.last)
 
 
