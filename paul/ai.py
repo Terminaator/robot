@@ -54,11 +54,11 @@ class AI(Thread):
                         self.last = "stop"
                     elif x_basket < 250:
                         mainboard.first_wheel_speed(0)
-                        mainboard.second_wheel_speed(-20)
+                        mainboard.second_wheel_speed(-10)
                         mainboard.third_wheel_speed(0)
                     elif x_basket > 390:
                         mainboard.first_wheel_speed(0)
-                        mainboard.second_wheel_speed(-20)
+                        mainboard.second_wheel_speed(-10)
                         mainboard.third_wheel_speed(0)
                 else:
                     mainboard.first_wheel_speed(0)
