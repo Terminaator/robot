@@ -29,7 +29,7 @@ class AI(Thread):
         basket_distance = self.vision_state["basket_distance"]
 
         if x_ball == 0 and y_ball == 0:
-            if 5 < basket_distance < 20:
+            if 3 < basket_distance < 20:
                 mainboard.first_wheel_speed(-40)
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(40)
