@@ -14,21 +14,22 @@ class AI(Thread):
 
         # Initially vision state is unknown
         self.vision_state = {}
-        self.robot_speed_x = 0
-        self.robot_speed_y = 0
         self.last = None
         self.wheelSpeedToMainboardUnits = 18.75 * 64 / (2 * math.pi * 0.035 * 60)
-        self.wheelOneAngle = 2
-        self.wheelTwoAngle = 131.1
-        self.wheelThreeAngle = 232.9
 
     def on_message(self, msg):
         # Received message, overwrite vision state
         self.vision_state = msg
 
-    def calculateAngleBetweenRobotAndBall(self, ball_x, ball_y):
+    def angle(self, ball_x, ball_y):
         return math.degrees(math.atan((abs(ball_y - 240)) / (640 - ball_x)))
 
+    def robotSpeed(self):
+
+    def getSpeed(self):
+        wheelLinearVelocity1 = robotSpeed * cos(robotDirectionAngle - wheelAngle) + wheelDistanceFromCenter * robotAngularVelocity
+        wheelLinearVelocity2 = robotSpeed * cos(robotDirectionAngle - wheelAngle) + wheelDistanceFromCenter * robotAngularVelocity
+        wheelLinearVelocity3 = robotSpeed * cos(robotDirectionAngle - wheelAngle) + wheelDistanceFromCenter * robotAngularVelocity
 
 
     def on_tick(self):
@@ -43,7 +44,10 @@ class AI(Thread):
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
 
-        print(self.calculateAngleBetweenRobotAndBall(x_ball,y_ball))
+        robotSpeed = sqrt(x_ball * x_ball + y_ball * y_ball)
+
+        robotDirectionAngle = atan2(x_ball, y_ball)
+        print(robotDirectionAngle)
 
 
 ai = AI()
