@@ -35,9 +35,9 @@ class AI(Thread):
         basket_distance = self.vision_state["basket_distance"]
 
         robotDirectionAngle = self.angle(x_ball, y_ball)
-        wheelLinearVelocity1 = 30 * cos(math.radians(robotDirectionAngle - 0))
-        wheelLinearVelocity2 = 30 * cos(math.radians(robotDirectionAngle - 120))
-        wheelLinearVelocity3 = 30 * cos(math.radians(robotDirectionAngle - 240))
+        wheelLinearVelocity1 = -30 * cos(math.radians(robotDirectionAngle - 0))
+        wheelLinearVelocity2 = -30 * cos(math.radians(robotDirectionAngle - 120))
+        wheelLinearVelocity3 = -30 * cos(math.radians(robotDirectionAngle - 240))
 
         print(robotDirectionAngle, wheelLinearVelocity1,wheelLinearVelocity2,wheelLinearVelocity3)
 
