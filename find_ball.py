@@ -80,12 +80,12 @@ def basket_mask(frame):
 
     # closing = cv2.morphologyEx(hsv, cv2.MORPH_CLOSE, kernel)
 
-    #mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
-    #                                  cv2.getTrackbarPos("3", "Trackbars")]),
-    #                   np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
-    #                             cv2.getTrackbarPos("6", "Trackbars")]))
-    mask = cv2.inRange(hsv, np.array([134, 81, 118]),
-                       np.array([177, 160, 194]))
+    mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
+                                      cv2.getTrackbarPos("3", "Trackbars")]),
+                       np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
+                                 cv2.getTrackbarPos("6", "Trackbars")]))
+    #mask = cv2.inRange(hsv, np.array([134, 81, 118]),
+    #                   np.array([177, 160, 194]))
     kernel = np.ones((5, 5), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
 
