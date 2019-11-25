@@ -52,13 +52,13 @@ class AI(Thread):
                             mainboard.first_wheel_speed(-40)
                             mainboard.second_wheel_speed(0)
                             mainboard.third_wheel_speed(40)
-                            mainboard.thrower(1500)
                             self.last = "FWD_STOP_FIRST"
                         else:
                             mainboard.first_wheel_speed(0)
                             mainboard.second_wheel_speed(0)
                             mainboard.third_wheel_speed(0)
                             self.last = "FWD_STOP_FIRST"
+                            mainboard.thrower(1500)
 
                     elif x_basket < 250:
                         mainboard.first_wheel_speed(0)
