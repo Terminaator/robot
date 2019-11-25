@@ -52,7 +52,7 @@ class AI(Thread):
                             mainboard.second_wheel_speed(0)
                             mainboard.third_wheel_speed(0)
                             mainboard.throw(1500)
-                            self.last = None
+                            self.last = "stop"
                         else:
                             mainboard.first_wheel_speed(-40)
                             mainboard.second_wheel_speed(0)
