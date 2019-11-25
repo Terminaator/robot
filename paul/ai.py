@@ -45,21 +45,26 @@ class AI(Thread):
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
                 self.last = "BALL_FOUND"
+            elif 250 < x_ball < 390 and ball_distance < 0.4:
+                mainboard.first_wheel_speed(0)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(0)
+                self.last = "FWD_STOP"
             elif 250 < x_ball < 390:
                 mainboard.first_wheel_speed(-40)
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(40)
-                mainboard.send_message("fwd")
+                self.last = "FWD"
             elif x_ball < 250:
                 mainboard.first_wheel_speed(-20)
                 mainboard.second_wheel_speed(-20)
                 mainboard.third_wheel_speed(-20)
-                mainboard.send_message("left_ball")
+                self.last = "LEFT_BALL"
             elif x_ball > 390:
                 mainboard.first_wheel_speed(20)
                 mainboard.second_wheel_speed(20)
                 mainboard.third_wheel_speed(20)
-                mainboard.send_message("right_ball")
+                self.last = "RIGHT_BALL"
         mainboard.send_message(self.last)
 
 
