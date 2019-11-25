@@ -47,16 +47,16 @@ class AI(Thread):
                 self.last = "BALL_FOUND"
             elif x_ball < 250:
                 speed = (250 - x_ball) / 28.9
-                mainboard.first_wheel_speed(-speed)
-                mainboard.second_wheel_speed(-speed)
-                mainboard.third_wheel_speed(-speed)
+                mainboard.first_wheel_speed(int(-speed))
+                mainboard.second_wheel_speed(int(-speed))
+                mainboard.third_wheel_speed(int(-speed))
                 print(speed)
                 self.last = "LEFT_BALL"
             elif x_ball > 390:
                 speed = (x_ball - 390) / 28.9
-                mainboard.first_wheel_speed(speed)
-                mainboard.second_wheel_speed(speed)
-                mainboard.third_wheel_speed(speed)
+                mainboard.first_wheel_speed(int(-speed))
+                mainboard.second_wheel_speed(int(-speed))
+                mainboard.third_wheel_speed(int(-speed))
                 print(speed)
                 self.last = "RIGHT_BALL"
         mainboard.send_message(self.last)
