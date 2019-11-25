@@ -45,6 +45,7 @@ class AI(Thread):
         mainboard.second_wheel_speed(wheelLinearVelocity1)
         mainboard.third_wheel_speed(wheelLinearVelocity3)
 
+        mainboard.send_message("ewew")
 
 
         mainboard.send_message("dasd")
