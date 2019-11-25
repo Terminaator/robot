@@ -20,7 +20,7 @@ class AI(Thread):
         self.vision_state = msg
 
     def angle(self, ball_x, ball_y):
-        return atan2(abs(640-ball_x),abs(ball_y-240))
+        return atan2(320-ball_x,ball_y-240)
 
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
