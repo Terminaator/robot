@@ -60,7 +60,7 @@ class AI(Thread):
                     mainboard.second_wheel_speed(0)
                     mainboard.third_wheel_speed(40)
                     mainboard.throw(1500)
-                    self.last = "FWD_STOP_FIRST"
+                    self.last = "THROW"
                     self.do_that = 20
                 elif x_basket < 280:
                     mainboard.first_wheel_speed(0)

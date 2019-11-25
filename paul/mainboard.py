@@ -40,6 +40,8 @@ class Mainboard(Thread):
         # Do nothing when no command has been received
         if self.last_command == None:
             return
+        if self.thrower > 0 and self.last_command != 'THROW':
+            self.thrower = 0
         string = "sd:" + str(self.first) + ":" + str(self.second) + ":" + str(self.third) + "\n"
         if self.thrower != 0:
             string += "d:1500\n"
