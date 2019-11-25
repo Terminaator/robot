@@ -23,10 +23,9 @@ class AI(Thread):
         x = self.vision_state["ball_coordinates"][0]
         y = self.vision_state["ball_coordinates"][1]
         distance = self.vision_state["ball_distance"]
-        print(x,y,distance, "cord")
 
         if x == 0 and y == 0:
-            print(self.vision_state["basket_distance"])
+            print("no ball",self.vision_state["basket_distance"])
             mainboard.first_wheel_speed(5)
             mainboard.second_wheel_speed(5)
             mainboard.third_wheel_speed(5)
