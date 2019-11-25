@@ -25,12 +25,16 @@ class AI(Thread):
         distance = self.vision_state["ball_distance"]
 
         if x == 0 and y == 0:
-            print("no ball",self.vision_state["basket_distance"])
-            mainboard.first_wheel_speed(5)
-            mainboard.second_wheel_speed(5)
-            mainboard.third_wheel_speed(5)
-            mainboard.send_message("turn")
-            self.last = "NO_BALL"
+            if 5 < self.vision_state["basket_distance"] < 9:
+                mainboard.first_wheel_speed(-40)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(40)
+            else:
+                mainboard.first_wheel_speed(5)
+                mainboard.second_wheel_speed(5)
+                mainboard.third_wheel_speed(5)
+                mainboard.send_message("turn")
+                self.last = "NO_BALL"
         else:
             if self.last == "NO_BALL":
                 mainboard.first_wheel_speed(0)
