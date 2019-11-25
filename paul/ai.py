@@ -40,9 +40,9 @@ class AI(Thread):
             basket_distance = self.vision_state["basket_distance"]
 
             robotDirectionAngle = self.angle(x_ball, y_ball)
-            wheelLinearVelocity1 = -60 * cos(math.radians(robotDirectionAngle - 0 + 90))
-            wheelLinearVelocity2 = -60 * cos(math.radians(robotDirectionAngle - 120 + 90))
-            wheelLinearVelocity3 = -60 * cos(math.radians(robotDirectionAngle - 240 + 90))
+            wheelLinearVelocity1 = -40 * cos(math.radians(robotDirectionAngle - 0 + 90))
+            wheelLinearVelocity2 = -40 * cos(math.radians(robotDirectionAngle - 120 + 90))
+            wheelLinearVelocity3 = -40 * cos(math.radians(robotDirectionAngle - 240 + 90))
             if x_ball == 0 and y_ball == 0:
                 if 3.5 < basket_distance < 20:
                     mainboard.first_wheel_speed(-40)
