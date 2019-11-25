@@ -22,31 +22,23 @@ class AI(Thread):
         self.robot_speed_x = 0
         self.robot_speed_y = 0
         self.last = None
+        self.wheelSpeedToMainboardUnits = 18.75 * 64 / (2 * math.pi * 0.035 * 60)
 
     def on_message(self, msg):
         # Received message, overwrite vision state
         self.vision_state = msg
 
-    def get_robot_speed(self):
-        return sqrt(self.robot_speed_x * self.robot_speed_x + self.robot_speed_y * self.robot_speed_y)
+    def calculateAngleBetweenRobotAndBall(self, ball_x, ball_y):
+        return math.degrees(math.atan((abs(ball_y - 240)) / (640 - ball_x)))
 
-    def get_robot_direction_angle(self):
-        return atan2(self.robot_speed_x, self.robot_speed_y)
-
-    def get_wheel_linear_velocity(self, wheel_angle):
-        return self.get_robot_speed() * cos(self.get_robot_direction_angle() - wheel_angle)
-
-    def omnidirec(self, x, y, speed, omniWheel1Speed):
-        try:
-            robotDirectionAngle = int(math.degrees(math.atan((327 - x) / y)) + 90)
-        except ZeroDivisionError:
-            robotDirectionAngle = 0.1
-
-        wheelLinearVelocity1 = int(-speed * math.cos(math.radians(robotDirectionAngle - self.wheelAngle1)))
-        wheelLinearVelocity2 = int(-speed * math.cos(math.radians(robotDirectionAngle - self.wheelAngle2)))
-        wheelLinearVelocity3 = int(-speed * math.cos(math.radians(robotDirectionAngle - self.wheelAngle3)))
-
-        return wheelLinearVelocity1,wheelLinearVelocity2,wheelLinearVelocity3
+    def getSpeed(self, angle, omega, speedLimit):
+        wheelOne = int(round(speedLimit * self.wheelSpeedToMainboardUnits * (
+            self.calculateOneWheelVelocity(self.wheelOneAngle, angle, 10, omega))))
+        wheelTwo = int(round(speedLimit * self.wheelSpeedToMainboardUnits * (
+            self.calculateOneWheelVelocity(self.wheelTwoAngle, angle, 10, omega))))
+        wheelThree = int(round(speedLimit * self.wheelSpeedToMainboardUnits * (
+            self.calculateOneWheelVelocity(self.wheelThreeAngle, angle, 10, omega))))
+        return wheelOne, wheelTwo, wheelThree
 
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
@@ -60,13 +52,7 @@ class AI(Thread):
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
 
-        omniWheelSpeed = int(toBallSpeed(y_ball))
-        omniWheel1Speed = int(rotateForBallDuringOmni(x_ball))
+        print(self.getSpeed(90 - self.calculateAngleBetweenRobotAndBall(x_ball, y_ball), 0, 0.07))
 
-        a,b,c = self.omnidirec(x_ball,y_ball,omniWheelSpeed,omniWheel1Speed)
-        mainboard.first_wheel_speed(a)
-        mainboard.second_wheel_speed(b)
-        mainboard.third_wheel_speed(c)
-        mainboard.send_message(self.last)
 
 ai = AI()
