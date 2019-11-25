@@ -43,7 +43,18 @@ class AI(Thread):
             wheelLinearVelocity1 = -30 * cos(math.radians(robotDirectionAngle - 0 + 90))
             wheelLinearVelocity2 = -30 * cos(math.radians(robotDirectionAngle - 120 + 90))
             wheelLinearVelocity3 = -30 * cos(math.radians(robotDirectionAngle - 240 + 90))
-            if 250 < x_ball < 390 and y_ball > 350:
+            if x_ball == 0 and y_ball == 0:
+                if 3.5 < basket_distance < 20:
+                    mainboard.first_wheel_speed(-40)
+                    mainboard.second_wheel_speed(0)
+                    mainboard.third_wheel_speed(40)
+                    self.last = "NO_BALL_BASKET_GO"
+                else:
+                    mainboard.first_wheel_speed(10)
+                    mainboard.second_wheel_speed(10)
+                    mainboard.third_wheel_speed(10)
+                    self.last = "NO_BALL"
+            elif 250 < x_ball < 390 and y_ball > 350:
                 if 280 < x_basket < 360:
                     mainboard.first_wheel_speed(-40)
                     mainboard.second_wheel_speed(0)
