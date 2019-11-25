@@ -45,6 +45,11 @@ class AI(Thread):
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
                 self.last = "BALL_FOUND"
+            elif 250 < x_ball < 390:
+                mainboard.first_wheel_speed(0)
+                mainboard.second_wheel_speed(0)
+                mainboard.third_wheel_speed(0)
+                self.last = "FWD"
             elif x_ball < 250:
                 speed = (250 - x_ball) / 28.9
                 mainboard.first_wheel_speed(int(-speed))
