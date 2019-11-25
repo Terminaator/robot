@@ -41,9 +41,9 @@ class AI(Thread):
         wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120)
         wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240)
 
-        mainboard.first_wheel_speed(wheelLinearVelocity1)
-        mainboard.second_wheel_speed(wheelLinearVelocity2)
-        mainboard.third_wheel_speed(wheelLinearVelocity3)
+        mainboard.first_wheel_speed(10)
+        mainboard.second_wheel_speed(10)
+        mainboard.third_wheel_speed(10)
 
         mainboard.send_message(self.last)
 
