@@ -48,8 +48,7 @@ class AI(Thread):
             mainboard.first_wheel_speed(int(wheelLinearVelocity2))
             mainboard.second_wheel_speed(int(wheelLinearVelocity1))
             mainboard.third_wheel_speed(int(wheelLinearVelocity3))
-
-
+            self.last = "START"
         mainboard.send_message(self.last)
 
 ai = AI()
