@@ -29,14 +29,7 @@ class AI(Thread):
     def calculateAngleBetweenRobotAndBall(self, ball_x, ball_y):
         return math.degrees(math.atan((abs(ball_y - 240)) / (640 - ball_x)))
 
-    def getSpeed(self, angle, omega, speedLimit):
-        wheelOne = int(round(speedLimit * self.wheelSpeedToMainboardUnits * (
-            self.calculateOneWheelVelocity(self.wheelOneAngle, angle, 10, omega))))
-        wheelTwo = int(round(speedLimit * self.wheelSpeedToMainboardUnits * (
-            self.calculateOneWheelVelocity(self.wheelTwoAngle, angle, 10, omega))))
-        wheelThree = int(round(speedLimit * self.wheelSpeedToMainboardUnits * (
-            self.calculateOneWheelVelocity(self.wheelThreeAngle, angle, 10, omega))))
-        return wheelOne, wheelTwo, wheelThree
+
 
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
@@ -50,7 +43,7 @@ class AI(Thread):
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
 
-        print(self.getSpeed(90 - self.calculateAngleBetweenRobotAndBall(x_ball, y_ball), 0, 0.07))
+        print(self.calculateAngleBetweenRobotAndBall(x_ball,y_ball))
 
 
 ai = AI()
