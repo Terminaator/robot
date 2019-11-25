@@ -61,7 +61,7 @@ class AI(Thread):
                     mainboard.third_wheel_speed(40)
                     mainboard.throw(1500)
                     self.last = "THROW"
-                    self.do_that = 10
+                    self.do_that = 5
                 elif x_basket < 280:
                     mainboard.first_wheel_speed(0)
                     mainboard.second_wheel_speed(-20)
