@@ -45,6 +45,6 @@ class AI(Thread):
         mainboard.second_wheel_speed(10)
         mainboard.third_wheel_speed(10)
 
-        mainboard.send_message(self.last)
+        mainboard.send_message("")
 
 ai = AI()
