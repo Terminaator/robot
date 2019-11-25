@@ -60,12 +60,11 @@ class Vision(Thread):
         if ball:
             mask = cv2.inRange(hsv, np.array([15, 15, 68]),
                                np.array([95, 226, 228]))
-            # mask = cv2.dilate(mask,  np.ones((3, 3), np.uint8), iterations=2)
         else:
             mask = cv2.inRange(hsv, np.array([134, 81, 118]),
                                np.array([177, 160, 194]))
-            mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
-        return mask
+        opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
+        return opening
 
     def read_frame(self):
         frames = self.pipeline.wait_for_frames()
