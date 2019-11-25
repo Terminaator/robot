@@ -21,12 +21,12 @@ def nothing(x):
     pass
 
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("1", "Trackbars", 29, 255, nothing)
-cv2.createTrackbar("2", "Trackbars", 90, 255, nothing)
-cv2.createTrackbar("3", "Trackbars", 99, 255, nothing)
-cv2.createTrackbar("4", "Trackbars", 255, 255, nothing)
-cv2.createTrackbar("5", "Trackbars", 70, 255, nothing)
-cv2.createTrackbar("6", "Trackbars", 200, 255, nothing)
+cv2.createTrackbar("1", "Trackbars", 15, 255, nothing)
+cv2.createTrackbar("2", "Trackbars", 15, 255, nothing)
+cv2.createTrackbar("3", "Trackbars", 68, 255, nothing)
+cv2.createTrackbar("4", "Trackbars", 95, 255, nothing)
+cv2.createTrackbar("5", "Trackbars", 226, 255, nothing)
+cv2.createTrackbar("6", "Trackbars", 228, 255, nothing)
 
 pipeline = rs.pipeline()
 config = rs.config()
@@ -69,19 +69,19 @@ try:
     advnc_mode.load_json(json_string)
 
 except Exception as e:
-    print(e)
+    pass
 pass
 
 profile = pipeline.start(config)
 
 def basket_mask(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    kernel = np.ones((5, 5), np.uint8)
+    #kernel = np.ones((5, 5), np.uint8)
 
 
-    closing = cv2.morphologyEx(hsv, cv2.MORPH_CLOSE, kernel)
+    #closing = cv2.morphologyEx(hsv, cv2.MORPH_CLOSE, kernel)
 
-    mask = cv2.inRange(closing,np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
+    mask = cv2.inRange(hsv,np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
                                         cv2.getTrackbarPos("3", "Trackbars")]),
                          np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
                                    cv2.getTrackbarPos("6", "Trackbars")]))
