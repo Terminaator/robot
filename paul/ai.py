@@ -47,17 +47,10 @@ class AI(Thread):
                     x = self.vision_state["basket_coordinates"][0]
                     y = self.vision_state["basket_coordinates"][1]
                     if 250 < x < 390:
-                        if self.last != "stop":
-                            mainboard.first_wheel_speed(0)
-                            mainboard.second_wheel_speed(0)
-                            mainboard.third_wheel_speed(0)
-                            mainboard.throw(1500)
-                            self.last = "stop"
-                        else:
-                            mainboard.first_wheel_speed(-40)
-                            mainboard.second_wheel_speed(0)
-                            mainboard.third_wheel_speed(40)
-                            self.last = "stop"
+                        mainboard.first_wheel_speed(0)
+                        mainboard.second_wheel_speed(0)
+                        mainboard.third_wheel_speed(0)
+                        self.last = "stop"
                     elif x < 250:
                         mainboard.first_wheel_speed(0)
                         mainboard.second_wheel_speed(-20)
