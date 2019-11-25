@@ -45,7 +45,7 @@ class AI(Thread):
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
                 self.last = "BALL_FOUND"
-            elif 250 < x_ball < 390 and ball_distance < 0.4:
+            elif 250 < x_ball < 390 and ball_distance < 0.3:
                 if self.last == "FWD_STOP" or self.last == "FWD_STOP_FIRST":
                     if 250 < x_basket < 390:
                         if self.last == "FWD_STOP_FIRST":
