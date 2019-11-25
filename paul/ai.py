@@ -39,18 +39,18 @@ class AI(Thread):
         wheelLinearVelocity2 = -30 * cos(math.radians(robotDirectionAngle - 120 + 90))
         wheelLinearVelocity3 = -30 * cos(math.radians(robotDirectionAngle - 240 + 90))
         if 250 < x_ball < 390 and y_ball > 350:
-            if 250 < x_basket < 390:
+            if 270 < x_basket < 370:
                 mainboard.first_wheel_speed(0)
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
                 self.last = "FWD_STOP_FIRST"
-            elif x_basket < 250:
+            elif x_basket < 270:
                 mainboard.first_wheel_speed(0)
                 mainboard.second_wheel_speed(-20)
                 mainboard.third_wheel_speed(0)
                 self.last = "FWD_STOP"
 
-            elif x_basket > 390:
+            elif x_basket > 370:
                 mainboard.first_wheel_speed(0)
                 mainboard.second_wheel_speed(-20)
                 mainboard.third_wheel_speed(0)
