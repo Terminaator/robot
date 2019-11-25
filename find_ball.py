@@ -20,6 +20,7 @@ throw = False
 def nothing(x):
     pass
 
+
 cv2.namedWindow("Trackbars")
 cv2.createTrackbar("1", "Trackbars", 15, 255, nothing)
 cv2.createTrackbar("2", "Trackbars", 15, 255, nothing)
@@ -37,7 +38,6 @@ config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
 def find_compatible_camera():
     ctx = rs.context()
-    ds5_dev = rs.device()
     devices = ctx.query_devices()
     DS5_product_ids = ["0AD1", "0AD2", "0AD3", "0AD4", "0AD5", "0AF6", "0AFE", "0AFF", "0B00", "0B01", "0B03",
                        "0B07"]
@@ -48,7 +48,6 @@ def find_compatible_camera():
                 print("Found device that supports advanced mode:", dev.get_info(rs.camera_info.name))
             return dev
     raise Exception("No device that supports advanced mode was found")
-
 
 
 try:
@@ -74,17 +73,17 @@ pass
 
 profile = pipeline.start(config)
 
+
 def basket_mask(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    #kernel = np.ones((5, 5), np.uint8)
+    # kernel = np.ones((5, 5), np.uint8)
 
+    # closing = cv2.morphologyEx(hsv, cv2.MORPH_CLOSE, kernel)
 
-    #closing = cv2.morphologyEx(hsv, cv2.MORPH_CLOSE, kernel)
-
-    mask = cv2.inRange(hsv,np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
-                                        cv2.getTrackbarPos("3", "Trackbars")]),
-                         np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
-                                   cv2.getTrackbarPos("6", "Trackbars")]))
+    mask = cv2.inRange(hsv, np.array([cv2.getTrackbarPos("1", "Trackbars"), cv2.getTrackbarPos("2", "Trackbars"),
+                                      cv2.getTrackbarPos("3", "Trackbars")]),
+                       np.array([cv2.getTrackbarPos("4", "Trackbars"), cv2.getTrackbarPos("5", "Trackbars"),
+                                 cv2.getTrackbarPos("6", "Trackbars")]))
     kernel = np.ones((5, 5), np.uint8)
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
 
@@ -102,10 +101,10 @@ def find_blob(blob):  # returns the red colored circle
             cont_index = idx
 
     if len(contours) > 0:
-
         r = cv2.boundingRect(contours[cont_index])
         return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
     return 0, 0
+
 
 fps = 0
 str_fps = " "
@@ -119,12 +118,12 @@ while True:
     frame = np.asanyarray(color_frame.get_data())
     mask = basket_mask(frame)
     x, y = find_blob(mask)
-    #print(x, y,depth_frame.get_distance(int(x), int(y)))
+    # print(x, y,depth_frame.get_distance(int(x), int(y)))
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', mask)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-    
+
     end = time.time()
     seconds += end - start
     if seconds < 1:

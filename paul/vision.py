@@ -1,3 +1,4 @@
+import json
 import time
 
 import pyrealsense2 as rs
@@ -16,11 +17,40 @@ class Vision(Thread):
         self.config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
         self.config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
 
-        self.profile = self.pipeline.start(self.config)
         self.frame = None
-        camera_one = self.profile.get_device().query_sensors()[1]
-        camera_one.set_option(rs.option.enable_auto_exposure, False)
-        camera_one.set_option(rs.option.enable_auto_white_balance, False)
+        try:
+            dev = self.find_camera()
+            advnc_mode = rs.rs400_advanced_mode(dev)
+            while not advnc_mode.is_enabled():
+                advnc_mode.toggle_advanced_mode(True)
+                time.sleep(2)
+                # The 'dev' object will become invalid and we need to initialize it again
+                dev = self.find_camera()
+                advnc_mode = rs.rs400_advanced_mode(dev)
+
+            with open('camera.json', 'r') as f:
+                distros_dict = json.load(f)
+
+            as_json_object = json.loads(str(distros_dict).replace("'", '\"'))
+            json_string = str(as_json_object).replace("'", '\"')
+            advnc_mode.load_json(json_string)
+
+        except Exception as e:
+            pass
+        self.profile = self.pipeline.start(self.config)
+
+    def find_camera(self):
+        ctx = rs.context()
+        devices = ctx.query_devices()
+        products = ["0AD1", "0AD2", "0AD3", "0AD4", "0AD5", "0AF6", "0AFE", "0AFF", "0B00", "0B01", "0B03",
+                    "0B07"]
+        for dev in devices:
+            if dev.supports(rs.camera_info.product_id) and str(
+                    dev.get_info(rs.camera_info.product_id)) in products:
+                if dev.supports(rs.camera_info.name):
+                    print("Found device that supports advanced mode:", dev.get_info(rs.camera_info.name))
+                return dev
+        raise Exception("No device that supports advanced mode was found")
 
     def on_message(self, msg):
         print("vision received:", msg)
@@ -30,7 +60,7 @@ class Vision(Thread):
         if ball:
             mask = cv2.inRange(hsv, np.array([10, 85, 76]),
                                np.array([28, 252, 189]))
-            #mask = cv2.dilate(mask,  np.ones((3, 3), np.uint8), iterations=2)
+            # mask = cv2.dilate(mask,  np.ones((3, 3), np.uint8), iterations=2)
         else:
             mask = cv2.inRange(hsv, np.array([167, 173, 207]),
                                np.array([184, 223, 255]))
