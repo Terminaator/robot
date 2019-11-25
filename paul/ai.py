@@ -46,9 +46,7 @@ class AI(Thread):
         wheelLinearVelocity2 = int(-speed * math.cos(math.radians(robotDirectionAngle - self.wheelAngle2)))
         wheelLinearVelocity3 = int(-speed * math.cos(math.radians(robotDirectionAngle - self.wheelAngle3)))
 
-        print(wheelLinearVelocity1)
-        print(wheelLinearVelocity2)
-        print(wheelLinearVelocity3)
+        return wheelLinearVelocity1,wheelLinearVelocity2,wheelLinearVelocity3
 
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
@@ -64,6 +62,11 @@ class AI(Thread):
 
         omniWheelSpeed = int(toBallSpeed(y_ball))
         omniWheel1Speed = int(rotateForBallDuringOmni(x_ball))
-        self.omnidirec(x_ball,y_ball,omniWheelSpeed,omniWheel1Speed)
+
+        a,b,c = self.omnidirec(x_ball,y_ball,omniWheelSpeed,omniWheel1Speed)
+        mainboard.first_wheel_speed(a)
+        mainboard.second_wheel_speed(b)
+        mainboard.third_wheel_speed(c)
+        mainboard.send_message(self.last)
 
 ai = AI()
