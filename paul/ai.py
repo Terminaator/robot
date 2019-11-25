@@ -24,13 +24,6 @@ class AI(Thread):
     def angle(self, ball_x, ball_y):
         return math.degrees(math.atan((abs(ball_y - 240)) / (640 - ball_x)))
 
-    def robotSpeed(self):
-
-    def getSpeed(self):
-        wheelLinearVelocity1 = robotSpeed * cos(robotDirectionAngle - wheelAngle) + wheelDistanceFromCenter * robotAngularVelocity
-        wheelLinearVelocity2 = robotSpeed * cos(robotDirectionAngle - wheelAngle) + wheelDistanceFromCenter * robotAngularVelocity
-        wheelLinearVelocity3 = robotSpeed * cos(robotDirectionAngle - wheelAngle) + wheelDistanceFromCenter * robotAngularVelocity
-
 
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
