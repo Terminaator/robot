@@ -15,6 +15,7 @@ class Mainboard(Thread):
         self.first = 0
         self.second = 0
         self.third = 0
+        self.thrower = 0
 
     def first_wheel_speed(self, first):
         self.first = first
@@ -29,6 +30,9 @@ class Mainboard(Thread):
         print("mainboard received:", msg)
         self.last_command = msg
 
+    def throw(self, speed):
+        self.thrower = speed
+
     def on_tick(self):
         while self.ser.in_waiting:
             self.ser.read()
@@ -36,7 +40,10 @@ class Mainboard(Thread):
         # Do nothing when no command has been received
         if self.last_command == None:
             return
-        self.ser.write(("sd:" + str(self.first) + ":" + str(self.second) + ":" + str(self.third) + "\n").encode())
+        string = "sd:" + str(self.first) + ":" + str(self.second) + ":" + str(self.third) + "\n"
+        if self.thrower != 0:
+            string += "d:1500\n"
+        self.ser.write(string.encode())
 
 
 mainboard = Mainboard()
