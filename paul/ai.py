@@ -20,7 +20,7 @@ class AI(Thread):
         self.vision_state = msg
 
     def angle(self, ball_x, ball_y):
-        return math.degrees(math.atan((abs(ball_y - 240)) / (640 - ball_x)))
+        return atan2(abs(640-ball_x),abs(ball_y-240))
 
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
@@ -39,21 +39,7 @@ class AI(Thread):
         wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120)
         wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240)
 
-        if x_ball < 250:
-            wheelLinearVelocity1 = 30 * cos(robotDirectionAngle - 0 + 90)
-            wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120 + 90)
-            wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240 + 90)
-            mainboard.first_wheel_speed(int(wheelLinearVelocity2))
-            mainboard.second_wheel_speed(int(wheelLinearVelocity1))
-            mainboard.third_wheel_speed(int(wheelLinearVelocity3))
-
-        elif x_ball > 390:
-            wheelLinearVelocity1 = 30 * cos(robotDirectionAngle - 0 - 90)
-            wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120 - 90)
-            wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240 -90)
-            mainboard.first_wheel_speed(int(wheelLinearVelocity2))
-            mainboard.second_wheel_speed(int(wheelLinearVelocity1))
-            mainboard.third_wheel_speed(int(wheelLinearVelocity3))
+        print(wheelLinearVelocity1,wheelLinearVelocity2,wheelLinearVelocity3)
 
 
 
