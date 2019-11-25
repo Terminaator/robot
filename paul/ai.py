@@ -2,15 +2,10 @@ import time
 
 import math
 from math import sqrt, atan2, cos
-from simple_pid import PID
 from thread import Thread
 from mainboard import mainboard
 
-pid = PID(0.8, 0, 0.00001, setpoint=330)
-pid.output_limits = (-30, 30)
-toBallSpeed = PID(0.3, 0.00001, 0, setpoint=420)
-rotateForBasketSpeed = PID(0.3, 0, 0, setpoint=320)
-rotateForBallDuringOmni = PID(0.35, 0, 0, setpoint=320)
+
 
 
 class AI(Thread):
@@ -23,6 +18,9 @@ class AI(Thread):
         self.robot_speed_y = 0
         self.last = None
         self.wheelSpeedToMainboardUnits = 18.75 * 64 / (2 * math.pi * 0.035 * 60)
+        self.wheelOneAngle = 2
+        self.wheelTwoAngle = 131.1
+        self.wheelThreeAngle = 232.9
 
     def on_message(self, msg):
         # Received message, overwrite vision state
