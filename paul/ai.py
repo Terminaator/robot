@@ -6,8 +6,6 @@ from thread import Thread
 from mainboard import mainboard
 
 
-
-
 class AI(Thread):
     def __init__(self):
         Thread.__init__(self)
@@ -24,7 +22,6 @@ class AI(Thread):
     def angle(self, ball_x, ball_y):
         return math.degrees(math.atan((abs(ball_y - 240)) / (640 - ball_x)))
 
-
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
             return
@@ -39,7 +36,7 @@ class AI(Thread):
 
         robotSpeed = sqrt(x_ball * x_ball + y_ball * y_ball)
 
-        robotDirectionAngle = atan2(x_ball, y_ball)
+        robotDirectionAngle = self.angle(x_ball, y_ball)
         print(robotDirectionAngle)
 
 
