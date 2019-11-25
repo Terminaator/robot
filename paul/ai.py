@@ -40,8 +40,11 @@ class AI(Thread):
                 mainboard.third_wheel_speed(10)
                 self.last = "NO_BALL"
         else:
-            pass
-        mainboard.send_message("command")
+            mainboard.first_wheel_speed(0)
+            mainboard.second_wheel_speed(0)
+            mainboard.third_wheel_speed(0)
+            self.last = "STOP"
+        mainboard.send_message(self.last)
 
 
 ai = AI()
