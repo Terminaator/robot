@@ -37,7 +37,16 @@ class AI(Thread):
         robotSpeed = sqrt(x_ball * x_ball + y_ball * y_ball)
 
         robotDirectionAngle = self.angle(x_ball, y_ball)
-        print(robotDirectionAngle)
+        wheelLinearVelocity1 = 30 * cos(robotDirectionAngle - 0)
+        wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120)
+        wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240)
+
+
+        print(wheelLinearVelocity1)
+        print(wheelLinearVelocity2)
+        print(wheelLinearVelocity3)
+
+
 
 
 ai = AI()
