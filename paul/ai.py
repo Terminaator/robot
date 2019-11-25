@@ -26,6 +26,7 @@ class AI(Thread):
         print(x,y,distance, "cord")
 
         if x == 0 and y == 0:
+            print(self.vision_state["basket_distance"])
             mainboard.first_wheel_speed(5)
             mainboard.second_wheel_speed(5)
             mainboard.third_wheel_speed(5)
