@@ -34,16 +34,28 @@ class AI(Thread):
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
 
-        robotSpeed = sqrt(x_ball * x_ball + y_ball * y_ball)
-
         robotDirectionAngle = self.angle(x_ball, y_ball)
         wheelLinearVelocity1 = 30 * cos(robotDirectionAngle - 0)
         wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120)
         wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240)
 
-        mainboard.first_wheel_speed(int(wheelLinearVelocity2))
-        mainboard.second_wheel_speed(int(wheelLinearVelocity1))
-        mainboard.third_wheel_speed(int(wheelLinearVelocity3))
+        if x_ball < 250:
+            wheelLinearVelocity1 = 30 * cos(robotDirectionAngle - 0 + 90)
+            wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120 + 90)
+            wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240 + 90)
+            mainboard.first_wheel_speed(int(wheelLinearVelocity2))
+            mainboard.second_wheel_speed(int(wheelLinearVelocity1))
+            mainboard.third_wheel_speed(int(wheelLinearVelocity3))
+
+        elif x_ball > 390:
+            wheelLinearVelocity1 = 30 * cos(robotDirectionAngle - 0 - 90)
+            wheelLinearVelocity2 = 30 * cos(robotDirectionAngle - 120 - 90)
+            wheelLinearVelocity3 = 30 * cos(robotDirectionAngle - 240 -90)
+            mainboard.first_wheel_speed(int(wheelLinearVelocity2))
+            mainboard.second_wheel_speed(int(wheelLinearVelocity1))
+            mainboard.third_wheel_speed(int(wheelLinearVelocity3))
+
+
 
         mainboard.send_message("dasd")
 
