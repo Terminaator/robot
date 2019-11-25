@@ -40,16 +40,31 @@ class AI(Thread):
                 mainboard.third_wheel_speed(10)
                 self.last = "NO_BALL"
         else:
-            if self.last in ["NO_BALL_BASKET_GO","NO_BALL"]:
+            if self.last in ["NO_BALL_BASKET_GO", "NO_BALL"]:
                 mainboard.first_wheel_speed(0)
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
                 self.last = "BALL_FOUND"
-            elif 250 < x_ball < 390 and  0 < ball_distance < 0.4:
-                mainboard.first_wheel_speed(0)
-                mainboard.second_wheel_speed(0)
-                mainboard.third_wheel_speed(0)
-                self.last = "FWD_STOP"
+            elif 250 < x_ball < 390 and 0 < ball_distance < 0.4:
+                if self.last == "FWD_STOP":
+                    if 250 < x_basket < 390:
+                        mainboard.first_wheel_speed(0)
+                        mainboard.second_wheel_speed(0)
+                        mainboard.third_wheel_speed(0)
+                        self.last = "stop"
+                    elif x_basket < 250:
+                        mainboard.first_wheel_speed(0)
+                        mainboard.second_wheel_speed(-20)
+                        mainboard.third_wheel_speed(0)
+                    elif x_basket > 390:
+                        mainboard.first_wheel_speed(0)
+                        mainboard.second_wheel_speed(-20)
+                        mainboard.third_wheel_speed(0)
+                else:
+                    mainboard.first_wheel_speed(0)
+                    mainboard.second_wheel_speed(0)
+                    mainboard.third_wheel_speed(0)
+                    self.last = "FWD_STOP"
             elif 250 < x_ball < 390:
                 mainboard.first_wheel_speed(-40)
                 mainboard.second_wheel_speed(0)
