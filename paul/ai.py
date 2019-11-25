@@ -45,49 +45,17 @@ class AI(Thread):
                 mainboard.second_wheel_speed(0)
                 mainboard.third_wheel_speed(0)
                 self.last = "BALL_FOUND"
-            elif 250 < x_ball < 390 and ball_distance < 0.3:
-                if self.last == "FWD_STOP" or self.last == "FWD_STOP_FIRST":
-                    if 250 < x_basket < 390:
-                        if self.last == "FWD_STOP_FIRST":
-                            mainboard.first_wheel_speed(-40)
-                            mainboard.second_wheel_speed(0)
-                            mainboard.third_wheel_speed(40)
-                            mainboard.throw(1500)
-                            self.last = "FWD_STOP_FIRST"
-                        else:
-                            mainboard.first_wheel_speed(0)
-                            mainboard.second_wheel_speed(0)
-                            mainboard.third_wheel_speed(0)
-                            self.last = "FWD_STOP_FIRST"
-                    elif x_basket < 250:
-                        mainboard.first_wheel_speed(0)
-                        mainboard.second_wheel_speed(-20)
-                        mainboard.third_wheel_speed(0)
-                        self.last = "FWD_STOP"
-                    elif x_basket > 390:
-                        mainboard.first_wheel_speed(0)
-                        mainboard.second_wheel_speed(-20)
-                        mainboard.third_wheel_speed(0)
-                        self.last = "FWD_STOP"
-                else:
-                    mainboard.first_wheel_speed(0)
-                    mainboard.second_wheel_speed(0)
-                    mainboard.third_wheel_speed(0)
-                    self.last = "FWD_STOP"
-            elif 250 < x_ball < 390:
-                mainboard.first_wheel_speed(-40)
-                mainboard.second_wheel_speed(0)
-                mainboard.third_wheel_speed(40)
-                self.last = "FWD"
             elif x_ball < 250:
-                mainboard.first_wheel_speed(-20)
-                mainboard.second_wheel_speed(-20)
-                mainboard.third_wheel_speed(-20)
+                speed = (250 - x_ball) / 28.9
+                mainboard.first_wheel_speed(-speed)
+                mainboard.second_wheel_speed(-speed)
+                mainboard.third_wheel_speed(-speed)
                 self.last = "LEFT_BALL"
             elif x_ball > 390:
-                mainboard.first_wheel_speed(20)
-                mainboard.second_wheel_speed(20)
-                mainboard.third_wheel_speed(20)
+                speed = (x_ball - 390) / 28.9
+                mainboard.first_wheel_speed(speed)
+                mainboard.second_wheel_speed(speed)
+                mainboard.third_wheel_speed(speed)
                 self.last = "RIGHT_BALL"
         mainboard.send_message(self.last)
 
