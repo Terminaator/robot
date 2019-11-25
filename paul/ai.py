@@ -41,9 +41,9 @@ class AI(Thread):
 
         print(wheelLinearVelocity1,wheelLinearVelocity2,wheelLinearVelocity3)
 
-        mainboard.first_wheel_speed(wheelLinearVelocity2)
-        mainboard.second_wheel_speed(wheelLinearVelocity1)
-        mainboard.third_wheel_speed(wheelLinearVelocity3)
+        mainboard.first_wheel_speed(int(wheelLinearVelocity2))
+        mainboard.second_wheel_speed(int(wheelLinearVelocity1))
+        mainboard.third_wheel_speed(int(wheelLinearVelocity3))
 
         mainboard.send_message("ewew")
 
