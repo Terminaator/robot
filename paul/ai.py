@@ -57,6 +57,7 @@ class AI(Thread):
                             mainboard.first_wheel_speed(-40)
                             mainboard.second_wheel_speed(0)
                             mainboard.third_wheel_speed(40)
+                            self.last = "stop"
                     elif x < 250:
                         mainboard.first_wheel_speed(0)
                         mainboard.second_wheel_speed(-20)
