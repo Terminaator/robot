@@ -38,7 +38,7 @@ class AI(Thread):
         wheelLinearVelocity1 = -30 * cos(math.radians(robotDirectionAngle - 0 + 90))
         wheelLinearVelocity2 = -30 * cos(math.radians(robotDirectionAngle - 120 + 90))
         wheelLinearVelocity3 = -30 * cos(math.radians(robotDirectionAngle - 240 + 90))
-        if 250 < x_ball < 390 and y_ball < 350:
+        if 250 < x_ball < 390 and y_ball > 350:
             mainboard.first_wheel_speed(int(0))
             mainboard.second_wheel_speed(int(0))
             mainboard.third_wheel_speed(int(0))
