@@ -40,7 +40,6 @@ class Mainboard(Thread):
         self.speed_two = int(-40 * math.cos(math.radians(direction_angle - 0 + 90)))
         self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
 
-        self.ticks = 3
 
     def set_speeds(self):
         if self.last_command == "NO_BALL_BASKET_GO":
