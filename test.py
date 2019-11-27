@@ -9,5 +9,5 @@ ser = serial.Serial(device, 115200)
 
 while True:
 
-    ser.write("sd:0:-10:10\nd:1500\n".encode())
+    ser.write("sd:0:-10:10\nd:-1500\n".encode())
 
