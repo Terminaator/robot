@@ -61,6 +61,8 @@ class Mainboard(Thread):
             self.set_speeds_wheels(0, 20, -20)
         elif self.last_command == "MOVE_RIGHT":
             self.set_speeds_wheels(0, -20, 20)
+        elif self.last_command == "STOP":
+            self.set_speeds_wheels(0, 0, 0)
 
     def on_tick(self):
         while self.ser.in_waiting:
@@ -73,7 +75,7 @@ class Mainboard(Thread):
 
         thrower = ""
         if self.ticks > 0:
-            thrower += "d:-1500\n"
+            thrower += "d:1500\n"
         else:
             thrower += "d:0\n"
 
