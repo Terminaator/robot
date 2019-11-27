@@ -13,7 +13,7 @@ class Mainboard(Thread):
         self.speed_one = 0
         self.speed_two = 0
         self.speed_three = 0
-
+        self.thrower_speed = 0
         self.last_command = None
 
     def on_message(self, msg):
@@ -61,7 +61,10 @@ class Mainboard(Thread):
 
         self.set_speeds()
 
-        command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        thrower = "d:" + str(self.thrower_speed) + "\n"
+
+        command = move + thrower
         self.ser.write(command.encode())
 
 
