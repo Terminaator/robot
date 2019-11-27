@@ -16,6 +16,8 @@ class Mainboard(Thread):
         self.thrower_speed = 1500
         self.last_command = None
 
+        self.ticks = 0
+
     def on_message(self, msg):
         self.last_command = msg
 
@@ -36,6 +38,8 @@ class Mainboard(Thread):
         self.speed_one = int(-40 * math.cos(math.radians(direction_angle - 120 + 90)))
         self.speed_two = int(-40 * math.cos(math.radians(direction_angle - 0 + 90)))
         self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
+
+        self.ticks = 3
 
     def set_speeds(self):
         if self.last_command == "NO_BALL_BASKET_GO":
@@ -65,7 +69,12 @@ class Mainboard(Thread):
         self.set_speeds()
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        thrower = "d:" + str(self.thrower_speed) + "\n"
+        thrower = ""
+        if self.ticks < 0:
+            thrower = "d:" + str(self.thrower_speed) + "\n"
+            self.ticks -= 1
+        else:
+            thrower = "d:0\n"
 
         command = move + thrower
         print(command)
