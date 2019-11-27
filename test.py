@@ -14,3 +14,6 @@ while True:
     ser.write("sd:0:-10:10\n".encode())
     time.sleep(1)
 
+    ser.write("sd:0:-10:10\nd:1500\n".encode())
+
+
