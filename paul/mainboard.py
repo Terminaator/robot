@@ -27,6 +27,9 @@ class Mainboard(Thread):
         self.speed_two = speed2
         self.speed_three = speed3
 
+    def set_thrower_speed(self, speed):
+        self.thrower_speed = speed
+
     def omni_monition(self, x_ball, y_ball):
         direction_angle = self.angle(x_ball, y_ball)
 
@@ -36,13 +39,13 @@ class Mainboard(Thread):
 
     def set_speeds(self):
         if self.last_command == "NO_BALL_BASKET_GO":
-            self.set_speeds_wheels(-40,0,40)
+            self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "NO_BALL":
-            self.set_speeds_wheels(10,10,10)
+            self.set_speeds_wheels(10, 10, 10)
         elif self.last_command == "STRAIGHT":
-            self.set_speeds_wheels(-40,0,40)
+            self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "THROW_BALL":
-            self.set_speeds_wheels(-40,0,40)
+            self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "TURN_BASKET_BALL_0":
             self.set_speeds_wheels(0, -20, 0)
         elif self.last_command == "TURN_BASKET_BALL_1":

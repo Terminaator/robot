@@ -22,7 +22,7 @@ class AI(Thread):
         x_basket = self.vision_state["basket_coordinates"][0]
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
-
+        '''
         if x_ball == 0 and y_ball == 0:
             if 3.5 < basket_distance < 20:
                 self.last = "NO_BALL_BASKET_GO"
@@ -43,6 +43,9 @@ class AI(Thread):
         else:
             mainboard.omni_monition(x_ball,y_ball)
             self.last = "OMNIDIRECTIONAL"
+            '''
+        mainboard.omni_monition(x_ball, y_ball)
+        self.last = "OMNIDIRECTIONAL"
         mainboard.on_message(self.last)
 
 ai = AI()
