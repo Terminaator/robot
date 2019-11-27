@@ -68,7 +68,7 @@ class Mainboard(Thread):
 
         thrower = ""
         if self.ticks < 0:
-            thrower += "d:" + str(self.thrower_speed) + "\n"
+            thrower += "d:1500\n"
             self.ticks -= 1
         else:
             self.set_speeds()
