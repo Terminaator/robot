@@ -22,12 +22,35 @@ class Mainboard(Thread):
     def angle(self, ball_x, ball_y):
         return math.degrees(math.atan2(320 - ball_x, 480 - ball_y))
 
-    def omni_monition(self, x_ball, y_ball):
-        robotDirectionAngle = self.angle(x_ball, y_ball)
+    def set_speeds_wheels(self, speed1, speed2, speed3):
+        self.speed_one = speed1
+        self.speed_two = speed2
+        self.speed_three = speed3
 
-        self.speed_one = -40 * math.cos(math.radians(robotDirectionAngle - 120 + 90))
-        self.speed_two = -40 * math.cos(math.radians(robotDirectionAngle - 0 + 90))
-        self.speed_three = -40 * math.cos(math.radians(robotDirectionAngle - 240 + 90))
+    def omni_monition(self, x_ball, y_ball):
+        direction_angle = self.angle(x_ball, y_ball)
+
+        self.speed_one = -40 * math.cos(math.radians(direction_angle - 120 + 90))
+        self.speed_two = -40 * math.cos(math.radians(direction_angle - 0 + 90))
+        self.speed_three = -40 * math.cos(math.radians(direction_angle - 240 + 90))
+
+    def set_speeds(self):
+        if self.last_command == "NO_BALL_BASKET_GO":
+            self.set_speeds_wheels(-40,0,40)
+        elif self.last_command == "NO_BALL":
+            self.set_speeds_wheels(10,10,10)
+        elif self.last_command == "STRAIGHT":
+            self.set_speeds_wheels(-40,0,40)
+        elif self.last_command == "THROW_BALL":
+            self.set_speeds_wheels(-40,0,40)
+        elif self.last_command == "TURN_BASKET_BALL_0":
+            self.set_speeds_wheels(0, -20, 0)
+        elif self.last_command == "TURN_BASKET_BALL_1":
+            self.set_speeds_wheels(0, 20, 0)
+        elif self.last_command == "MOVE_LEFT":
+            self.set_speeds_wheels(0, 20, -20)
+        elif self.last_command == "MOVE_RIGHT":
+            self.set_speeds_wheels(0, -20, 20)
 
     def on_tick(self):
         while self.ser.in_waiting:
@@ -35,6 +58,8 @@ class Mainboard(Thread):
 
         if self.last_command is None:
             return
+
+        self.set_speeds()
 
         command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
         self.ser.write(command.encode())

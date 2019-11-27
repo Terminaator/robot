@@ -24,9 +24,18 @@ class AI(Thread):
         basket_distance = self.vision_state["basket_distance"]
 
         if x_ball == 0 and y_ball == 0:
-            self.last = "NO_BALL"
-        elif 250 < x_ball < 390:
+            if 3.5 < basket_distance < 20:
+                self.last = "NO_BALL_BASKET_GO"
+            else:
+                self.last = "NO_BALL"
+        elif 250 < x_ball < 390 and y_ball > 350:
             self.last = "STRAIGHT"
+            if 280 < x_basket < 360:
+                self.last = "THROW_BALL"
+            elif x_basket < 280:
+                self.last = "TURN_BASKET_BALL_0"
+            elif x_basket > 360:
+                self.last = "TURN_BASKET_BALL_1"
         elif x_ball < 100:
             self.last = "MOVE_LEFT"
         elif x_ball > 440:
