@@ -71,7 +71,7 @@ class Mainboard(Thread):
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
         thrower = ""
         if self.ticks < 0:
-            thrower = "d:" + str(self.thrower_speed) + "\n"
+            thrower += "d:" + str(self.thrower_speed) + "\n"
             self.ticks -= 1
         else:
             thrower = "d:0\n"
