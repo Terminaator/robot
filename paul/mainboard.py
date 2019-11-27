@@ -55,6 +55,9 @@ class Mainboard(Thread):
         elif self.last_command == "MOVE_RIGHT":
             self.set_speeds_wheels(0, -20, 20)
 
+        if self.last_command != "THROW_BALL":
+            self.thrower_speed = 0
+
     def on_tick(self):
         while self.ser.in_waiting:
             self.ser.read()
@@ -65,9 +68,9 @@ class Mainboard(Thread):
         self.set_speeds()
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        #thrower = "d:" + str(self.thrower_speed) + "\n"
+        thrower = "d:" + str(self.thrower_speed) + "\n"
 
-        command = move
+        command = move + thrower
         print(command)
 
         self.ser.write(command.encode())
