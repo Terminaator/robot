@@ -30,6 +30,7 @@ class Mainboard(Thread):
         self.speed_three = speed3
 
     def set_thrower_speed(self, speed):
+        self.ticks = 3
         self.thrower_speed = speed
 
     def omni_monition(self, x_ball, y_ball):
