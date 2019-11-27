@@ -31,7 +31,7 @@ class Mainboard(Thread):
 
     def set_thrower_speed(self, speed):
         self.thrower_speed = speed
-        self.ticks = 10
+        self.ticks = 100
 
     def omni_monition(self, x_ball, y_ball):
         direction_angle = self.angle(x_ball, y_ball)
