@@ -40,7 +40,6 @@ class Mainboard(Thread):
         self.speed_two = int(-40 * math.cos(math.radians(direction_angle - 0 + 90)))
         self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
 
-
     def set_speeds(self):
         if self.last_command == "NO_BALL_BASKET_GO":
             self.set_speeds_wheels(-40, 0, 40)
@@ -67,7 +66,7 @@ class Mainboard(Thread):
             return
 
         thrower = ""
-        if self.ticks < 0:
+        if self.ticks > 0:
             thrower += "d:1500\n"
             self.ticks -= 1
         else:
