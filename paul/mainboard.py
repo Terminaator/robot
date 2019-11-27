@@ -35,7 +35,8 @@ class Mainboard(Thread):
 
     def on_tick(self):
         while self.ser.in_waiting:
-            self.ser.read()
+            #self.ser.read()
+            print(self.ser.read())
 
         # Do nothing when no command has been received
         if self.last_command == None:
