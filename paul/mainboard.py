@@ -65,7 +65,7 @@ class Mainboard(Thread):
         self.set_speeds()
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        thrower = "d:" + str(self.thrower_speed) + "\n"
+        thrower = "d:" + "1500" + "\n"
 
         command = move + thrower
         print(command)
