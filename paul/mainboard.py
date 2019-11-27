@@ -68,6 +68,7 @@ class Mainboard(Thread):
         thrower = "d:" + str(self.thrower_speed) + "\n"
 
         command = move + thrower
+        print(command)
         self.ser.write(command.encode())
 
 
