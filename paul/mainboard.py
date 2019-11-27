@@ -25,8 +25,8 @@ class Mainboard(Thread):
     def omni_monition(self, x_ball, y_ball):
         robotDirectionAngle = self.angle(x_ball, y_ball)
 
-        self.speed_two = -40 * math.cos(math.radians(robotDirectionAngle - 0 + 90))
         self.speed_one = -40 * math.cos(math.radians(robotDirectionAngle - 120 + 90))
+        self.speed_two = -40 * math.cos(math.radians(robotDirectionAngle - 0 + 90))
         self.speed_three = -40 * math.cos(math.radians(robotDirectionAngle - 240 + 90))
 
     def on_tick(self):
@@ -35,7 +35,9 @@ class Mainboard(Thread):
 
         if self.last_command is None:
             return
-        print(self.last_command)
+
+        command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        self.ser.write(command.encode())
 
 
 mainboard = Mainboard()
