@@ -66,7 +66,6 @@ class Mainboard(Thread):
         if self.last_command is None:
             return
 
-
         thrower = ""
         if self.ticks < 0:
             thrower += "d:" + str(self.thrower_speed) + "\n"
