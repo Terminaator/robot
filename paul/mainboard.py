@@ -73,7 +73,7 @@ class Mainboard(Thread):
 
         thrower = ""
         if self.ticks > 0:
-            thrower += "d:1500\n"
+            thrower += "d:-1500\n"
         else:
             thrower += "d:0\n"
 
