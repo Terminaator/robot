@@ -8,12 +8,7 @@ device = list(map(lambda port: port.device, ports))[0]
 ser = serial.Serial(device, 115200)
 
 while True:
-
-
-
-    ser.write("sd:0:-10:10\n".encode())
-    time.sleep(1)
-
-    ser.write("sd:0:-10:10\nd:1500\n".encode())
+    
+    ser.write("sd:0:0:0\nd:1500\n".encode())
 
 
