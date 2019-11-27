@@ -66,15 +66,15 @@ class Mainboard(Thread):
         if self.last_command is None:
             return
 
-        self.set_speeds()
 
-        move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
         thrower = ""
         if self.ticks < 0:
             thrower += "d:" + str(self.thrower_speed) + "\n"
             self.ticks -= 1
         else:
+            self.set_speeds()
             thrower = "d:0\n"
+        move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
         command = move + thrower
         print(command)
