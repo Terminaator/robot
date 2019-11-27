@@ -65,10 +65,11 @@ class Mainboard(Thread):
         self.set_speeds()
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        thrower = "d:" + str(self.thrower_speed) + "\n"
+        #thrower = "d:" + str(self.thrower_speed) + "\n"
 
-        command = move + thrower
+        command = move
         print(command)
+
         self.ser.write(command.encode())
 
 
