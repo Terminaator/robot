@@ -32,6 +32,7 @@ class AI(Thread):
         elif x_ball > 440:
             self.last = "MOVE_RIGHT"
         else:
+            mainboard.omni_monition(x_ball,y_ball)
             self.last = "OMNIDIRECTIONAL"
         mainboard.on_message(self.last)
 
