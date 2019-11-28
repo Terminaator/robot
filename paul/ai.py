@@ -29,7 +29,6 @@ class AI(Thread):
 
         if self.go_forward > 0:
             self.last = "THROW_BALL"
-            mainboard.thrower_speed = 1500
             self.go_forward -= 1
         else:
             if x_ball == 0 and y_ball == 0:
@@ -39,7 +38,6 @@ class AI(Thread):
                     self.last = "NO_BALL"
             elif 250 < x_ball < 390 and y_ball > 350:
                 if 280 < x_basket < 360:
-                    mainboard.thrower_speed = 1500
                     self.go_forward = 3
                     self.last = "THROW_BALL"
                 elif x_basket < 280:

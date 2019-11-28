@@ -35,7 +35,9 @@ class Mainboard(Thread):
         self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
 
     def set_speeds(self):
+        self.thrower_speed = 0
         if self.last_command == "THROW_BALL":
+            self.thrower_speed = 1500
             self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "NO_BALL_BASKET_GO":
             self.set_speeds_wheels(-40, 0, 40)
