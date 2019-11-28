@@ -7,7 +7,7 @@ class AI(Thread):
         Thread.__init__(self)
         self.vision_state = {}
         self.last = None
-        self.go_forward = 4
+        self.go_forward = 0
 
     def on_message(self, msg):
         self.vision_state = msg
