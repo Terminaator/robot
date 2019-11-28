@@ -66,7 +66,7 @@ class Mainboard(Thread):
         if self.thrower_speed != 0:
             thrower += "d:" + str(self.thrower_speed) + "\n"
         else:
-            thrower += "d:0\n"
+            thrower += "d:1500\n"
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
