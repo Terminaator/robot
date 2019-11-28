@@ -31,7 +31,7 @@ class AI(Thread):
             mainboard.thrower = "d:1500\n"
             self.go_forward -= 1
         elif self.last == "STOP":
-            mainboard.thrower = ""
+            mainboard.thrower = "d:100\n"
         else:
             if x_ball == 0 and y_ball == 0:
                 if 3.5 < basket_distance < 20:
