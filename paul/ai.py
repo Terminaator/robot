@@ -27,7 +27,7 @@ class AI(Thread):
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
 
-        if self.last == "STOP" and 10 > self.go_forward > 0:
+        if self.last == "STOP" and 3 > self.go_forward > 0:
             mainboard.thrower = "d:1500\n"
             self.go_forward -= 1
         elif self.last == "STOP":
@@ -40,7 +40,7 @@ class AI(Thread):
                     self.last = "NO_BALL"
             elif 250 < x_ball < 390 and y_ball > 350:
                 if 280 < x_basket < 360:
-                    self.go_forward = 9
+                    self.go_forward = 2
                     self.last = "STOP"
                 elif x_basket < 280:
                     self.last = "TURN_BASKET_BALL_0"
