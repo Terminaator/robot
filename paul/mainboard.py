@@ -63,7 +63,9 @@ class Mainboard(Thread):
 
         self.set_speeds()
 
-        thrower = "d:" + str(self.thrower_speed) + "\n"
+        thrower = ""
+        if self.thrower_speed != 0:
+            thrower = "d:" + str(self.thrower_speed) + "\n"
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
