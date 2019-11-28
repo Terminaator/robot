@@ -17,6 +17,10 @@ class Mainboard(Thread):
         self.last_command = None
         self.thrower = ""
 
+    def set_thrower(self, speed):
+        self.thrower_speed = speed
+        self.thrower = "d:" + str(speed) + "\n"
+
     def on_message(self, msg):
         self.last_command = msg
 
@@ -70,6 +74,9 @@ class Mainboard(Thread):
         print(command)
         print(self.last_command, "")
         self.ser.write(command.encode())
+
+        if self.thrower_speed == 100:
+            self.thrower = ""
 
 
 mainboard = Mainboard()

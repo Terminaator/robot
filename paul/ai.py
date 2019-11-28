@@ -26,12 +26,11 @@ class AI(Thread):
         x_basket = self.vision_state["basket_coordinates"][0]
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
-
-        if self.last == "STOP" and 3 > self.go_forward > 0:
-            mainboard.thrower = "d:1500\n"
+        if self.last == "THROW_BALL" and self.go_forward > 0:
+            self.last = "THROW_BALL"
             self.go_forward -= 1
-        elif self.last == "STOP":
-            mainboard.thrower = "d:100\n"
+        elif self.last == "THROW_BALL":
+            mainboard.set_thrower(100)
         else:
             if x_ball == 0 and y_ball == 0:
                 if 3.5 < basket_distance < 20:
@@ -40,15 +39,16 @@ class AI(Thread):
                     self.last = "NO_BALL"
             elif 250 < x_ball < 390 and y_ball > 350:
                 if 280 < x_basket < 360:
-                    self.go_forward = 2
-                    self.last = "STOP"
+                    self.go_forward = 3
+                    mainboard.set_thrower(1500)
+                    self.last = "THROW_BALL"
                 elif x_basket < 280:
                     self.last = "TURN_BASKET_BALL_0"
                 elif x_basket > 360:
                     self.last = "TURN_BASKET_BALL_1"
-                #elif x_ball < 100:
+                # elif x_ball < 100:
                 #    self.last = "MOVE_LEFT"
-                #elif x_ball > 440:
+                # elif x_ball > 440:
                 #    self.last = "MOVE_RIGHT"
             else:
                 mainboard.omni_monition(x_ball, y_ball)
