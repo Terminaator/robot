@@ -62,7 +62,6 @@ class Mainboard(Thread):
             return
 
         self.set_speeds()
-
         thrower = ""
         if self.thrower_speed != 0:
             thrower += "d:" + str(self.thrower_speed) + "\n"
