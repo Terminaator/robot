@@ -62,7 +62,7 @@ class Mainboard(Thread):
 
         if self.last_command is None:
             return
-        command = ""
+
         if self.go_forward > 0:
             command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
             self.go_forward -= 1
