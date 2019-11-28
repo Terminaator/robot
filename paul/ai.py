@@ -27,12 +27,9 @@ class AI(Thread):
         y_basket = self.vision_state["basket_coordinates"][1]
         basket_distance = self.vision_state["basket_distance"]
 
-        if self.go_forward > 1:
+        if self.go_forward > 0:
             self.last = "THROW_BALL"
             mainboard.thrower_speed = 1500
-            self.go_forward -= 1
-        elif self.go_forward > 0:
-            mainboard.thrower_speed = 0
             self.go_forward -= 1
         else:
             if x_ball == 0 and y_ball == 0:
@@ -41,7 +38,6 @@ class AI(Thread):
                 else:
                     self.last = "NO_BALL"
             elif 250 < x_ball < 390 and y_ball > 350:
-                self.last = "STRAIGHT"
                 if 280 < x_basket < 360:
                     mainboard.thrower_speed = 1500
                     self.go_forward = 3
