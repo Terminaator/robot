@@ -63,6 +63,7 @@ class Mainboard(Thread):
         else:
             return
         if self.last_command is None:
+            self.thrower_speed = 0
             return
 
         self.set_speeds()
