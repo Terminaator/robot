@@ -69,7 +69,7 @@ class Mainboard(Thread):
 
         command = thrower + move
         print(command)
-        print(self.last_command)
+        print(self.last_command, "")
         self.ser.write(command.encode())
 
 
