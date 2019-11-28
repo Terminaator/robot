@@ -28,8 +28,10 @@ class AI(Thread):
         basket_distance = self.vision_state["basket_distance"]
 
         if self.last == "STOP" and 3 > self.go_forward > 0:
-            mainboard.thrower_speed = 1500
+            mainboard.thrower = "d:1500\n"
             self.go_forward -= 1
+        elif self.last == "STOP":
+            mainboard.thrower = "d:0\n"
         else:
             if x_ball == 0 and y_ball == 0:
                 if 3.5 < basket_distance < 20:
