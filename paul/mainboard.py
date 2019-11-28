@@ -71,7 +71,7 @@ class Mainboard(Thread):
 
             move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
-            command = move + self.thrower
+            command = move
 
         print(command)
         self.ser.write(command.encode())
