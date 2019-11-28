@@ -71,6 +71,7 @@ class Mainboard(Thread):
             self.set_speeds()
 
             move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+            move += "d:100"
 
             command = move
 
