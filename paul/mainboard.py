@@ -58,6 +58,10 @@ class Mainboard(Thread):
         while self.ser.in_waiting:
             self.ser.read()
 
+        if self.thrower_speed == 1500:
+            self.ser.write("d:1500\n".encode())
+        else:
+            return
         if self.last_command is None:
             return
 
