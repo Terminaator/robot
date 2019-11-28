@@ -18,7 +18,12 @@ class AI(Thread):
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
             return
-        mainboard.thrower_speed = 1500
+        if self.go_forward > 0:
+            self.last = "THROW_BALL"
+            mainboard.thrower_speed = 1500
+            self.go_forward -= 1
+        else:
+            mainboard.thrower_speed = 0
         '''
         x_ball = self.vision_state["ball_coordinates"][0]
         y_ball = self.vision_state["ball_coordinates"][1]

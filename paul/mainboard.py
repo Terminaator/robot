@@ -58,18 +58,16 @@ class Mainboard(Thread):
         while self.ser.in_waiting:
             self.ser.read()
 
-        if self.thrower_speed == 1500:
-            self.ser.write("d:1500\n".encode())
-        else:
-            return
         if self.last_command is None:
-            self.thrower_speed = 0
             return
 
         self.set_speeds()
+
         thrower = ""
         if self.thrower_speed != 0:
             thrower += "d:" + str(self.thrower_speed) + "\n"
+        else:
+            thrower += "d:0\n"
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
