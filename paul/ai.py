@@ -12,6 +12,9 @@ class AI(Thread):
     def on_message(self, msg):
         self.vision_state = msg
 
+    def get_thrower_speed_by_distance(self):
+        return 0
+
     def on_tick(self):
         if "ball_coordinates" not in self.vision_state:
             return
@@ -52,9 +55,10 @@ class AI(Thread):
             elif x_ball > 440:
                 self.last = "MOVE_RIGHT"
             else:
-                mainboard.omni_monition(x_ball,y_ball)
+                mainboard.omni_monition(x_ball, y_ball)
                 self.last = "OMNIDIRECTIONAL"
 
         mainboard.on_message(self.last)
+
 
 ai = AI()
