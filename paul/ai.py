@@ -29,16 +29,19 @@ class AI(Thread):
         print(x_ball,y_ball)
         if x_ball == 0 and y_ball == 0:
             if 3.5 < basket_distance < 20:
-                self.last = "NO_BALL_BASKET_GO"
+                mainboard.omni_monition(x_basket, y_basket)
+                self.last = "OMNIDIRECTIONAL"
             else:
                 self.last = "NO_BALL"
-        elif 250 < x_ball < 390 and y_ball > 350:
+        elif 300 < x_ball < 380 and y_ball > 350:
             if 330 < x_basket < 350:
                 self.last = "STOP"
             elif x_basket < 330:
                 self.last = "TURN_BASKET_BALL_0"
             elif x_basket > 350:
                 self.last = "TURN_BASKET_BALL_1"
+            else:
+                self.last = "STOP"
                 # elif x_ball < 100:
                 #    self.last = "MOVE_LEFT"
                 # elif x_ball > 440:
