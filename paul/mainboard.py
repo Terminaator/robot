@@ -15,11 +15,7 @@ class Mainboard(Thread):
         self.speed_three = 0
         self.thrower_speed = 0
         self.last_command = None
-        self.thrower = ""
-
-    def set_thrower(self, speed):
-        self.thrower_speed = speed
-        self.thrower = "d:" + str(speed) + "\n"
+        self.go_forward = 0
 
     def on_message(self, msg):
         self.last_command = msg
@@ -41,6 +37,7 @@ class Mainboard(Thread):
 
     def set_speeds(self):
         if self.last_command == "THROW_BALL":
+            self.go_forward = 3
             self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "NO_BALL_BASKET_GO":
             self.set_speeds_wheels(-40, 0, 40)
@@ -65,18 +62,19 @@ class Mainboard(Thread):
 
         if self.last_command is None:
             return
+        command = ""
+        if self.go_forward > 0:
+            command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+            self.go_forward -= 1
+        else:
+            self.set_speeds()
 
-        self.set_speeds()
+            move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
-        move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+            command = move + self.thrower
 
-        command = move + self.thrower
         print(command)
-        print(self.last_command, "")
         self.ser.write(command.encode())
-
-        if self.thrower_speed == 100:
-            self.thrower = ""
 
 
 mainboard = Mainboard()
