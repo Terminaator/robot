@@ -16,8 +16,6 @@ class Mainboard(Thread):
         self.thrower_speed = 1500
         self.last_command = None
 
-        self.ticks = 0
-
     def on_message(self, msg):
         self.last_command = msg
 
@@ -29,10 +27,6 @@ class Mainboard(Thread):
         self.speed_two = speed2
         self.speed_three = speed3
 
-    def set_thrower_speed(self, speed):
-        self.thrower_speed = speed
-        self.ticks = 100
-
     def omni_monition(self, x_ball, y_ball):
         direction_angle = self.angle(x_ball, y_ball)
 
@@ -41,10 +35,6 @@ class Mainboard(Thread):
         self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
 
     def set_speeds(self):
-        if self.ticks > 0:
-            self.last_command = "THROW_BALL"
-            self.ticks -= 1
-
         if self.last_command == "THROW_BALL":
             self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "NO_BALL_BASKET_GO":
@@ -73,15 +63,11 @@ class Mainboard(Thread):
 
         self.set_speeds()
 
-        thrower = ""
-        if self.ticks > 0:
-            thrower += "d:1500\n"
-        else:
-            thrower += "d:0\n"
+        thrower = "d:" + str(self.thrower_speed) + "\n"
 
         move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
-        command = move + thrower
+        command = thrower + move
         print(command)
 
         self.ser.write(command.encode())
