@@ -31,8 +31,8 @@ class Mainboard(Thread):
         direction_angle = self.angle(x_ball, y_ball)
 
         self.speed_one = int(-40 * math.cos(math.radians(direction_angle - 120 + 90)))
-        self.speed_two = int(-40 * math.cos(math.radians(direction_angle - 0 + 90)))
-        self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
+        self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 0 + 90)))
+        self.speed_two = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
 
     def set_speeds(self):
         if self.last_command == "THROW_BALL":
