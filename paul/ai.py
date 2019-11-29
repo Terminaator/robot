@@ -37,7 +37,7 @@ class AI(Thread):
                     self.last = "NO_BALL"
             elif 300 < x_ball < 380 and y_ball > 350:
                 if 330 <= x_basket <= 350:
-                    if y_ball > 450:
+                    if y_ball > 430:
                         self.last = "BACK"
                     elif y_ball > 420:
                         mainboard.omni_monition(x_basket, y_basket)
