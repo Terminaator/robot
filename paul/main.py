@@ -6,14 +6,24 @@ from mainboard import mainboard
 
 def on_press(key):
     try:
-        k = key.char  # single-char keys
+        k = key.char
     except:
-        k = key.name  # other keys
+        k = key.name
     global throw
     if k == 'enter':
         ai.stop = not ai.stop
         mainboard.last_command = None
         mainboard.thrower_speed = 0
+
+    if ai.stop:
+        if k == "w":
+            mainboard.last_command = "STRAIGHT"
+        elif k == "a":
+            mainboard.last_command = "TURN_BASKET_BALL_0"
+        elif k == "d":
+            mainboard.last_command = "TURN_BASKET_BALL_1"
+        elif k == "space":
+            mainboard.last_command = "STOP"
 
 
 
