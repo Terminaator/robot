@@ -12,7 +12,7 @@ ser = serial.Serial(device, 115200, timeout=0.01)
 
 field = 'X'
 robot = 'Z'
-activated = False
+activated = 1
 
 def respond():
     response = 'rf:a' + field + robot + 'ACK------\n'
@@ -32,14 +32,14 @@ while True:
             print('cmd=', cmd)
 
             if cmd == 'START----':
-                activated = True
+                activated = 1
                 # start AI
                 respond()
 
 
             if cmd == 'STOP-----':
                 # stop AI
-                activated = False
+                activated = 0
                 respond()
                     
             if cmd == 'PING-----':
@@ -59,18 +59,16 @@ while True:
         #print(str(activated)) - for checking if it works right or not
         
     time.sleep(0.01)
-    #if activated == 1:
-    #    ai.start()
-    #    vision.start()
-    #    mainboard.start()
-    #    ai.join()
-    #    vision.join()
-    #    mainboard.join()
-    #    activated = 2
-    #elif activated == 0:
-    #    ai.kill()
-    #    vision.kill()
-    #    mainboard.kill()
-    #    activated = 2
-    #if ai.isalive() == False:
-    #    print('dead')
+    if activated == 1:
+        ai.start()
+        vision.start()
+        mainboard.start()
+        ai.join()
+        vision.join()
+        mainboard.join()
+        activated = 2
+    elif activated == 0:
+        ai.kill()
+        vision.kill()
+        mainboard.kill()
+        activated = 2
