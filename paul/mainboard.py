@@ -77,7 +77,7 @@ class Mainboard(Thread):
         else:
             self.set_speeds()
             move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-            if self.thrower_speed <= 3000:
+            if self.thrower_speed >= 1000:
                 self.thrower_speed = 100
                 move += "d:100\n"
             command = move
