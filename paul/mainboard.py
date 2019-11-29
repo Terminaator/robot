@@ -71,6 +71,7 @@ class Mainboard(Thread):
         thrower = ""
 
         if self.go_forward > 0:
+            print("mida vittu")
             thrower = "d:" + str(self.thrower_speed) + "\n"
             self.go_forward -= 1
         else:
