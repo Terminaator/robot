@@ -29,6 +29,9 @@ class Mainboard(Thread):
         self.speed_three = speed3
 
     def omni_monition(self, x_ball, y_ball):
+        if self.go_forward > 0:
+            return
+
         direction_angle = self.angle(x_ball, y_ball)
 
         self.speed_one = int(-40 * math.cos(math.radians(direction_angle - 120 + 90)))
