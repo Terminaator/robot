@@ -36,22 +36,16 @@ class AI(Thread):
                 else:
                     self.last = "NO_BALL"
             elif 300 < x_ball < 380 and y_ball > 350:
-                if 330 < x_basket < 350:
+                if 330 <= x_basket <= 350:
                     if y_ball > 420:
                         mainboard.omni_monition(x_basket, y_basket)
                         self.last = "OMNIDIRECTIONAL_THROW"
                     else:
                         self.last = "STRAIGHT_SLOW"
-                elif x_ball < 100:
-                    self.last = "MOVE_LEFT"
-                elif x_ball > 440:
-                    self.last = "MOVE_RIGHT"
-                elif x_basket < 320:
+                elif x_basket < 330:
                     self.last = "TURN_BASKET_BALL_0"
-                elif x_basket > 360:
+                elif x_basket > 350:
                     self.last = "TURN_BASKET_BALL_1"
-                else:
-                    self.last = "STOP"
             else:
                 mainboard.omni_monition(x_ball, y_ball)
                 self.last = "OMNIDIRECTIONAL"
