@@ -66,24 +66,23 @@ class Mainboard(Thread):
         while self.ser.in_waiting:
             self.ser.read()
 
-        print(self.last_command)
         if self.last_command is None:
             return
+        thrower = ""
 
         if self.go_forward > 0:
-            command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-            self.thrower_speed = 1500
-            command += "d:1500\n"
+            thrower = "d:" + str(self.thrower_speed) + "\n"
             self.go_forward -= 1
         else:
             self.set_speeds()
-            move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-            if self.thrower_speed == 1500:
+            if self.thrower_speed >= 1000:
                 self.thrower_speed = 100
-                move += "d:100\n"
-            command = move
+                thrower = "d:100\n"
 
-        print(command)
+        move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        command = move + thrower
+
+        print(command, self.last_command)
         self.ser.write(command.encode())
 
 

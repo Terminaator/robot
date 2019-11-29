@@ -9,12 +9,13 @@ class AI(Thread):
         self.last = None
         self.go_forward = 0
         self.stop = True
+        self.distances = {229: 1280, 169: 1300, 162: 1320, 132: 1380, 113: 1500, 410: 2150}
 
     def on_message(self, msg):
         self.vision_state = msg
 
-    def get_thrower_speed_by_distance(self):
-        return 0
+    def get_closest_speed(self, y_basket):
+        return min(self.distances, key=lambda x: abs(x - y_basket))
 
     def on_tick(self):
         if not self.stop:
@@ -28,7 +29,7 @@ class AI(Thread):
             x_basket = self.vision_state["basket_coordinates"][0]
             y_basket = self.vision_state["basket_coordinates"][1]
             basket_distance = self.vision_state["basket_distance"]
-            print(x_ball,y_ball)
+            print(x_ball, y_ball)
             if x_ball == 0 and y_ball == 0:
                 if 3.5 < basket_distance < 20:
                     mainboard.omni_monition(x_basket, y_basket)
@@ -40,6 +41,7 @@ class AI(Thread):
                     self.last = "BACK"
                 elif 330 <= x_basket <= 350:
                     if y_ball > 420:
+                        mainboard.thrower_speed = self.get_closest_speed(y_basket)
                         mainboard.omni_monition(x_basket, y_basket)
                         self.last = "OMNIDIRECTIONAL_THROW"
                     else:
