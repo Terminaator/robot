@@ -76,11 +76,7 @@ class Mainboard(Thread):
             self.go_forward -= 1
         else:
             self.set_speeds()
-            move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-            if self.thrower_speed >= 1000:
-                self.thrower_speed = 100
-                move += "d:100\n"
-            command = move
+            command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
         print(command, self.last_command)
         self.ser.write(command.encode())
