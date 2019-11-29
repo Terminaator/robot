@@ -67,7 +67,10 @@ class Mainboard(Thread):
             return
 
         command = ""
-        self.set_speeds()
+        if self.last_command == "OMNIDIRECTIONAL_THROW":
+            pass
+        else:
+            self.set_speeds()
 
         command += "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
        # command += "d:1500\n"
