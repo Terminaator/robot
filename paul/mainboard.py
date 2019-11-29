@@ -71,6 +71,7 @@ class Mainboard(Thread):
             return
 
         if self.go_forward > 0:
+            self.last_command = "OMNIDIRECTIONAL_THROW"
             command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
             command += "d:" + str(self.thrower_speed) + "\n"
             self.go_forward -= 1
