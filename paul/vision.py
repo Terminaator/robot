@@ -98,8 +98,6 @@ class Vision(Thread):
             return
         self.frame = np.asanyarray(color_frame.get_data())
 
-        cv2.imshow('frame', self.frame)
-
         ball_mask = self.mask(self.frame, True)
         basket_mask = self.mask(self.frame, False)
         x_ball, y_ball = self.find_blob(ball_mask, True)
@@ -110,6 +108,10 @@ class Vision(Thread):
             "ball_distance": (depth_frame.get_distance(int(x_ball), int(y_ball))),
             "basket_distance": (depth_frame.get_distance(int(x_basket), int(y_basket)))
         })
+
+        cv2.imshow('frame', self.frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            return
 
 
 vision = Vision()
