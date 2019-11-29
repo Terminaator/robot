@@ -40,6 +40,7 @@ class Mainboard(Thread):
             self.go_forward = 20
             self.set_speeds_wheels(-20, 0, 20)
         if self.last_command == "OMNIDIRECTIONAL_THROW":
+            self.thrower_speed = 1500
             self.go_forward = 20
         elif self.last_command == "NO_BALL_BASKET_GO":
             self.set_speeds_wheels(-40, 0, 40)
