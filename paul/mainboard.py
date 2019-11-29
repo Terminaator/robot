@@ -13,7 +13,7 @@ class Mainboard(Thread):
         self.speed_one = 0
         self.speed_two = 0
         self.speed_three = 0
-        self.thrower_speed = 0
+        self.thrower_speed = 1500
         self.last_command = None
         self.go_forward = 0
 
@@ -76,7 +76,8 @@ class Mainboard(Thread):
             self.go_forward -= 1
         else:
             self.set_speeds()
-            command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+            command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n" + \
+                      "d:" + str(self.thrower_speed) + "\n"
 
         print(command, self.last_command)
         self.ser.write(command.encode())
