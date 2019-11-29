@@ -53,6 +53,8 @@ class Mainboard(Thread):
             self.set_speeds_wheels(0, 20, -20)
         elif self.last_command == "MOVE_RIGHT":
             self.set_speeds_wheels(0, -20, 20)
+        elif self.last_command == "STRAIGHT_SLOW":
+            self.set_speeds_wheels(-15, 0, 15)
         elif self.last_command == "STOP":
             self.set_speeds_wheels(0, 0, 0)
         elif self.last_command == "BACK":
