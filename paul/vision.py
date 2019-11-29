@@ -88,8 +88,10 @@ class Vision(Thread):
                 cont_index = idx
         if len(contours) > 0:
             r = cv2.boundingRect(contours[cont_index])
-
-            return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
+            if ball:
+                return r[0] + (r[2] / 2), r[1] + (r[3] / 2)
+            else:
+                return r[0] + (r[2] / 2), r[3]
         return 0, 0
 
     def on_tick(self):
