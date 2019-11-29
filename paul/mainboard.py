@@ -67,10 +67,7 @@ class Mainboard(Thread):
             return
 
         command = ""
-        if self.go_forward > 0:
-            self.go_forward -= 1
-        else:
-            self.set_speeds()
+        self.set_speeds()
 
         command += "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
         command += "d:1500\n"
