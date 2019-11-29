@@ -109,7 +109,7 @@ class Vision(Thread):
             "basket_distance": (depth_frame.get_distance(int(x_basket), int(y_basket)))
         })
 
-        cv2.imshow('frame', basket_mask)
+        cv2.imshow('frame', self.frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             return
 
