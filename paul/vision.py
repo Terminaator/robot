@@ -100,7 +100,6 @@ class Vision(Thread):
 
         cv2.imshow('frame', self.frame)
 
-        print(self.frame)
         ball_mask = self.mask(self.frame, True)
         basket_mask = self.mask(self.frame, False)
         x_ball, y_ball = self.find_blob(ball_mask, True)
@@ -114,3 +113,4 @@ class Vision(Thread):
 
 
 vision = Vision()
+cv2.destroyAllWindows()
