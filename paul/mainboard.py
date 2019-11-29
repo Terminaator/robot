@@ -68,14 +68,12 @@ class Mainboard(Thread):
 
         command = ""
         if self.go_forward > 0:
-            command += "d:" + str(self.thrower_speed) + "\n"
             self.go_forward -= 1
         else:
             self.set_speeds()
-            if self.thrower_speed >= 1000:
-                command += "d:100\n"
 
         command += "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        command += "d:1500\n"
 
         print(command, self.last_command)
         self.ser.write(command.encode())
