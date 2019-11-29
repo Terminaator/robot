@@ -37,7 +37,7 @@ class Mainboard(Thread):
 
     def set_speeds(self):
         if self.last_command == "OMNIDIRECTIONAL_THROW":
-            self.go_forward = 20
+            self.go_forward = 100
         elif self.last_command == "NO_BALL_BASKET_GO":
             self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "NO_BALL":
