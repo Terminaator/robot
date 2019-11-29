@@ -69,6 +69,7 @@ class Mainboard(Thread):
         if self.last_command is None:
             return
 
+        self.set_speeds()
         command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
 
         print(command, self.last_command)
