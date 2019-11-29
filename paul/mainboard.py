@@ -55,6 +55,8 @@ class Mainboard(Thread):
             self.set_speeds_wheels(0, -20, 20)
         elif self.last_command == "STOP":
             self.set_speeds_wheels(0, 0, 0)
+        elif self.last_command == "BACK":
+            self.set_speeds_wheels(40, 0, -40)
 
     def on_tick(self):
         while self.ser.in_waiting:

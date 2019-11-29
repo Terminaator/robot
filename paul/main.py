@@ -24,6 +24,8 @@ def on_press(key):
             mainboard.last_command = "TURN_BASKET_BALL_1"
         elif k == "space":
             mainboard.last_command = "STOP"
+        elif k == "back":
+            mainboard.last_command = "BACK"
 
 
 
