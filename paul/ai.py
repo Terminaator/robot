@@ -38,9 +38,9 @@ class AI(Thread):
             elif 300 < x_ball < 380 and y_ball > 350:
                 if 330 < x_basket < 350:
                     self.last = "STOP"
-                elif x_basket < 330:
+                elif x_basket < 320:
                     self.last = "TURN_BASKET_BALL_0"
-                elif x_basket > 350:
+                elif x_basket > 360:
                     self.last = "TURN_BASKET_BALL_1"
                 else:
                     self.last = "STOP"
