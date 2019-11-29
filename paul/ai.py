@@ -51,7 +51,8 @@ class AI(Thread):
                     self.last = "TURN_BASKET_BALL_1"
                 else:
                     self.last = "STOP"
-
+            elif 300 < x_ball < 380 and 400 < y_ball:
+                self.last = "BACK"
             else:
                 mainboard.omni_monition(x_ball, y_ball)
                 self.last = "OMNIDIRECTIONAL"
