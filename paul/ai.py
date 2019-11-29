@@ -35,7 +35,7 @@ class AI(Thread):
                     self.last = "OMNIDIRECTIONAL"
                 else:
                     self.last = "NO_BALL"
-            elif 300 < x_ball < 380 and y_ball > 350:
+            elif 300 < x_ball < 380 and 450 > y_ball > 350:
                 if 330 < x_basket < 350:
                     self.last = "STOP"
                 elif x_basket < 320:
