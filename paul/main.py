@@ -11,22 +11,21 @@ def on_press(key):
         k = key.name  # other keys
     global throw
     if k == 'enter':
-        print("OK")
+        ai.stop = not ai.stop
+        mainboard.last_command = None
+        mainboard.thrower_speed = 0
     print(k)
 
 
 
 lis = keyboard.Listener(on_press=on_press)
+
 lis.start()
+ai.start()
+vision.start()
+mainboard.start()
 
 lis.join()
-#ai.start()
-#vision.start()
-#mainboard.start()
-
-
-
-
-#ai.join()
-#vision.join()
-#mainboard.join()
+ai.join()
+vision.join()
+mainboard.join()
