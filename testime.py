@@ -16,7 +16,7 @@ class InputThread(threading.Thread):
     def run(self):
         while True:
             speed = input('input something: ')
-            i = 3
+            i = 40
             while i > 0:
                 i -= 1
                 ser.write(("d:" + str(speed) + "\n").encode())
