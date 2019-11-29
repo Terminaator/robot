@@ -22,12 +22,12 @@ def nothing(x):
 
 
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("1", "Trackbars", 15, 255, nothing)
-cv2.createTrackbar("2", "Trackbars", 15, 255, nothing)
-cv2.createTrackbar("3", "Trackbars", 68, 255, nothing)
-cv2.createTrackbar("4", "Trackbars", 95, 255, nothing)
-cv2.createTrackbar("5", "Trackbars", 226, 255, nothing)
-cv2.createTrackbar("6", "Trackbars", 228, 255, nothing)
+cv2.createTrackbar("1", "Trackbars", 134, 255, nothing)
+cv2.createTrackbar("2", "Trackbars", 81, 255, nothing)
+cv2.createTrackbar("3", "Trackbars", 118, 255, nothing)
+cv2.createTrackbar("4", "Trackbars", 177, 255, nothing)
+cv2.createTrackbar("5", "Trackbars", 160, 255, nothing)
+cv2.createTrackbar("6", "Trackbars", 194, 255, nothing)
 
 pipeline = rs.pipeline()
 config = rs.config()
@@ -120,7 +120,7 @@ while True:
     frame = np.asanyarray(color_frame.get_data())
     mask = basket_mask(frame)
     x, y = find_blob(mask)
-    # print(x, y,depth_frame.get_distance(int(x), int(y)))
+    print(x, y)
     cv2.imshow('Processed', frame)
     cv2.imshow('treshold', mask)
     if cv2.waitKey(1) & 0xFF == ord('q'):
