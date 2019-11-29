@@ -66,6 +66,7 @@ class Mainboard(Thread):
         while self.ser.in_waiting:
             self.ser.read()
 
+        print(self.last_command)
         if self.last_command is None:
             return
 
