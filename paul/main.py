@@ -13,7 +13,6 @@ def on_press(key):
     if k == 'enter':
         ai.stop = not ai.stop
         mainboard.last_command = None
-        mainboard.thrower_speed = 0
 
     if ai.stop:
         if k == "w":

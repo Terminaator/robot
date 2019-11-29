@@ -28,7 +28,7 @@ class Mainboard(Thread):
         self.speed_two = speed2
         self.speed_three = speed3
 
-    def omni_monition(self, x_ball, y_ball):
+    def omni_monition(self, x_ball, y_ball, throw):
         direction_angle = self.angle(x_ball, y_ball)
 
         self.speed_one = int(-40 * math.cos(math.radians(direction_angle - 120 + 90)))
@@ -71,6 +71,7 @@ class Mainboard(Thread):
 
         self.set_speeds()
         command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        command += "d:1500\n"
 
         print(command, self.last_command)
         self.ser.write(command.encode())

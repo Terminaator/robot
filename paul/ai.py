@@ -32,13 +32,13 @@ class AI(Thread):
             print(x_ball, y_ball)
             if x_ball == 0 and y_ball == 0:
                 if 3.5 < basket_distance < 20:
-                    mainboard.omni_monition(x_basket, y_basket)
+                    mainboard.omni_monition(x_basket, y_basket, False)
                     self.last = "OMNIDIRECTIONAL"
                 else:
                     self.last = "NO_BALL"
             elif 300 < x_ball < 380 and y_ball > 350:
                 if 330 <= x_basket <= 350 and y_ball > 400:
-                    mainboard.omni_monition(x_basket, y_basket)
+                    mainboard.omni_monition(x_basket, y_basket, True)
                     self.last = "OMNIDIRECTIONAL_THROW"
                 if 330 <= x_basket <= 350:
                     self.last = "STRAIGHT_SLOW"
@@ -47,7 +47,7 @@ class AI(Thread):
                 elif x_basket > 350:
                     self.last = "TURN_BASKET_BALL_1"
             else:
-                mainboard.omni_monition(x_ball, y_ball)
+                mainboard.omni_monition(x_ball, y_ball, False)
                 self.last = "OMNIDIRECTIONAL"
 
             mainboard.on_message(self.last)
