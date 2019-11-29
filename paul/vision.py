@@ -97,6 +97,10 @@ class Vision(Thread):
         if not depth_frame or not color_frame:
             return
         self.frame = np.asanyarray(color_frame.get_data())
+
+        cv2.imshow('frame', self.frame)
+
+        print(self.frame)
         ball_mask = self.mask(self.frame, True)
         basket_mask = self.mask(self.frame, False)
         x_ball, y_ball = self.find_blob(ball_mask, True)
