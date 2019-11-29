@@ -19,9 +19,9 @@ def on_press(key):
         if k == "w":
             mainboard.last_command = "STRAIGHT"
         elif k == "a":
-            mainboard.last_command = "TURN_BASKET_BALL_0"
+            mainboard.last_command = "MOVE_LEFT"
         elif k == "d":
-            mainboard.last_command = "TURN_BASKET_BALL_1"
+            mainboard.last_command = "MOVE_RIGHT"
         elif k == "space":
             mainboard.last_command = "STOP"
         elif k == "s":
