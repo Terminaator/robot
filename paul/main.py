@@ -23,7 +23,7 @@ def on_press(key):
         elif k == "d":
             mainboard.last_command = "MOVE_RIGHT"
         elif k == "r":
-            mainboard.last_command = "MOVE_RIGHT"
+            mainboard.last_command = "TURN_BASKET_BALL_0"
         elif k == "space":
             mainboard.last_command = "STOP"
         elif k == "s":
