@@ -41,8 +41,6 @@ class AI(Thread):
                     self.last = "BACK"
                 elif 330 <= x_basket <= 350:
                     if y_ball > 420:
-                        if mainboard.thrower_speed == 100:
-                            mainboard.thrower_speed = self.get_closest_speed(y_basket)
                         mainboard.omni_monition(x_basket, y_basket)
                         self.last = "OMNIDIRECTIONAL_THROW"
                     else:
