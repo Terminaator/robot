@@ -29,9 +29,6 @@ class Mainboard(Thread):
         self.speed_three = speed3
 
     def omni_monition(self, x_ball, y_ball):
-        if self.go_forward > 0:
-            return
-
         direction_angle = self.angle(x_ball, y_ball)
 
         self.speed_one = int(-40 * math.cos(math.radians(direction_angle - 120 + 90)))
@@ -69,24 +66,23 @@ class Mainboard(Thread):
         while self.ser.in_waiting:
             self.ser.read()
 
+        print(self.last_command)
         if self.last_command is None:
             return
-        thrower = ""
 
         if self.go_forward > 0:
-            print("mida vittu")
-            thrower = "d:" + str(self.thrower_speed) + "\n"
+            command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+            command += "d:" + str(self.thrower_speed) + "\n"
             self.go_forward -= 1
         else:
             self.set_speeds()
-            if self.thrower_speed >= 1000:
+            move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+            if self.thrower_speed == 1500:
                 self.thrower_speed = 100
-                thrower = "d:100\n"
+                move += "d:100\n"
+            command = move
 
-        move = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        command = move + thrower
-
-        print(command, self.last_command)
+        print(command)
         self.ser.write(command.encode())
 
 
