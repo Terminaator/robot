@@ -104,7 +104,7 @@ def find_blob(blob):  # returns the red colored circle
 
     if len(contours) > 0:
         r = cv2.boundingRect(contours[cont_index])
-        return r[0] + (r[2] / 2), r[1]
+        return r[0] + (r[2] / 2), r[3]
     return 0, 0
 
 
