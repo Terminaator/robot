@@ -14,7 +14,6 @@ def on_press(key):
         ai.stop = not ai.stop
         mainboard.last_command = None
         mainboard.thrower_speed = 0
-    print(k)
 
 
 
