@@ -66,7 +66,6 @@ class Mainboard(Thread):
         while self.ser.in_waiting:
             self.ser.read()
 
-        print(self.last_command)
         if self.last_command is None:
             return
 
@@ -83,7 +82,7 @@ class Mainboard(Thread):
                 move += "d:100\n"
             command = move
 
-        print(command)
+        print(command, self.last_command)
         self.ser.write(command.encode())
 
 
