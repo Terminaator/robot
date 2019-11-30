@@ -67,7 +67,7 @@ class Mainboard(Thread):
             self.ser.read()
 
         command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-
+        print(self.last_command)
         self.ser.write(command.encode())
 
 
