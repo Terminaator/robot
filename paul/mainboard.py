@@ -16,7 +16,7 @@ class Mainboard(Thread):
         self.thrower_speed = 1500
         self.last_command = None
         self.go_forward = 0
-        self.locked = True
+        self.locked = False
 
     def on_message(self, msg):
         self.last_command = msg
