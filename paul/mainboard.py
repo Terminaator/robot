@@ -18,7 +18,7 @@ class Mainboard(Thread):
         self.go_forward = 0
 
     def on_message(self, msg):
-        self.last_command = msg
+        self.las    t_command = msg
 
     def angle(self, ball_x, ball_y):
         return math.degrees(math.atan2(320 - ball_x, 480 - ball_y))
@@ -71,7 +71,8 @@ class Mainboard(Thread):
         else:
             self.set_speeds()
 
-        command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        #command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        command = "sd:0:20:0\n"
        # command += "d:1500\n"
 
         print(command, self.last_command)
