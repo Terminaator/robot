@@ -63,20 +63,6 @@ class Mainboard(Thread):
         while self.ser.in_waiting:
             self.ser.read()
         command = "sd:0:40:0\n"
-
-
-        if self.last_command is None:
-            return
-
-        if self.last_command == "OMNIDIRECTIONAL_THROW":
-            pass
-        else:
-            self.set_speeds()
-
-        #command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-       # command += "d:1500\n"
-
-        print(command, self.last_command)
         self.ser.write(command.encode())
 
 
