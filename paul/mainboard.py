@@ -16,6 +16,7 @@ class Mainboard(Thread):
         self.thrower_speed = 1500
         self.last_command = None
         self.go_forward = 0
+        self.locked = True
 
     def on_message(self, msg):
         self.last_command = msg
@@ -60,15 +61,16 @@ class Mainboard(Thread):
             self.set_speeds_wheels(20, 0, -20)
 
     def on_tick(self):
-        if self.last_command is None:
+        if self.last_command is None and self.locked:
             return
-
-        while self.ser.in_waiting:
-            self.ser.read()
 
         command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
         print(self.last_command)
         self.ser.write(command.encode())
 
+        self.locked = True
+        while self.ser.in_waiting:
+            self.ser.read()
+        self.locked = False
 
 mainboard = Mainboard()
