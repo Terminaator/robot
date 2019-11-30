@@ -76,7 +76,7 @@ class Mainboard(Thread):
 
         self.set_speeds()
         command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        print(self.last_command)
+        print(self.last_command, command)
         self.ser.write(command.encode())
 
 
