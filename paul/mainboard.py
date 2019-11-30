@@ -19,6 +19,8 @@ class Mainboard(Thread):
         self.locked = False
 
     def on_message(self, msg):
+        if self.locked:
+            return
         self.last_command = msg
 
     def angle(self, ball_x, ball_y):
@@ -30,6 +32,9 @@ class Mainboard(Thread):
         self.speed_three = speed3
 
     def omni_monition(self, x_ball, y_ball, throw):
+        if self.locked:
+            return
+
         direction_angle = self.angle(x_ball, y_ball)
 
         self.speed_one = int(-40 * math.cos(math.radians(direction_angle - 120 + 90)))
@@ -37,7 +42,7 @@ class Mainboard(Thread):
         self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
 
     def set_speeds(self):
-        #if self.last_command == "OMNIDIRECTIONAL_THROW":
+        # if self.last_command == "OMNIDIRECTIONAL_THROW":
         #    self.go_forward = 20
         if self.last_command == "NO_BALL_BASKET_GO":
             self.set_speeds_wheels(-40, 0, 40)
@@ -64,16 +69,15 @@ class Mainboard(Thread):
         if self.last_command is None and self.locked:
             return
 
-        while self.ser.in_waiting:
-            self.ser.read()
-
-        command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        print(self.last_command)
-        self.ser.write(command.encode())
-
         self.locked = True
         while self.ser.in_waiting:
             self.ser.read()
         self.locked = False
+
+        self.set_speeds()
+        command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+        print(self.last_command)
+        self.ser.write(command.encode())
+
 
 mainboard = Mainboard()
