@@ -62,6 +62,8 @@ class Mainboard(Thread):
     def on_tick(self):
         while self.ser.in_waiting:
             self.ser.read()
+        command = "sd:0:20:0\n"
+
 
         if self.last_command is None:
             return
@@ -72,7 +74,6 @@ class Mainboard(Thread):
             self.set_speeds()
 
         #command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
-        command = "sd:0:20:0\n"
        # command += "d:1500\n"
 
         print(command, self.last_command)
