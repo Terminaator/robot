@@ -9,6 +9,7 @@ class Thread(threading.Thread):
 
         self.message_queue = queue.Queue()
         self.tick_speed = tick_speed
+        self.time_sleep = 0.02
 
     def send_message(self, msg):
         self.message_queue.put_nowait(msg)
@@ -23,4 +24,4 @@ class Thread(threading.Thread):
                 pass
 
             self.on_tick()
-            time.sleep(0.01)
+            time.sleep(self.time_sleep)
