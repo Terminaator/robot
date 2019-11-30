@@ -36,8 +36,10 @@ class Mainboard(Thread):
         self.speed_three = int(-40 * math.cos(math.radians(direction_angle - 240 + 90)))
 
     def set_speeds(self):
-        if self.last_command == "OMNIDIRECTIONAL_THROW":
-            self.go_forward = 20
+        #if self.last_command == "OMNIDIRECTIONAL_THROW":
+        #    self.go_forward = 20
+        if self.last_command is None:
+            self.set_speeds_wheels(0, 0, 0)
         elif self.last_command == "NO_BALL_BASKET_GO":
             self.set_speeds_wheels(-40, 0, 40)
         elif self.last_command == "NO_BALL":
@@ -62,7 +64,9 @@ class Mainboard(Thread):
     def on_tick(self):
         while self.ser.in_waiting:
             self.ser.read()
-        command = "sd:0:40:0\n"
+
+        command = "sd:" + str(self.speed_one) + ":" + str(self.speed_two) + ":" + str(self.speed_three) + "\n"
+
         self.ser.write(command.encode())
 
 
