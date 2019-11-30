@@ -18,7 +18,7 @@ class Mainboard(Thread):
         self.go_forward = 0
 
     def on_message(self, msg):
-        self.las    t_command = msg
+        self.last_command = msg
 
     def angle(self, ball_x, ball_y):
         return math.degrees(math.atan2(320 - ball_x, 480 - ball_y))
