@@ -60,6 +60,9 @@ class Mainboard(Thread):
             self.set_speeds_wheels(20, 0, -20)
 
     def on_tick(self):
+        if self.last_command is None:
+            return
+
         while self.ser.in_waiting:
             self.ser.read()
 
