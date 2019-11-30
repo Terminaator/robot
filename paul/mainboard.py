@@ -71,7 +71,7 @@ class Mainboard(Thread):
 
         self.locked = True
         while self.ser.in_waiting:
-            self.ser.read()
+            print(self.ser.read())
         self.locked = False
 
         self.set_speeds()
