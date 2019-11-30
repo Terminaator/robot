@@ -62,7 +62,7 @@ class Mainboard(Thread):
     def on_tick(self):
         while self.ser.in_waiting:
             self.ser.read()
-        command = "sd:0:20:0\n"
+        command = "sd:0:40:0\n"
 
 
         if self.last_command is None:
